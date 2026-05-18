@@ -1,0 +1,599 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+
+  /* ── Wayfarer Brand Tokens ─────────────────────── */
+
+  /* Font families */
+  --font-heading: 'Raleway', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Font weights */
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+
+  /* ── Layout & Grid Tokens ───────────────────────── */
+
+  /* Container margins — phone: 16→24 (8px grid) */
+  --container-px: clamp(16px, 4.8vw, 24px);
+
+  /* Grid gutters — phone: 16px (8px grid) */
+  --grid-gap: 16px;
+
+  /* Section vertical spacing — phone (8px grid) */
+  --section-py-sm: clamp(24px, 8vw, 32px);
+  --section-py-md: clamp(32px, 10vw, 40px);
+  --section-py-lg: clamp(40px, 13vw, 56px);
+
+  /* Inner section spacing — phone (8px grid) */
+  --space-section-title: clamp(16px, 5vw, 24px);
+  --space-stack-xs: 8px;
+  --space-stack-sm: 16px;
+  --space-stack-md: 24px;
+  --space-stack-lg: 32px;
+
+  /* ── Hero-specific tokens — phone (8px grid, 4px sub-grid for buttons) ── */
+  --hero-height: clamp(408px, 68vw, 496px);
+  --hero-pt: clamp(40px, 14.9vw, 56px);
+  --hero-pb: clamp(40px, 14.9vw, 56px);
+  --hero-btn-gap: clamp(12px, 3.7vw, 16px);
+  --hero-btn-px: 16px;
+  --hero-btn-py: clamp(12px, 3.7vw, 16px);
+
+  /* ── Fluid Type Scale ───────────────────────────── */
+
+  /* Display — hero headline — phone (fluid: ~26px → ~34px) */
+  --text-display: clamp(1.625rem, 5.8vw, 2.125rem);
+  --leading-display: 1.12;
+
+  /* Title 1 — large section titles — phone (fluid: ~24px → ~30px) */
+  --text-title-1: clamp(1.5rem, 5vw, 1.875rem);
+  --leading-title-1: 1.15;
+
+  /* Title 2 — standard section titles — phone (fluid: ~20px → ~26px) */
+  --text-title-2: clamp(1.25rem, 4.2vw, 1.625rem);
+  --leading-title-2: 1.2;
+
+  /* Title 3 — card/feature titles (large) — phone (fluid: ~18px → ~22px) */
+  --text-title-3: clamp(1.125rem, 3.5vw, 1.375rem);
+  --leading-title-3: 1.25;
+
+  /* Title 4 — card/feature titles (small) — phone (fluid: ~16px → ~19px) */
+  --text-title-4: clamp(1rem, 3vw, 1.1875rem);
+  --leading-title-4: 1.3;
+
+  /* Subtitle — hero body, feature descriptions — phone (fluid: ~15px → ~17px) */
+  --text-subtitle: clamp(0.9375rem, 3.2vw, 1.0625rem);
+  --leading-subtitle: 1.5;
+
+  /* Body — default body copy — phone (fluid: ~14px → ~15px) */
+  --text-body: clamp(0.875rem, 2.4vw, 0.9375rem);
+  --leading-body: 1.65;
+
+  /* Body small — metadata, labels, badges — phone (fluid: ~12px → ~13px) */
+  --text-body-sm: clamp(0.75rem, 2.1vw, 0.8125rem);
+  --leading-body-sm: 1.5;
+
+  /* Caption — fine print, timestamps — phone (fluid: ~11px → ~12px) */
+  --text-caption: clamp(0.6875rem, 1.9vw, 0.75rem);
+  --leading-caption: 1.4;
+
+  /* Nav / UI — interactive elements — phone (fluid) */
+  --text-nav: clamp(0.8125rem, 2.2vw, 0.875rem);
+  --text-button: clamp(0.8125rem, 2.4vw, 0.9375rem);
+  --text-badge: clamp(0.75rem, 2.1vw, 0.8125rem);
+
+  /* Core surfaces */
+  --background: #fafaf5;
+  --foreground: #060a0d;
+  --card: #f3f4f5;
+  --card-foreground: #2e3d49;
+  --popover: #fafaf5;
+  --popover-foreground: #060a0d;
+
+  /* Primary — coral CTA */
+  --primary: #d95d39;
+  --primary-foreground: #fafaf5;
+  --primary-hover: #e36844;
+  --primary-active: #c45230;
+  --primary-disabled: rgba(217, 93, 57, 0.38);
+  --primary-dark: #7d2207;
+
+  /* Secondary — warm beige */
+  --secondary: #ded2ba;
+  --secondary-foreground: #2e3d49;
+  --secondary-hover: #c8bba5;
+  --secondary-active: #b8ab94;
+  --secondary-disabled: rgba(222, 210, 186, 0.45);
+
+  /* Secondary button — peach gradient */
+  --secondary-btn: #ffc5b5;
+  --secondary-btn-end: #f5b4a2;
+
+  /* Muted — subtle surfaces & subdued text */
+  --muted: #f3f4f5;
+  --muted-foreground: #4a5964;
+
+  /* Accent — teal */
+  --accent: #247ba0;
+  --accent-foreground: #fafaf5;
+  --accent-hover: #2a8ab3;
+  --accent-active: #1d6a8c;
+  --accent-disabled: rgba(36, 123, 160, 0.38);
+  --accent-light: #d1f0ef;
+  --accent-muted: #CCE0E3;
+
+  /* Feedback */
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --destructive-hover: #e01f45;
+  --destructive-active: #be1536;
+  --destructive-disabled: rgba(212, 24, 61, 0.38);
+  --destructive-subtle: rgba(212, 24, 61, 0.08);
+  --destructive-muted: rgba(212, 24, 61, 0.25);
+  --success: #A3C36B;
+  --success-stroke: #94B55B;
+  --success-subtle: rgba(163, 195, 107, 0.12);
+
+  /* Borders & inputs */
+  --border: #e9dec8;
+  --border-hover: #d4c9b0;
+  --border-focus: #247ba0;
+  --border-disabled: rgba(233, 222, 200, 0.5);
+  --input: transparent;
+  --input-background: #fafaf5;
+  --input-hover: #f5f3ee;
+  --input-focus: #fafaf5;
+  --input-disabled: #f0eeea;
+  --card-border: #e6e8eb;
+  --switch-background: #cbced4;
+
+  /* Surface — off-white text on dark images */
+  --surface: #faf8f3;
+
+  /* Elevated surfaces */
+  --bg-elevated: #ffffff;
+  --bg-subtle: #f7f6f2;
+  --bg-overlay: rgba(6, 10, 13, 0.48);
+  --card-hover: #eef0f1;
+  --card-active: #e8eaec;
+
+  /* Text semantics */
+  --text-primary: #060a0d;
+  --text-secondary: #4a5964;
+  --text-disabled: #9aa5ad;
+  --text-inverse: #fafaf5;
+  --text-link: #247ba0;
+  --text-link-hover: #1d6a8c;
+
+  /* Shadows — base */
+  --shadow-navbar: 0px 4px 8px 0px rgba(6,10,13,0.04);
+  --shadow-input: 0px 4px 8px 0px rgba(6,10,13,0.03), 0px 2px 4px 0px rgba(6,10,13,0.03);
+  --shadow-badge: 0px 2px 4px 0px rgba(6,10,13,0.03);
+  --shadow-badge-active: 0px 2px 4px 0px rgba(22,98,130,0.03);
+  --shadow-button-glow: 0px 4px 8px 0px rgba(6,10,13,0.08);
+  --shadow-feature: 0px 8px 16px 0px rgba(6,10,13,0.03), 0px 4px 8px 0px rgba(6,10,13,0.03);
+  --shadow-feature-sm: 0px 5px 10px 0px rgba(6,10,13,0.03), 0px 2.5px 5px 0px rgba(6,10,13,0.03);
+  --shadow-card: 0px 4px 8px rgba(46,61,73,0.03), 0px 2px 4px rgba(46,61,73,0.05);
+  --shadow-card-elevated: 0px 16px 32px 0px rgba(6,10,13,0.05), 0px 8px 16px 0px rgba(6,10,13,0.05);
+  --shadow-section: 0px 16px 32px 2px rgba(6,10,13,0.03);
+  --shadow-section-card: 0px 16px 32px 0px rgba(6,10,13,0.03), 0px 4px 8px 0px rgba(6,10,13,0.03);
+  --shadow-section-card-lg: 0px 16px 32px 2px rgba(6,10,13,0.03), 0px 4px 8px rgba(6,10,13,0.03);
+
+  /* Shadows — CTAs */
+  --shadow-primary-cta: 0px 16px 32px 2px rgba(125,34,7,0.08), 0px 4px 8px 0px rgba(125,34,7,0.08);
+  --shadow-primary-cta-sm: 0px 8px 16px rgba(125,34,7,0.12);
+  --shadow-secondary-cta: 0px 16px 32px 2px rgba(217,93,57,0.08), 0px 4px 8px 0px rgba(217,93,57,0.08);
+  --shadow-secondary-cta-sm: 0px 8px 16px rgba(217,93,57,0.12);
+
+  /* Shadows — structural */
+  --shadow-footer: 0px -8px 16px rgba(6,10,13,0.04), 0px -4px 4px rgba(6,10,13,0.04);
+  --shadow-dot-ring: 0 0 0 4px rgba(209,240,239,0.4);
+  --shadow-dot-glow: 0px 4px 8px rgba(36,123,160,0.3), 0px 2px 4px rgba(36,123,160,0.2);
+
+  /* Inset shadows */
+  --shadow-inset-hero: inset 0px 8px 16px 0px rgba(6,10,13,0.08), inset 0px 4px 8px 2px rgba(6,10,13,0.1);
+  --shadow-inset-overlay: inset 0px 4px 8px 0px rgba(6,10,13,0.03);
+  --shadow-inset-subtle: inset 4px 4px 8px 0px rgba(6,10,13,0.03);
+  --shadow-inset-subtle-sm: inset 2.5px 2.5px 5px 0px rgba(6,10,13,0.03);
+  --shadow-inset-card: inset 4px 4px 8px 0px rgba(6,10,13,0.02), inset 2px 2px 4px 0px rgba(6,10,13,0.02);
+  --shadow-inset-card-lg: inset 4px 4px 8px 2px rgba(6,10,13,0.02), inset 2px 2px 4px rgba(6,10,13,0.02);
+
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #030213;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+/* ── Tablet (≥ 768px) ──────────────────────────────── */
+@media (min-width: 768px) {
+  :root {
+    /* Layout — fluid within 768–1023px (8px grid) */
+    --container-px: clamp(32px, 5.2vw, 48px);
+    --grid-gap: clamp(16px, 2.6vw, 24px);
+
+    /* Section vertical spacing (8px grid) */
+    --section-py-sm: clamp(36px, 5.5vw, 48px);
+    --section-py-md: clamp(44px, 6.5vw, 56px);
+    --section-py-lg: clamp(56px, 8.3vw, 72px);
+
+    /* Inner section spacing (8px grid) */
+    --space-section-title: clamp(28px, 4.2vw, 36px);
+    --space-stack-xs: 8px;
+    --space-stack-sm: clamp(16px, 2.6vw, 24px);
+    --space-stack-md: clamp(24px, 3.6vw, 32px);
+    --space-stack-lg: clamp(32px, 5.2vw, 40px);
+
+    /* Hero — fluid within 768–1023px (8px grid, 4px sub-grid for buttons) */
+    --hero-height: clamp(480px, 55vw, 552px);
+    --hero-pt: clamp(64px, 9vw, 88px);
+    --hero-pb: clamp(56px, 7.5vw, 72px);
+    --hero-btn-gap: clamp(16px, 2.3vw, 24px);
+    --hero-btn-px: clamp(16px, 2.6vw, 24px);
+    --hero-btn-py: clamp(12px, 2.1vw, 16px);
+
+    /* Typography — font sizes */
+    --text-display: clamp(2.25rem, 4.5vw, 2.875rem);
+    --text-title-1: clamp(1.875rem, 3.9vw, 2.375rem);
+    --text-title-2: clamp(1.5rem, 3.1vw, 1.875rem);
+    --text-title-3: clamp(1.375rem, 2.5vw, 1.5rem);
+    --text-title-4: clamp(1.1875rem, 2.2vw, 1.3125rem);
+    --text-subtitle: clamp(1.0625rem, 2.2vw, 1.1875rem);
+    --text-body: clamp(0.9375rem, 1.6vw, 1rem);
+    --text-body-sm: clamp(0.8125rem, 1.4vw, 0.875rem);
+    --text-caption: clamp(0.75rem, 1.3vw, 0.8125rem);
+    --text-nav: clamp(0.875rem, 1.5vw, 0.9375rem);
+    --text-button: clamp(0.9375rem, 1.6vw, 1rem);
+    --text-badge: clamp(0.8125rem, 1.4vw, 0.875rem);
+
+    /* Typography — line heights (tighten for tablet) */
+    --leading-display: 1.1;
+    --leading-title-1: 1.12;
+    --leading-title-2: 1.18;
+    --leading-title-3: 1.22;
+    --leading-title-4: 1.28;
+    --leading-subtitle: 1.45;
+    --leading-body: 1.6;
+    --leading-body-sm: 1.45;
+    --leading-caption: 1.38;
+  }
+}
+
+/* ── Desktop (≥ 1024px) ────────────────────────────── */
+@media (min-width: 1024px) {
+  :root {
+    /* Layout (8px grid) */
+    --container-px: clamp(64px, 8.6vw, 112px);
+    --grid-gap: clamp(24px, 2vw, 32px);
+
+    /* Section vertical spacing (8px grid) */
+    --section-py-sm: clamp(40px, 4.2vw, 56px);
+    --section-py-md: clamp(48px, 5vw, 64px);
+    --section-py-lg: clamp(64px, 6.2vw, 80px);
+
+    /* Inner section spacing (8px grid) */
+    --space-section-title: clamp(36px, 3.5vw, 48px);
+    --space-stack-xs: 8px;
+    --space-stack-sm: 24px;
+    --space-stack-md: 32px;
+    --space-stack-lg: clamp(40px, 3.9vw, 48px);
+
+    /* Hero — fluid within 1024px+ (8px grid, 4px sub-grid for buttons) */
+    --hero-height: clamp(544px, 46vw, 624px);
+    --hero-pt: clamp(88px, 10.5vw, 144px);
+    --hero-pb: clamp(80px, 9.5vw, 136px);
+    --hero-btn-gap: clamp(16px, 2vw, 24px);
+    --hero-btn-px: 24px;
+    --hero-btn-py: 16px;
+
+    /* Typography — font sizes */
+    --text-display: clamp(3rem, 4.5vw, 3.5rem);
+    --text-title-1: clamp(2.25rem, 3.5vw, 2.5rem);
+    --text-title-2: clamp(1.75rem, 2.6vw, 2rem);
+    --text-title-3: clamp(1.5rem, 2.1vw, 1.625rem);
+    --text-title-4: clamp(1.3125rem, 1.8vw, 1.375rem);
+    --text-subtitle: clamp(1.125rem, 1.7vw, 1.25rem);
+    --text-body: clamp(1rem, 1.3vw, 1.0625rem);
+    --text-body-sm: clamp(0.875rem, 1.1vw, 0.9375rem);
+    --text-caption: clamp(0.8125rem, 1vw, 0.875rem);
+    --text-nav: clamp(0.9375rem, 1.2vw, 1rem);
+    --text-button: clamp(1rem, 1.3vw, 1.0625rem);
+    --text-badge: clamp(0.875rem, 1.1vw, 0.9375rem);
+
+    /* Typography — line heights (tighten for desktop) */
+    --leading-display: 1.08;
+    --leading-title-1: 1.1;
+    --leading-title-2: 1.15;
+    --leading-title-3: 1.2;
+    --leading-title-4: 1.25;
+    --leading-subtitle: 1.4;
+    --leading-body: 1.6;
+    --leading-body-sm: 1.45;
+    --leading-caption: 1.35;
+  }
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --primary-hover: oklch(0.95 0 0);
+  --primary-active: oklch(0.92 0 0);
+  --primary-disabled: rgba(255, 255, 255, 0.3);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --secondary-hover: oklch(0.32 0 0);
+  --secondary-active: oklch(0.24 0 0);
+  --secondary-disabled: rgba(60, 60, 60, 0.4);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --accent-hover: oklch(0.32 0 0);
+  --accent-active: oklch(0.24 0 0);
+  --accent-disabled: rgba(60, 60, 60, 0.35);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --destructive-hover: oklch(0.45 0.16 25.723);
+  --destructive-active: oklch(0.35 0.12 25.723);
+  --destructive-disabled: rgba(180, 50, 70, 0.3);
+  --destructive-subtle: rgba(200, 60, 80, 0.1);
+  --destructive-muted: rgba(200, 60, 80, 0.2);
+  --success: #8aad52;
+  --success-stroke: #7a9d42;
+  --success-subtle: rgba(138, 173, 82, 0.12);
+  --border: oklch(0.269 0 0);
+  --border-hover: oklch(0.35 0 0);
+  --border-focus: oklch(0.55 0.15 230);
+  --border-disabled: rgba(60, 60, 60, 0.35);
+  --input: oklch(0.269 0 0);
+  --input-background: oklch(0.18 0 0);
+  --input-hover: oklch(0.22 0 0);
+  --input-focus: oklch(0.18 0 0);
+  --input-disabled: oklch(0.2 0 0);
+  --ring: oklch(0.439 0 0);
+  --surface: oklch(0.95 0 0);
+  --bg-elevated: oklch(0.2 0 0);
+  --bg-subtle: oklch(0.17 0 0);
+  --bg-overlay: rgba(0, 0, 0, 0.64);
+  --card-hover: oklch(0.19 0 0);
+  --card-active: oklch(0.17 0 0);
+  --text-primary: oklch(0.985 0 0);
+  --text-secondary: oklch(0.708 0 0);
+  --text-disabled: oklch(0.45 0 0);
+  --text-inverse: oklch(0.145 0 0);
+  --text-link: oklch(0.6 0.12 230);
+  --text-link-hover: oklch(0.7 0.14 230);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  /* ── Breakpoints (3-tier: phone → tablet → desktop) ──
+   *  default  → Phone    (< 768px)
+   *  md:      → Tablet   (≥ 768px — iPad Mini / iPad)
+   *  lg:      → Desktop  (≥ 1024px — iPad landscape / laptops+)
+   */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* Font families */
+  --font-family-heading: var(--font-heading);
+  --font-family-body: var(--font-body);
+
+  /* ── Fluid type scale ── */
+  --text-display: var(--text-display);
+  --text-title-1: var(--text-title-1);
+  --text-title-2: var(--text-title-2);
+  --text-title-3: var(--text-title-3);
+  --text-title-4: var(--text-title-4);
+  --text-subtitle: var(--text-subtitle);
+  --text-body: var(--text-body);
+  --text-body-sm: var(--text-body-sm);
+  --text-caption: var(--text-caption);
+  --text-nav: var(--text-nav);
+  --text-button: var(--text-button);
+  --text-badge: var(--text-badge);
+
+  /* ── Line heights ── */
+  --leading-display: var(--leading-display);
+  --leading-title-1: var(--leading-title-1);
+  --leading-title-2: var(--leading-title-2);
+  --leading-title-3: var(--leading-title-3);
+  --leading-title-4: var(--leading-title-4);
+  --leading-subtitle: var(--leading-subtitle);
+  --leading-body: var(--leading-body);
+  --leading-body-sm: var(--leading-body-sm);
+  --leading-caption: var(--leading-caption);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-disabled: var(--primary-disabled);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-active: var(--secondary-active);
+  --color-secondary-disabled: var(--secondary-disabled);
+  --color-secondary-btn: var(--secondary-btn);
+  --color-secondary-btn-end: var(--secondary-btn-end);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-active: var(--accent-active);
+  --color-accent-disabled: var(--accent-disabled);
+  --color-accent-light: var(--accent-light);
+  --color-accent-muted: var(--accent-muted);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-active: var(--destructive-active);
+  --color-destructive-disabled: var(--destructive-disabled);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-destructive-muted: var(--destructive-muted);
+  --color-success: var(--success);
+  --color-success-stroke: var(--success-stroke);
+  --color-success-subtle: var(--success-subtle);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-border-focus: var(--border-focus);
+  --color-border-disabled: var(--border-disabled);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-input-hover: var(--input-hover);
+  --color-input-focus: var(--input-focus);
+  --color-input-disabled: var(--input-disabled);
+  --color-card-border: var(--card-border);
+  --color-surface: var(--surface);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+
+  /* Elevated surfaces */
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-bg-overlay: var(--bg-overlay);
+  --color-card-hover: var(--card-hover);
+  --color-card-active: var(--card-active);
+
+  /* Text semantics */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-inverse: var(--text-inverse);
+  --color-text-link: var(--text-link);
+  --color-text-link-hover: var(--text-link-hover);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: var(--text-title-1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-title-1);
+  }
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-title-2);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-title-2);
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    font-size: var(--text-title-3);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-title-3);
+  }
+
+  h4 {
+    font-family: var(--font-heading);
+    font-size: var(--text-title-4);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-title-4);
+  }
+
+  p {
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+  }
+
+  label {
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-body-sm);
+  }
+
+  button {
+    font-size: var(--text-button);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--leading-body);
+  }
+}
