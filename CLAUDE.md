@@ -16,7 +16,41 @@ Three locations exist — don't conflate them:
 | --- | --- |
 | `CLAUDE.md` (this file) | Project-level guidance for Claude Code. The root instructions. |
 | `guidelines/Guidelines.md` | The "Wayfarer System Prompt" — the Figma Make brand brief + design-system rules. Treat as design spec, not as Claude config. |
-| `.agents/skills/*/SKILL.md`, `.claude/skills/*/SKILL.md` | Manifests for installed agent skills (`frontend-design`, `browser-use`, `code-reviewer`). Don't edit; managed by `npx skills` / `npx claude-code-templates`. |
+| `.agents/skills/*/SKILL.md`, `.claude/skills/*/SKILL.md` | Manifests for installed agent skills. Don't edit; managed by `npx skills` / `npx claude-code-templates`. See **Installed skills** below for the active set and when to reach for each. |
+
+## Installed skills
+
+Each skill occupies a distinct slot in the workflow. Reach for the most specific match; don't invoke generic skills when a project-aligned one exists.
+
+| Skill | Location | When to use |
+| --- | --- | --- |
+| `frontend-design` | `.agents/skills/frontend-design/` | New components, layouts, or aesthetic decisions. Pairs with `guidelines/Guidelines.md`. |
+| `copywriting` | `.claude/skills/copywriting/` | UX copy, microcopy, brand-voice work, empty/error states, onboarding language. Wayfarer is content-led — use liberally. |
+| `accessibility` | `.claude/skills/accessibility/` | Semantic HTML, ARIA, focus order, contrast against design tokens. Run before shipping any new flow. Includes WCAG reference. |
+| `web-performance-optimization` | `.claude/skills/web-performance-optimization/` | Asset/bundle/loading perf. **Highest-priority debt: the 8–15 MB PNGs in `src/assets/`.** |
+| `code-reviewer` | `.claude/skills/code-reviewer/` | Pre-commit/PR review with security scan + checklist. |
+| `browser-use` | `.agents/skills/browser-use/` | Browser automation — interactive testing, screenshots, form flows. ⚠️ Rated High Risk (Gen) / Med Risk (Snyk); review before broad use. |
+
+## Skill governance
+
+A `PostToolUse` hook at `.claude/hooks/on-skill-install.sh` (wired through `.claude/settings.json`) fires whenever a skill/plugin install command runs (`npx skills add`, `npx claude-code-templates --skill`, `claude plugin install`). The hook injects a system message that **requires** an inventory audit before the next user-facing action. The policy below defines what that audit is.
+
+### Audit checklist (run on every install)
+
+1. **Inventory** — list every skill currently in `.agents/skills/` and `.claude/skills/` with its one-line purpose.
+2. **Redundancy check** — does the new skill duplicate capability of an existing one (e.g., another generic "web dev" or "code review" skill)? If yes, recommend keeping one and removing the other.
+3. **Replacement check** — does the new skill obsolete an older one (e.g., a project-specific successor replacing a generic predecessor)?
+4. **Slot conflict** — does any other skill now occupy the same workflow slot? Two skills in the same slot create reach ambiguity; pick one.
+5. **CLAUDE.md drift** — is the **Installed skills** table above still accurate? If not, propose the exact diff before continuing.
+6. **Risk flag** — note any skill with a non-Low security rating (Gen / Socket / Snyk). Carry the flag into the table description.
+
+### Removal rule
+
+If the audit recommends removal, **do not delete silently**. Show the user the redundancy or replacement evidence, get confirmation, then remove with `rm -rf` of the skill directory and edit `skills-lock.json` to drop the entry.
+
+### When to skip the audit
+
+Only when the user explicitly says so in the same turn (e.g., "skip the audit, just install"). Otherwise the audit is mandatory — the hook exists specifically to enforce it.
 
 ## Commands
 
