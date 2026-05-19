@@ -1,4 +1,4 @@
-import imgHeroImage from "figma:asset/b9eec30ee7db572fec86e8db69b530b9fd818720.png";
+import imgHeroImage from "figma:asset/b9eec30ee7db572fec86e8db69b530b9fd818720.jpg";
 
 function Header() {
   return (

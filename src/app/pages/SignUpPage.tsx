@@ -52,7 +52,7 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { useAuth } from "../components/AuthContext";
 import { usePersonalization } from "../components/PersonalizationContext";
 
-import bgImage from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.png";
+import bgImage from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.jpg";
 
 const steps = ["Personal Details", "Travel Preferences", "Other Preferences"];
 

@@ -2,7 +2,7 @@ import svgPaths from "./svg-rt3anv2fn2";
 import imgNavBar from "figma:asset/d0d7a881bda4a994e8710d8a092c951bf7d632e3.png";
 import imgWayfarerBlack12 from "figma:asset/31bfa83910aefa179da0ef0052c94a5701371e0c.png";
 import imgWayfarerBlack23 from "figma:asset/ee0ae046dd453c8d4b5bc89b2cfbcca670ff8d17.png";
-import imgBodyContents from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.png";
+import imgBodyContents from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.jpg";
 
 function SaveIcon() {
   return (

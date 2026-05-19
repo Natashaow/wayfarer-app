@@ -10,7 +10,7 @@ import { X, Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from "lucide-reac
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { useAuth } from "../components/AuthContext";
 
-import bgImage from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.png";
+import bgImage from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.jpg";
 
 export default function LoginPage() {
   const navigate = useNavigate();

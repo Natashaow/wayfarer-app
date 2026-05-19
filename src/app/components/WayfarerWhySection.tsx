@@ -1,7 +1,7 @@
 import imgLandscapeBodyImage from "figma:asset/fc109d945abb0894d1ba4ce01874fa59b9084196.png";
-import imgLandscapeBodyImage1 from "figma:asset/8002921c5ea6a11bcc431a0e39e3070185ba2803.png";
-import imgLandscapeBodyImage2 from "figma:asset/30d25324936154a66198ebdf5b3aee0ea33834c1.png";
-import imgLandscapeBodyImage3 from "figma:asset/10229b5a73858413df0b08a90d518fca03b97bde.png";
+import imgLandscapeBodyImage1 from "figma:asset/8002921c5ea6a11bcc431a0e39e3070185ba2803.jpg";
+import imgLandscapeBodyImage2 from "figma:asset/30d25324936154a66198ebdf5b3aee0ea33834c1.jpg";
+import imgLandscapeBodyImage3 from "figma:asset/10229b5a73858413df0b08a90d518fca03b97bde.jpg";
 import { motion } from "motion/react";
 import {
   fadeUp,

@@ -1,4 +1,4 @@
-import imgFeatureImage from "figma:asset/fdd7ef2bdcec3dd5700c66fad60c69f02d7b8b3e.png";
+import imgFeatureImage from "figma:asset/fdd7ef2bdcec3dd5700c66fad60c69f02d7b8b3e.jpg";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";

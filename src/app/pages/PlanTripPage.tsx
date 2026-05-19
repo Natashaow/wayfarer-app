@@ -41,7 +41,7 @@ import {
   User,
   Users2,
 } from "lucide-react";
-import bgImage from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.png";
+import bgImage from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.jpg";
 
 /* ── Step labels ── */
 const stepLabels = ["Where & When", "How You Travel", "Personal Touch"];

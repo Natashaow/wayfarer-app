@@ -6,10 +6,10 @@ import imgHeroSection from "figma:asset/e2e3f204a6869d3991cb9ff963548e71e9e76281
 import imgCard from "figma:asset/4f16f9b6f947a1aaa7cbe0ceb925eee5507e3c01.png";
 import imgCard1 from "figma:asset/915badebd49e36188b3df157392503ccd103408b.png";
 import imgLandscapeBodyImage from "figma:asset/fc109d945abb0894d1ba4ce01874fa59b9084196.png";
-import imgLandscapeBodyImage1 from "figma:asset/8002921c5ea6a11bcc431a0e39e3070185ba2803.png";
-import imgLandscapeBodyImage2 from "figma:asset/30d25324936154a66198ebdf5b3aee0ea33834c1.png";
-import imgLandscapeBodyImage3 from "figma:asset/10229b5a73858413df0b08a90d518fca03b97bde.png";
-import imgFeatureImage from "figma:asset/fdd7ef2bdcec3dd5700c66fad60c69f02d7b8b3e.png";
+import imgLandscapeBodyImage1 from "figma:asset/8002921c5ea6a11bcc431a0e39e3070185ba2803.jpg";
+import imgLandscapeBodyImage2 from "figma:asset/30d25324936154a66198ebdf5b3aee0ea33834c1.jpg";
+import imgLandscapeBodyImage3 from "figma:asset/10229b5a73858413df0b08a90d518fca03b97bde.jpg";
+import imgFeatureImage from "figma:asset/fdd7ef2bdcec3dd5700c66fad60c69f02d7b8b3e.jpg";
 import imgUserProfile from "figma:asset/b41c98dab08bc3348c5322a353f0050a4a3a2ded.png";
 import imgUserProfile1 from "figma:asset/4728b493b16c8c7caabba896e57c533a6e789832.png";
 

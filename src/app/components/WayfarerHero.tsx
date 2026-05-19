@@ -1,4 +1,4 @@
-import imgHeroImage from "figma:asset/b9eec30ee7db572fec86e8db69b530b9fd818720.png";
+import imgHeroImage from "figma:asset/b9eec30ee7db572fec86e8db69b530b9fd818720.jpg";
 import imgHeroMobile from "figma:asset/e2e3f204a6869d3991cb9ff963548e71e9e76281.png";
 import { motion } from "motion/react";
 import { stagger, fadeIn } from "./animations";
