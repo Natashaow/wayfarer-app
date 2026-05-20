@@ -52,7 +52,7 @@ export function WayfarerCTA() {
 
             {/* Text */}
             <motion.h2
-              className="font-heading text-foreground text-center font-bold text-title-2 leading-title-2"
+              className="font-heading text-foreground text-center font-bold text-subtitle leading-subtitle"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
