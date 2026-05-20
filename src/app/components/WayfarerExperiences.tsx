@@ -21,7 +21,6 @@ import {
 import { destinations, filters, countries, countryFlags, type Destination } from "./destinations-data";
 import { useFavorites } from "./FavoritesContext";
 import { useNavigate } from "react-router";
-import { usePersonalization } from "./PersonalizationContext";
 import {
   Popover,
   PopoverContent,
@@ -97,48 +96,14 @@ function CountryList({
 }
 
 
-/** Match badge shown on cards when personalization is active */
-function MatchBadge({ score }: { score: number }) {
-  const isHighMatch = score >= 80;
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={fastTransition}
-      className="flex items-center gap-1 px-2 py-1 rounded-full backdrop-blur-sm"
-      style={{
-        backgroundColor: isHighMatch ? "var(--accent)" : "var(--surface)",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.18)",
-      }}
-    >
-      <span
-        className="font-body font-bold"
-        style={{
-          fontSize: "10px",
-          lineHeight: 1,
-          color: isHighMatch ? "var(--accent-foreground)" : "var(--accent)",
-          letterSpacing: "0.01em",
-        }}
-      >
-        {score}% match
-      </span>
-    </motion.div>
-  );
-}
-
 const DestinationCard = forwardRef<HTMLDivElement, { dest: Destination, compact?: boolean }>(({ dest, compact }, ref) => {
   const { isFavorite, toggleFavorite } = useFavorites();
-  const { trackInteraction, getMatchScore, tier } = usePersonalization();
   const saved = isFavorite(dest.id);
   const navigate = useNavigate();
 
-  const matchScore = tier !== "none" ? getMatchScore(dest) : null;
-  const showBadge = matchScore !== null && matchScore >= 65;
-
   const handleCardClick = useCallback(() => {
-    trackInteraction(dest.id, dest.categories);
     navigate(`/experience/${dest.slug}`);
-  }, [navigate, dest.slug, dest.id, dest.categories, trackInteraction]);
+  }, [navigate, dest.slug]);
 
   const handleLocationClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
@@ -180,13 +145,8 @@ const DestinationCard = forwardRef<HTMLDivElement, { dest: Destination, compact?
           className="absolute inset-0 flex flex-col justify-between"
           style={{ padding: "clamp(16px, 1.5vw, 18px)" }}
         >
-          {/* Top: match badge (left) + favourite (right) */}
-          <div className="flex justify-between items-start">
-            {showBadge && matchScore !== null ? (
-              <MatchBadge score={matchScore} />
-            ) : (
-              <div />
-            )}
+          {/* Top: favourite (right) */}
+          <div className="flex justify-end items-start">
             <Button
               variant="ghost"
               size="icon"

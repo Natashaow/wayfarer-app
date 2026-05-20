@@ -7,7 +7,6 @@ import { Badge } from "../components/ui/badge";
 import { Separator } from "../components/ui/separator";
 import { WayfarerNavbar } from "../components/WayfarerNavbar";
 import { useAuth } from "../components/AuthContext";
-import { usePersonalization } from "../components/PersonalizationContext";
 import { destinations } from "../components/destinations-data";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { toast } from "sonner";
@@ -151,17 +150,6 @@ const STYLE_TO_CAT: Record<string, string[]> = {
   photography: ["Top Attractions"],
   romantic: ["Top Experiences"],
   group: ["Top Attractions"],
-};
-
-const IMPLICIT_CAT_TO_STYLE: Record<string, string> = {
-  "Cultural & Historic": "cultural",
-  "Adventure Travel": "adventure",
-  "Nature & Outdoors": "nature",
-  "Hidden Gems": "hidden-gems",
-  "Top Experiences": "relaxation",
-  "Top Attractions": "photography",
-  "Bucket List Experiences": "adventure",
-  "Entertainment & Music": "relaxation",
 };
 
 function computeStyleMatch(destCategories: string[], selectedStyleIds: string[]): number {
@@ -760,7 +748,6 @@ function RegistrationBridgeModal({
 export default function PlanTripPage() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
-  const { inferredInterests, tier } = usePersonalization();
 
   const inferredStyles = useMemo(() => {
     if (!user?.experiences) return [];
@@ -783,12 +770,6 @@ export default function PlanTripPage() {
     return [...new Set(styles)];
   }, [user]);
 
-  const guestPreselectedStyles = useMemo(() => {
-    if (isAuthenticated || tier !== "implicit") return [];
-    return inferredInterests.map((cat) => IMPLICIT_CAT_TO_STYLE[cat]).filter(Boolean) as string[];
-  }, [inferredInterests, isAuthenticated, tier]);
-
-  const hasGuestPreselection = guestPreselectedStyles.length > 0;
   const hasAuthPreselection = isAuthenticated && inferredStyles.length > 0;
 
   /* ── State ── */
@@ -798,7 +779,7 @@ export default function PlanTripPage() {
   const [durationPreset, setDurationPreset] = useState("");
   const [companion, setCompanion] = useState("");
   const [selectedStyles, setSelectedStyles] = useState<string[]>(
-    isAuthenticated ? inferredStyles : guestPreselectedStyles
+    isAuthenticated ? inferredStyles : []
   );
   const [pace, setPace] = useState("balanced");
   const [budget, setBudget] = useState("");
@@ -937,7 +918,7 @@ export default function PlanTripPage() {
     setDestination("");
     setDurationPreset("");
     setCompanion("");
-    setSelectedStyles(isAuthenticated ? inferredStyles : guestPreselectedStyles);
+    setSelectedStyles(isAuthenticated ? inferredStyles : []);
     setPace("balanced");
     setBudget("");
     setMustSee("");
@@ -1047,11 +1028,9 @@ export default function PlanTripPage() {
                       {step === 0
                         ? "Choose your destination, trip length and who's coming."
                         : step === 1
-                          ? hasGuestPreselection
-                            ? "Pre-selected from your recent browsing — adjust as you like."
-                            : hasAuthPreselection
-                              ? "Based on your Wayfarer profile — customise to your taste."
-                              : "Your travel style, pace and budget help us personalise everything."
+                          ? hasAuthPreselection
+                            ? "Based on your Wayfarer profile — customise to your taste."
+                            : "Your travel style, pace and budget help us personalise everything."
                           : "These details are optional but make your itinerary much richer."}
                     </p>
                   </motion.div>
@@ -1120,7 +1099,7 @@ export default function PlanTripPage() {
                             <span className="font-body font-bold text-body" style={{ color: "var(--card-foreground)" }}>
                               What kind of experiences do you enjoy?
                             </span>
-                            {(hasGuestPreselection || hasAuthPreselection) && (
+                            {hasAuthPreselection && (
                               <motion.div
                                 className="flex items-center gap-1.5 mt-0.5"
                                 initial={{ opacity: 0, y: -4 }}
@@ -1129,9 +1108,7 @@ export default function PlanTripPage() {
                               >
                                 <Sparkles className="size-3.5 shrink-0" style={{ color: "var(--accent)" }} strokeWidth={1.8} />
                                 <span className="font-body text-caption" style={{ color: "var(--accent)", fontStyle: "italic" }}>
-                                  {hasGuestPreselection
-                                    ? "Pre-selected from your recent inspiration browsing"
-                                    : "Pre-applied from your Wayfarer profile — adjust as needed"}
+                                  Pre-applied from your Wayfarer profile — adjust as needed
                                 </span>
                               </motion.div>
                             )}
@@ -1147,9 +1124,7 @@ export default function PlanTripPage() {
                                 icon={style.icon}
                                 selected={selectedStyles.includes(style.id)}
                                 preSelected={
-                                  !isAuthenticated
-                                    ? guestPreselectedStyles.includes(style.id)
-                                    : inferredStyles.includes(style.id)
+                                  isAuthenticated && inferredStyles.includes(style.id)
                                 }
                                 onToggle={() => toggleStyle(style.id)}
                               />

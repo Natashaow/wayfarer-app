@@ -9,7 +9,7 @@ import {
   countries,
   countryFlags,
 } from "../components/destinations-data";
-import { Globe, Search, SlidersHorizontal, X, Sparkles } from "lucide-react";
+import { Globe, Search, SlidersHorizontal, X } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
 import { Input } from "../components/ui/input";
@@ -24,10 +24,8 @@ import {
   sectionItem,
   badgeItem,
   viewport,
-  fastTransition,
   quickTransition,
 } from "../components/animations";
-import { usePersonalization } from "../components/PersonalizationContext";
 
 export default function ExploreAllPage() {
   const [searchParams] = useSearchParams();
@@ -39,10 +37,6 @@ export default function ExploreAllPage() {
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [showCountries, setShowCountries] = useState(false);
-  const [smartSort, setSmartSort] = useState(false);
-
-  const { tier, getPersonalizedFeed } = usePersonalization();
-  const canSmartSort = tier !== "none";
 
   const allFilters = ["All", ...filters];
 
@@ -70,13 +64,8 @@ export default function ExploreAllPage() {
       );
     }
 
-    // Smart sort — rank by personalization score
-    if (smartSort && canSmartSort) {
-      return getPersonalizedFeed(results);
-    }
-
     return results;
-  }, [activeFilter, selectedCountry, searchQuery, smartSort, canSmartSort, getPersonalizedFeed]);
+  }, [activeFilter, selectedCountry, searchQuery]);
 
   const handleClearFilters = useCallback(() => {
     setActiveFilter("All");
@@ -124,28 +113,6 @@ export default function ExploreAllPage() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  {/* Smart sort toggle — only when personalization data exists */}
-                  {canSmartSort && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={fastTransition}
-                    >
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "font-body rounded-full h-9 px-4 w-fit font-medium text-body-sm gap-1.5 transition-all",
-                          smartSort
-                            ? "bg-accent-light border-2 border-accent text-accent hover:bg-accent-light shadow-[var(--shadow-badge-active)]"
-                            : "border-border text-card-foreground hover:bg-muted"
-                        )}
-                        onClick={() => setSmartSort(!smartSort)}
-                      >
-                        <Sparkles className="size-3.5" />
-                        Smart sort
-                      </Button>
-                    </motion.div>
-                  )}
                   {hasActiveFilters && (
                     <Button
                       variant="outline"

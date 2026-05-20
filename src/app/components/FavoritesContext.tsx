@@ -12,7 +12,7 @@ interface FavoritesContextValue {
 const FavoritesContext = createContext<FavoritesContextValue | null>(null);
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
-  const [favorites, setFavorites] = useState<Set<number>>(() => new Set([1, 4, 6]));
+  const [favorites, setFavorites] = useState<Set<number>>(() => new Set());
 
   const toggleFavorite = useCallback((id: number) => {
     setFavorites((prev) => {

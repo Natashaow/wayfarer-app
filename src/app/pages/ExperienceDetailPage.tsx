@@ -5,7 +5,6 @@ import { WayfarerFooter } from "../components/WayfarerFooter";
 import { DestinationCard } from "../components/WayfarerExperiences";
 import { useFavorites } from "../components/FavoritesContext";
 import { useRecentlyViewed } from "../components/RecentlyViewedContext";
-import { usePersonalization } from "../components/PersonalizationContext";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import {
   getDestinationBySlug,
@@ -41,7 +40,6 @@ export default function ExperienceDetailPage() {
   const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { trackView } = useRecentlyViewed();
-  const { startView, endView } = usePersonalization();
   const dest = getDestinationBySlug(slug ?? "");
 
   // Track as recently viewed
@@ -51,18 +49,6 @@ export default function ExperienceDetailPage() {
       trackView(destId);
     }
   }, [destId, trackView]);
-
-  // Track view duration for personalization
-  const destCategories = dest?.categories;
-  useEffect(() => {
-    if (destId != null && destCategories) {
-      startView(destId, destCategories);
-      return () => {
-        endView(destId);
-      };
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [destId]);
 
   if (!dest) {
     return (

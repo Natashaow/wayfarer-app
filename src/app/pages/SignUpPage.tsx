@@ -51,7 +51,6 @@ import {
 } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { useAuth } from "../components/AuthContext";
-import { usePersonalization } from "../components/PersonalizationContext";
 
 import bgImage from "figma:asset/f5674fb8c81228aad16688b6e79873cbfc000594.jpg";
 
@@ -980,7 +979,6 @@ function ValidationErrors({ errors }: { errors: string[] }) {
 export default function SignUpPage() {
   const navigate = useNavigate();
   const { signUp, isAuthenticated } = useAuth();
-  const { setPendingOnboarding } = usePersonalization();
   const [currentStep, setCurrentStep] = useState(0);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [step1FieldErrors, setStep1FieldErrors] = useState<Record<string, string>>({});
@@ -1072,9 +1070,6 @@ export default function SignUpPage() {
       healthCondition,
       keepUpdated,
     });
-
-    // Trigger personalization onboarding after signup
-    setPendingOnboarding(true);
 
     toast.success(`Welcome aboard, ${personalData.firstName || "Traveler"}! Your profile is ready.`, {
       duration: 3000,
