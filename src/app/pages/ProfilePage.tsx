@@ -163,7 +163,7 @@ function ProfileSection({
         <div className="flex items-center gap-2">
           <Icon className="size-5" style={{ color: "var(--accent)" }} strokeWidth={1.8} />
           <h2
-            className="font-heading text-foreground font-bold text-body"
+            className="font-heading text-foreground font-bold text-title-3 leading-title-3"
           >
             {title}
           </h2>

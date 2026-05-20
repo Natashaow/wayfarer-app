@@ -1,6 +1,6 @@
 {
-  "generated": "2026-05-20T14:41:42.834Z",
-  "count": 546,
+  "generated": "2026-05-20T14:43:20.629Z",
+  "count": 544,
   "violations": [
     {
       "file": "src/app/components/Breadcrumbs.tsx",
@@ -2158,12 +2158,6 @@
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 421,
-      "category": "font-heading-misuse",
-      "snippet": "className=\"font-heading text-foreground font-semibold text-body\""
-    },
-    {
-      "file": "src/app/pages/ItineraryPage.tsx",
       "line": 303,
       "category": "inline-style",
       "snippet": "6 inline style={{}} occurrence(s) in file"
@@ -3031,12 +3025,6 @@
       "line": 868,
       "category": "raw-px-bracket",
       "snippet": "className=\"h-[36px] px-5 rounded-full border-border text-card-foreground hover:bg-muted font-bold text-caption\""
-    },
-    {
-      "file": "src/app/pages/ProfilePage.tsx",
-      "line": 166,
-      "category": "font-heading-misuse",
-      "snippet": "className=\"font-heading text-foreground font-bold text-body\""
     },
     {
       "file": "src/app/pages/ProfilePage.tsx",

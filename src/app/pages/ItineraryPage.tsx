@@ -418,7 +418,7 @@ function ActivityBlock({
           </Badge>
         </div>
         <h4
-          className="font-heading text-foreground font-semibold text-body"
+          className="font-heading text-foreground font-semibold text-title-4 leading-title-4"
           style={{ marginTop: "4px" }}
         >
           {activity.title}
