@@ -142,49 +142,47 @@ const spacingMap = {
 
 /* ── Refactoring logic ───────────────────────────────────────────────────── */
 
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+function refactorTokens(source) {
+  const replacements = [];
+  let result = source;
 
-function collectReplacements(source, map, category) {
-  const pending = [];
-  for (const [oldClass, newClass] of Object.entries(map)) {
-    if (newClass === null) continue;
-    const regex = new RegExp(`\\b${escapeRegExp(oldClass)}\\b`, "g");
+  // Type scale replacements (word-boundary aware)
+  for (const [oldClass, newClass] of Object.entries(typeScaleMap)) {
+    const regex = new RegExp(`\\b${oldClass.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "g");
     let match;
     while ((match = regex.exec(source)) !== null) {
       if (!isExempt(source, match.index)) {
-        pending.push({
+        replacements.push({
           old: oldClass,
           new: newClass,
-          index: match.index,
           line: lineOf(source, match.index),
-          category,
+          category: "type-scale",
         });
+        result = result.replace(match[0], newClass);
+        regex.lastIndex = 0; // Reset after replacement
       }
     }
   }
-  return pending;
-}
 
-function refactorTokens(source) {
-  const pending = [
-    ...collectReplacements(source, typeScaleMap, "type-scale"),
-    ...collectReplacements(source, spacingMap, "spacing"),
-  ];
-
-  // Apply right-to-left so indices from the original source stay valid.
-  pending.sort((a, b) => b.index - a.index);
-
-  let result = source;
-  const replacements = [];
-  for (const { old: oldClass, new: newClass, index, line, category } of pending) {
-    if (result.slice(index, index + oldClass.length) !== oldClass) continue;
-    result = result.slice(0, index) + newClass + result.slice(index + oldClass.length);
-    replacements.push({ old: oldClass, new: newClass, line, category });
+  // Spacing replacements (word-boundary aware)
+  for (const [oldClass, newClass] of Object.entries(spacingMap)) {
+    if (newClass === null) continue; // Skip kept values
+    const regex = new RegExp(`\\b${oldClass.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "g");
+    let match;
+    while ((match = regex.exec(source)) !== null) {
+      if (!isExempt(source, match.index)) {
+        replacements.push({
+          old: oldClass,
+          new: newClass,
+          line: lineOf(source, match.index),
+          category: "spacing",
+        });
+        result = result.replace(match[0], newClass);
+        regex.lastIndex = 0;
+      }
+    }
   }
 
-  replacements.reverse();
   return { result, replacements };
 }
 
