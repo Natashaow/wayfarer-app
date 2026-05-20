@@ -1,6 +1,7 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
+import { defaultTransition, fastTransition, quickTransition } from "../components/animations";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
 import { Separator } from "../components/ui/separator";
@@ -284,7 +285,7 @@ function DestinationCombobox({ value, onChange }: { value: string; onChange: (va
             initial={{ opacity: 0, y: -8, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            transition={quickTransition}
           >
             {filtered.map((dest, i) => (
               <button
@@ -527,7 +528,7 @@ function BudgetCard({
             style={{ backgroundColor: "var(--accent)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={quickTransition}
           />
         )}
       </div>
@@ -650,7 +651,7 @@ function TripSummaryStrip({
       style={{ backgroundColor: "var(--muted)" }}
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25 }}
+      transition={quickTransition}
     >
       <Sparkles className="size-3.5 shrink-0" style={{ color: "var(--accent)" }} strokeWidth={1.8} />
       {pills.map(({ key, icon: Icon, label }) => (
@@ -683,7 +684,7 @@ function RegistrationBridgeModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
+      transition={quickTransition}
     >
       <div className="absolute inset-0 bg-foreground/40 backdrop-blur-sm" onClick={onSkip} aria-hidden="true" />
       <motion.div
@@ -692,7 +693,7 @@ function RegistrationBridgeModal({
         initial={{ y: "100%", opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: "100%", opacity: 0 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        transition={fastTransition}
       >
         <div className="flex justify-center pt-3 pb-1 md:hidden">
           <div className="w-8 h-1 rounded-full" style={{ backgroundColor: "var(--border)" }} />
@@ -989,7 +990,7 @@ export default function PlanTripPage() {
           style={{ boxShadow: "var(--shadow-card-elevated)", margin: "clamp(24px, 5vw, 48px) 16px" }}
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={defaultTransition}
         >
           <div className="flex flex-col items-center px-6 sm:px-10 pt-6 pb-8 gap-(--space-stack-md)">
             {/* Close */}
@@ -1014,7 +1015,7 @@ export default function PlanTripPage() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12 }}
-                    transition={{ duration: 0.3 }}
+                    transition={fastTransition}
                   >
                     {step === 0 && (
                       <div
@@ -1079,7 +1080,7 @@ export default function PlanTripPage() {
                     initial={{ opacity: 0, x: direction * 40 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: direction * -40 }}
-                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    transition={fastTransition}
                   >
                     {/* ── Step 0: Where & When ── */}
                     {step === 0 && (
@@ -1124,7 +1125,7 @@ export default function PlanTripPage() {
                                 className="flex items-center gap-1.5 mt-0.5"
                                 initial={{ opacity: 0, y: -4 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.3 }}
+                                transition={fastTransition}
                               >
                                 <Sparkles className="size-3.5 shrink-0" style={{ color: "var(--accent)" }} strokeWidth={1.8} />
                                 <span className="font-body text-caption" style={{ color: "var(--accent)", fontStyle: "italic" }}>
@@ -1198,7 +1199,7 @@ export default function PlanTripPage() {
                           }}
                           initial={{ opacity: 0, scale: 0.97 }}
                           animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.1, duration: 0.3 }}
+                          transition={{ ...fastTransition, delay: 0.1 }}
                         >
                           <Sparkles className="size-4 shrink-0 mt-0.5" style={{ color: "var(--accent)" }} strokeWidth={1.8} />
                           <p className="font-body text-body-sm" style={{ color: "var(--accent)", fontWeight: "var(--font-weight-medium)" }}>
@@ -1261,7 +1262,7 @@ export default function PlanTripPage() {
                     <motion.div
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.25 }}
+                      transition={quickTransition}
                       whileHover={{ opacity: 0.92 }}
                       whileTap={{ opacity: 0.82 }}
                     >
@@ -1296,7 +1297,7 @@ export default function PlanTripPage() {
                 className="flex flex-col items-center justify-center text-center py-8 w-full"
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                transition={fastTransition}
               >
                 {/* Animated rings */}
                 <div className="relative size-20 mb-(--space-stack-md)">
@@ -1348,7 +1349,7 @@ export default function PlanTripPage() {
                         background: "linear-gradient(to right, var(--accent), color-mix(in srgb, var(--accent) 70%, var(--primary)))",
                         width: `${Math.min(progress, 100)}%`,
                       }}
-                      transition={{ duration: 0.15 }}
+                      transition={quickTransition}
                     />
                   </div>
                   <div className="h-10 flex items-center justify-center mt-3">
@@ -1359,7 +1360,7 @@ export default function PlanTripPage() {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.22, ease: "easeOut" }}
+                        transition={quickTransition}
                       >
                         {([
                           <Compass key="c" className="size-3 mt-0.5 shrink-0" style={{ color: "var(--accent)" }} />,
@@ -1385,7 +1386,7 @@ export default function PlanTripPage() {
                 className="flex flex-col items-center w-full gap-(--space-stack-md)"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                transition={defaultTransition}
               >
                 <ProgressIndicator currentStep={totalSteps - 1} isComplete />
 
@@ -1444,7 +1445,7 @@ export default function PlanTripPage() {
                     }}
                     initial={{ opacity: 0, scale: 0.97 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2, duration: 0.35 }}
+                    transition={{ ...fastTransition, delay: 0.2 }}
                   >
                     <Gem className="size-4 shrink-0" style={{ color: "var(--accent)" }} strokeWidth={1.8} />
                     <p className="font-body text-body-sm" style={{ color: "var(--accent)", fontWeight: "var(--font-weight-medium)" }}>
@@ -1474,7 +1475,7 @@ export default function PlanTripPage() {
                           onClick={() => navigate(`/experience/${item.dest.slug}`)}
                           initial={{ opacity: 0, y: 12 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: i * 0.1, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{ ...fastTransition, delay: i * 0.1 }}
                           whileHover={{ x: 3 }}
                         >
                           <div className="size-12 rounded-[8px] overflow-hidden shrink-0">

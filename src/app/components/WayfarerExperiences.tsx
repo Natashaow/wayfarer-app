@@ -447,7 +447,7 @@ export function WayfarerExperiences() {
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -12 }}
-                transition={{ duration: 0.2 }}
+                transition={quickTransition}
                 className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10"
               >
                 <Button
@@ -493,7 +493,7 @@ export function WayfarerExperiences() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              transition={fastTransition}
             >
               {visibleCards.map((dest) => (
                 <DestinationCard key={dest.id} dest={dest} />

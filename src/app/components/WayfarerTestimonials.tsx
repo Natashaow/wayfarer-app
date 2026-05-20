@@ -23,7 +23,14 @@ import {
 } from "./ui/dialog";
 import { ChevronRight, ChevronLeft, MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-import { fadeUp, stagger, viewport, defaultTransition } from "./animations";
+import {
+  fadeUp,
+  stagger,
+  viewport,
+  defaultTransition,
+  quickTransition,
+  fastTransition,
+} from "./animations";
 import { useState, useCallback } from "react";
 import { cn } from "./ui/utils";
 
@@ -488,7 +495,7 @@ export function WayfarerTestimonials() {
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -12 }}
-                transition={{ duration: 0.2 }}
+                transition={quickTransition}
                 className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10"
               >
                 <Button
@@ -534,7 +541,7 @@ export function WayfarerTestimonials() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              transition={fastTransition}
             >
               {visibleCards.map((t) => (
                 <TestimonialCard key={t.id} t={t} onClickUser={handleClickUser} />

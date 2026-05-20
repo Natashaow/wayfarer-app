@@ -612,11 +612,7 @@ function CreatorSection() {
               initial={{ opacity: 0, scale: 0.96, y: 8 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-                delay: 0.15,
-              }}
+              transition={{ ...defaultTransition, delay: 0.15 }}
             >
               <div className="size-[112px] rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[var(--shadow-primary-cta)] ring-4 ring-card">
                 <span

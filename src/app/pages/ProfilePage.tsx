@@ -57,6 +57,8 @@ import {
   fadeUp,
   defaultTransition,
   viewport,
+  fastTransition,
+  quickTransition,
 } from "../components/animations";
 
 /* ── Data options (same as SignUpPage) ── */
@@ -405,7 +407,7 @@ export default function ProfilePage() {
           onClick={() => navigate("/")}
           initial={{ opacity: 0, x: -12 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={fastTransition}
         >
           <ArrowLeft className="size-4" strokeWidth={1.8} />
           Back to home
@@ -743,7 +745,7 @@ export default function ProfilePage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={quickTransition}
                   >
                     <div className="flex items-start gap-2.5">
                       <AlertTriangle className="size-5 mt-0.5 shrink-0" style={{ color: "var(--destructive)" }} strokeWidth={1.8} />
@@ -802,7 +804,7 @@ export default function ProfilePage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.2 }}
+                    transition={quickTransition}
                   >
                     <div className="flex flex-col gap-1.5">
                       <Label className="font-body text-caption font-medium" style={{ color: "var(--card-foreground)" }}>Current password</Label>
@@ -841,7 +843,7 @@ export default function ProfilePage() {
                       {pwError && (
                         <motion.p
                           initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
-                          transition={{ duration: 0.18 }}
+                          transition={quickTransition}
                           className="font-body flex items-center gap-1.5 text-caption"
                           style={{ color: "var(--destructive)" }}
                         >

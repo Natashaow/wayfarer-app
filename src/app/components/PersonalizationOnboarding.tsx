@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { fastTransition, quickTransition } from "./animations";
 import { Slider } from "./ui/slider";
 import { Button } from "./ui/button";
 import {
@@ -97,7 +98,7 @@ export function PersonalizationOnboarding() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={fastTransition}
       >
         <div
           className="absolute inset-0 bg-foreground/30 backdrop-blur-sm"
@@ -112,7 +113,7 @@ export function PersonalizationOnboarding() {
           initial={{ opacity: 0, scale: 0.96, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, y: 8 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={fastTransition}
         >
           {/* Header bar */}
           <div
@@ -152,7 +153,7 @@ export function PersonalizationOnboarding() {
                   initial={{ opacity: 0, x: 32 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -32 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  transition={fastTransition}
                 >
                   {/* Welcome header */}
                   <div className="flex flex-col gap-2">
@@ -230,7 +231,7 @@ export function PersonalizationOnboarding() {
                   initial={{ opacity: 0, x: 32 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -32 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  transition={fastTransition}
                 >
                   {/* Immersion header */}
                   <div className="flex flex-col gap-2">
@@ -305,7 +306,7 @@ export function PersonalizationOnboarding() {
                         key={immersion}
                         initial={{ opacity: 0, y: 4 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        transition={quickTransition}
                         className="font-heading font-bold"
                         style={{
                           fontSize: "var(--text-title-1)",

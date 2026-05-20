@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { WayfarerNavbar } from "../components/WayfarerNavbar";
 import { motion, AnimatePresence, useAnimate } from "motion/react";
+import { defaultTransition, fastTransition, quickTransition } from "../components/animations";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Textarea } from "../components/ui/textarea";
@@ -782,7 +783,7 @@ function StepOtherPreferences({
                       style={{ backgroundColor: "var(--accent)" }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                      transition={quickTransition}
                     />
                   )}
                 </div>
@@ -910,7 +911,7 @@ function FieldErrorMessage({ message }: { message?: string }) {
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
-          transition={{ duration: 0.18 }}
+          transition={quickTransition}
           className="font-body flex items-center gap-1 text-caption leading-caption"
           style={{
             color: "var(--destructive)",
@@ -953,7 +954,7 @@ function ValidationErrors({ errors }: { errors: string[] }) {
       initial={{ opacity: 0, y: -6 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -6 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
+      transition={quickTransition}
     >
       <AlertCircle
         className="size-3.5 shrink-0"
@@ -1137,7 +1138,7 @@ export default function SignUpPage() {
           }}
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={defaultTransition}
         >
           <div
             className="flex flex-col items-center px-6 sm:px-10 pt-6 pb-8 gap-(--space-stack-md)"
@@ -1162,7 +1163,7 @@ export default function SignUpPage() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12 }}
-                    transition={{ duration: 0.3 }}
+                    transition={fastTransition}
                   >
                     <h1
                       className="font-heading text-foreground font-bold text-title-1 leading-title-1"
@@ -1195,7 +1196,7 @@ export default function SignUpPage() {
                     initial={{ opacity: 0, x: direction * 40 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: direction * -40 }}
-                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    transition={fastTransition}
                   >
                     {currentStep === 0 && (
                       <StepPersonalDetails
@@ -1240,7 +1241,7 @@ export default function SignUpPage() {
                     <motion.div
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.25 }}
+                      transition={quickTransition}
                       whileHover={{ opacity: 0.92 }}
                       whileTap={{ opacity: 0.82 }}
                     >

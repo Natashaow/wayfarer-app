@@ -24,6 +24,8 @@ import {
   sectionItem,
   badgeItem,
   viewport,
+  fastTransition,
+  quickTransition,
 } from "../components/animations";
 import { usePersonalization } from "../components/PersonalizationContext";
 
@@ -125,9 +127,9 @@ export default function ExploreAllPage() {
                   {/* Smart sort toggle — only when personalization data exists */}
                   {canSmartSort && (
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.3 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={fastTransition}
                     >
                       <Button
                         variant="outline"
@@ -235,7 +237,7 @@ export default function ExploreAllPage() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25 }}
+                      transition={quickTransition}
                       className="overflow-hidden"
                     >
                       <ScrollArea className="w-full">

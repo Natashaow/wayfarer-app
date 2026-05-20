@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { WayfarerNavbar } from "../components/WayfarerNavbar";
 import { motion, AnimatePresence } from "motion/react";
+import { defaultTransition, fastTransition, quickTransition } from "../components/animations";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Button } from "../components/ui/button";
@@ -97,7 +98,7 @@ export default function LoginPage() {
           style={{ boxShadow: "var(--shadow-card-elevated)", margin: "clamp(24px, 5vw, 64px) 16px" }}
           initial={{ opacity: 0, y: 30, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={defaultTransition}
         >
           <div
             className="flex flex-col items-center px-6 sm:px-10 pt-6 pb-8 gap-(--space-stack-md)"
@@ -118,7 +119,7 @@ export default function LoginPage() {
               className="flex flex-col items-center gap-3 text-center"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
+              transition={{ ...fastTransition, delay: 0.1 }}
             >
               <h1
                 className="font-heading text-foreground font-bold text-title-1 leading-title-1"
@@ -141,7 +142,7 @@ export default function LoginPage() {
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2 }}
+                  transition={quickTransition}
                 >
                   <AlertCircle className="size-4 shrink-0" style={{ color: "var(--destructive)" }} strokeWidth={2} />
                   <span
@@ -159,7 +160,7 @@ export default function LoginPage() {
               className="w-full flex flex-col gap-6"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.15 }}
+              transition={{ ...fastTransition, delay: 0.15 }}
               onKeyDown={handleKeyDown}
             >
               {/* Email */}
@@ -186,7 +187,7 @@ export default function LoginPage() {
                   {fieldErrors.email && (
                     <motion.p
                       initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.18 }}
+                      transition={quickTransition}
                       className="font-body text-caption" style={{ color: "var(--destructive)" }}
                     >
                       {fieldErrors.email}
@@ -227,7 +228,7 @@ export default function LoginPage() {
                   {fieldErrors.password && (
                     <motion.p
                       initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.18 }}
+                      transition={quickTransition}
                       className="font-body text-caption" style={{ color: "var(--destructive)" }}
                     >
                       {fieldErrors.password}
