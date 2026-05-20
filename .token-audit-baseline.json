@@ -1,6 +1,6 @@
 {
-  "generated": "2026-05-20T14:37:54.270Z",
-  "count": 550,
+  "generated": "2026-05-20T14:41:42.834Z",
+  "count": 546,
   "violations": [
     {
       "file": "src/app/components/Breadcrumbs.tsx",
@@ -37,30 +37,6 @@
       "line": 46,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-body text-muted-foreground hover:text-foreground transition-colors rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 truncate max-w-[20"
-    },
-    {
-      "file": "src/app/components/ErrorBoundary.tsx",
-      "line": 25,
-      "category": "hardcoded-color",
-      "snippet": "<div style={{ padding: \"2rem\", fontFamily: \"monospace\", background: \"#fff\", minHeight: \"100vh\" }}>"
-    },
-    {
-      "file": "src/app/components/ErrorBoundary.tsx",
-      "line": 26,
-      "category": "hardcoded-color",
-      "snippet": "<h2 style={{ color: \"#d95d39\", marginBottom: \"1rem\" }}>Render Error</h2>"
-    },
-    {
-      "file": "src/app/components/ErrorBoundary.tsx",
-      "line": 27,
-      "category": "hardcoded-color",
-      "snippet": "<pre style={{ background: \"#f3f4f5\", padding: \"1rem\", borderRadius: \"8px\", overflow: \"auto\", fontSize: \"12px\" }}>"
-    },
-    {
-      "file": "src/app/components/ErrorBoundary.tsx",
-      "line": 25,
-      "category": "inline-style",
-      "snippet": "3 inline style={{}} occurrence(s) in file"
     },
     {
       "file": "src/app/components/MemoryCard.tsx",
@@ -196,13 +172,13 @@
     },
     {
       "file": "src/app/components/WayfarerCTA.tsx",
-      "line": 150,
+      "line": 147,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta)] ho"
     },
     {
       "file": "src/app/components/WayfarerCTA.tsx",
-      "line": 150,
+      "line": 147,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta)] ho"
     },
@@ -210,7 +186,7 @@
       "file": "src/app/components/WayfarerCTA.tsx",
       "line": 80,
       "category": "inline-style",
-      "snippet": "4 inline style={{}} occurrence(s) in file"
+      "snippet": "3 inline style={{}} occurrence(s) in file"
     },
     {
       "file": "src/app/components/WayfarerExperiences.tsx",
@@ -652,31 +628,31 @@
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 754,
+      "line": 753,
       "category": "raw-type-class",
       "snippet": "className=\"font-body text-card-foreground py-3 px-2 rounded-lg hover:bg-muted hover:text-primary active:bg-accent-light active:text-accent transition-colors text-sm font-medium outline-none focus-visi"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 768,
+      "line": 767,
       "category": "raw-type-class",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:op"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 775,
+      "line": 774,
       "category": "raw-type-class",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted gap-2 font-bold\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 785,
+      "line": 784,
       "category": "raw-type-class",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:op"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 792,
+      "line": 791,
       "category": "raw-type-class",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted font-bold\""
     },
@@ -844,91 +820,91 @@
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 754,
+      "line": 753,
       "category": "off-grid-spacing",
       "snippet": "className=\"font-body text-card-foreground py-3 px-2 rounded-lg hover:bg-muted hover:text-primary active:bg-accent-light active:text-accent transition-colors text-sm font-medium outline-none focus-visi"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 764,
+      "line": 763,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"flex flex-col px-6 py-4 gap-3\">"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 837,
+      "line": 836,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 px-4 py-3\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 837,
+      "line": 836,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 px-4 py-3\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 857,
+      "line": 856,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"p-1.5\">"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 859,
+      "line": 858,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 859,
+      "line": 858,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 869,
+      "line": 868,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 869,
+      "line": 868,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 881,
+      "line": 880,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"p-1.5\">"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 883,
+      "line": 882,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-muted-foreground hover:bg-destructive/6 hover:text-destructive transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 883,
+      "line": 882,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-muted-foreground hover:bg-destructive/6 hover:text-destructive transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 931,
+      "line": 930,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"flex flex-col gap-2 p-3\">"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 936,
+      "line": 935,
       "category": "off-grid-spacing",
       "snippet": "<UserPlus className=\"size-4 mr-1.5\" strokeWidth={1.8} />"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 944,
+      "line": 943,
       "category": "off-grid-spacing",
       "snippet": "<LogIn className=\"size-4 mr-1.5\" strokeWidth={1.8} />"
     },
@@ -1216,163 +1192,163 @@
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 768,
+      "line": 767,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:op"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 768,
+      "line": 767,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:op"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 775,
+      "line": 774,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted gap-2 font-bold\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 785,
+      "line": 784,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:op"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 785,
+      "line": 784,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:op"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 792,
+      "line": 791,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted font-bold\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 808,
+      "line": 807,
       "category": "raw-px-bracket",
       "snippet": "<div className=\"flex items-center gap-[8px] md:gap-[16px] text-card-foreground\">"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 808,
+      "line": 807,
       "category": "raw-px-bracket",
       "snippet": "<div className=\"flex items-center gap-[8px] md:gap-[16px] text-card-foreground\">"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 810,
+      "line": 809,
       "category": "raw-px-bracket",
       "snippet": "<Search className=\"size-[22px]\" strokeWidth={1.8} />"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 813,
+      "line": 812,
       "category": "raw-px-bracket",
       "snippet": "<Heart className=\"size-[22px]\" strokeWidth={1.8} />"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 833,
+      "line": 832,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-[256px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-[16px] p-0 overflow-hidden\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 833,
+      "line": 832,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-[256px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-[16px] p-0 overflow-hidden\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 859,
+      "line": 858,
       "category": "raw-px-bracket",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 859,
+      "line": 858,
       "category": "raw-px-bracket",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 862,
+      "line": 861,
       "category": "raw-px-bracket",
       "snippet": "<div className=\"size-8 rounded-[8px] bg-accent/8 flex items-center justify-center shrink-0\">"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 869,
+      "line": 868,
       "category": "raw-px-bracket",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 869,
+      "line": 868,
       "category": "raw-px-bracket",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 871,
+      "line": 870,
       "category": "raw-px-bracket",
       "snippet": "<div className=\"size-8 rounded-[8px] bg-accent/8 flex items-center justify-center shrink-0\">"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 883,
+      "line": 882,
       "category": "raw-px-bracket",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-muted-foreground hover:bg-destructive/6 hover:text-destructive transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 883,
+      "line": 882,
       "category": "raw-px-bracket",
       "snippet": "className=\"flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-muted-foreground hover:bg-destructive/6 hover:text-destructive transition-colors text-body-sm\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 899,
+      "line": 898,
       "category": "raw-px-bracket",
       "snippet": "<CircleUserRound className=\"size-[22px]\" strokeWidth={1.8} />"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 905,
+      "line": 904,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-[240px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-[16px] p-0 overflow-hidden\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 905,
+      "line": 904,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-[240px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-[16px] p-0 overflow-hidden\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 913,
+      "line": 912,
       "category": "raw-px-bracket",
       "snippet": "<Compass className=\"size-[18px] text-accent\" strokeWidth={1.8} />"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 933,
+      "line": 932,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[40px] rounded-full bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 933,
+      "line": 932,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[40px] rounded-full bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90"
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 941,
+      "line": 940,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full h-[40px] rounded-full border-border text-card-foreground hover:bg-muted hover:border-muted-foreground/30 transition-all font-bold text-body-sm\""
     },
@@ -1380,7 +1356,7 @@
       "file": "src/app/components/WayfarerNavbar.tsx",
       "line": 119,
       "category": "inline-style",
-      "snippet": "12 inline style={{}} occurrence(s) in file"
+      "snippet": "9 inline style={{}} occurrence(s) in file"
     },
     {
       "file": "src/app/components/WayfarerTestimonials.tsx",
@@ -2098,49 +2074,49 @@
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 592,
+      "line": 591,
       "category": "off-grid-spacing",
       "snippet": "<Badge variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 592,
+      "line": 591,
       "category": "off-grid-spacing",
       "snippet": "<Badge variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 595,
+      "line": 594,
       "category": "off-grid-spacing",
       "snippet": "<Badge variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 595,
+      "line": 594,
       "category": "off-grid-spacing",
       "snippet": "<Badge variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 599,
+      "line": 598,
       "category": "off-grid-spacing",
       "snippet": "<Badge key={s} variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body capitalize text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 599,
+      "line": 598,
       "category": "off-grid-spacing",
       "snippet": "<Badge key={s} variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body capitalize text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 674,
+      "line": 673,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex flex-col sm:flex-row items-center justify-center gap-3 print:hidden mt-(--space-stack-lg)\""
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 562,
+      "line": 561,
       "category": "rigid-container",
       "snippet": "<div className=\"px-(--container-px)\">"
     },
@@ -2158,31 +2134,31 @@
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 655,
+      "line": 654,
       "category": "raw-px-bracket",
       "snippet": "className=\"flex flex-col max-w-[800px] gap-(--space-stack-sm)\""
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 679,
+      "line": 678,
       "category": "raw-px-bracket",
       "snippet": "<Button variant=\"outline\" size=\"lg\" className=\"font-heading h-[48px] px-8 rounded-full gap-2 border-border text-card-foreground hover:bg-muted font-bold\" onClick={() => showComingSoon()}>"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 683,
+      "line": 682,
       "category": "raw-px-bracket",
       "snippet": "<Button size=\"lg\" className=\"font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shado"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 683,
+      "line": 682,
       "category": "raw-px-bracket",
       "snippet": "<Button size=\"lg\" className=\"font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shado"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 422,
+      "line": 421,
       "category": "font-heading-misuse",
       "snippet": "className=\"font-heading text-foreground font-semibold text-body\""
     },
@@ -2190,7 +2166,7 @@
       "file": "src/app/pages/ItineraryPage.tsx",
       "line": 303,
       "category": "inline-style",
-      "snippet": "7 inline style={{}} occurrence(s) in file"
+      "snippet": "6 inline style={{}} occurrence(s) in file"
     },
     {
       "file": "src/app/pages/LoginPage.tsx",
@@ -3118,49 +3094,49 @@
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 370,
+      "line": 371,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"flex flex-col gap-5\">"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 460,
+      "line": 461,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"flex flex-col gap-1.5\">"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 754,
+      "line": 755,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"flex gap-5 mt-1\">"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 797,
+      "line": 798,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"flex flex-col gap-3 mt-2\">"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 897,
+      "line": 898,
       "category": "off-grid-spacing",
       "snippet": "<div ref={scope} className=\"flex flex-col gap-1.5\">"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 952,
+      "line": 953,
       "category": "off-grid-spacing",
       "snippet": "className=\"w-full flex items-center justify-center gap-1.5\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 1157,
+      "line": 1158,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex flex-col items-center gap-3 text-center\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 1234,
+      "line": 1235,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"w-full flex items-center justify-center gap-3 mt-2\">"
     },
@@ -3208,91 +3184,91 @@
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 379,
+      "line": 380,
       "category": "raw-px-bracket",
       "snippet": "className=\"h-[40px] border-border bg-surface text-foreground placeholder:text-muted-foreground\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 391,
+      "line": 392,
       "category": "raw-px-bracket",
       "snippet": "className=\"h-[40px] border-border bg-surface text-foreground placeholder:text-muted-foreground\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 404,
+      "line": 405,
       "category": "raw-px-bracket",
       "snippet": "<SelectTrigger className=\"h-[40px] border-border bg-surface\" style={inputBorder(\"dob\")}>"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 416,
+      "line": 417,
       "category": "raw-px-bracket",
       "snippet": "<SelectTrigger className=\"h-[40px] border-border bg-surface\" style={inputBorder(\"dob\")}>"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 428,
+      "line": 429,
       "category": "raw-px-bracket",
       "snippet": "<SelectTrigger className=\"h-[40px] border-border bg-surface\" style={inputBorder(\"dob\")}>"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 445,
+      "line": 446,
       "category": "raw-px-bracket",
       "snippet": "<SelectTrigger className=\"h-[40px] border-border bg-surface\" style={inputBorder(\"residence\")}>"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 468,
+      "line": 469,
       "category": "raw-px-bracket",
       "snippet": "<SelectTrigger className=\"h-[40px] border-border bg-surface\" style={{ borderWidth: \"1.5px\" }}>"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 487,
+      "line": 488,
       "category": "raw-px-bracket",
       "snippet": "className=\"h-[40px] border-border bg-surface text-foreground placeholder:text-muted-foreground\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 509,
+      "line": 510,
       "category": "raw-px-bracket",
       "snippet": "className=\"h-[40px] pl-10 border-border bg-surface text-foreground placeholder:text-muted-foreground\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 524,
+      "line": 525,
       "category": "raw-px-bracket",
       "snippet": "className=\"h-[40px] border-border bg-surface text-foreground placeholder:text-muted-foreground\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 731,
+      "line": 732,
       "category": "raw-px-bracket",
       "snippet": "className=\"min-h-[80px] border-border bg-surface text-foreground placeholder:text-muted-foreground\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 1129,
+      "line": 1130,
       "category": "raw-px-bracket",
       "snippet": "className=\"relative z-10 w-full max-w-[680px] bg-surface rounded-2xl overflow-hidden\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 1246,
+      "line": 1247,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-heading h-[48px] px-6 rounded-full gap-2 border-border text-card-foreground hover:bg-muted transition-colors font-bold\""
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 1260,
+      "line": 1261,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta)] ho"
     },
     {
       "file": "src/app/pages/SignUpPage.tsx",
-      "line": 1260,
+      "line": 1261,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta)] ho"
     },

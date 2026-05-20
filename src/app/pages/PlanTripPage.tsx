@@ -1480,8 +1480,8 @@ export default function PlanTripPage() {
                               }}
                             >
                               <span
-                                className="font-body font-bold"
-                                style={{ fontSize: "10px", color: isHighMatch ? "var(--accent)" : "var(--primary)", letterSpacing: "0.01em" }}
+                                className="font-body font-bold text-caption"
+                                style={{ color: isHighMatch ? "var(--accent)" : "var(--primary)", letterSpacing: "0.01em" }}
                               >
                                 {matchPct}% match
                               </span>

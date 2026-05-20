@@ -133,10 +133,7 @@ export function WayfarerCTA() {
               variants={stagger}
             >
               <motion.h2
-                className="font-heading text-foreground text-center font-bold leading-title-1"
-                style={{
-                  fontSize: "2.625rem",
-                }}
+                className="font-heading text-foreground text-center font-bold text-display leading-display"
                 variants={sectionItem}
               >
                 {isAuthenticated

@@ -76,10 +76,13 @@ function lineText(source, line) {
 }
 
 function isExempt(source, idx) {
+  // Look at the current line and up to 5 lines above — multi-line style={{ }} blocks
+  // often place the offending value several lines below the natural comment site.
   const line = lineOf(source, idx);
-  const here = lineText(source, line);
-  const above = lineText(source, line - 1);
-  return /token-audit-exception:/.test(here) || /token-audit-exception:/.test(above);
+  for (let i = 0; i <= 5; i++) {
+    if (/token-audit-exception:/.test(lineText(source, line - i))) return true;
+  }
+  return false;
 }
 
 const violations = [];
@@ -120,6 +123,10 @@ const RE_BODY_TYPE_TOKEN = /\btext-(?:body(?:-sm)?|caption|badge|nav|button)\b/;
 
 // Inline style={{}} — file-level signal.
 const RE_INLINE_STYLE = /style=\{\{/g;
+
+// Inline fontSize with a literal px or rem value. Hardcoded type sizes that bypass the fluid scale.
+// Allowed: `fontSize: "var(--text-*)"`, `fontSize: someVariable`, computed expressions.
+const RE_INLINE_FONT_SIZE = /fontSize:\s*["'](\d+(?:\.\d+)?(?:px|rem|em))["']/g;
 
 function auditFile(file, source) {
   // 1. Raw Tailwind type classes
@@ -201,7 +208,15 @@ function auditFile(file, source) {
     }
   }
 
-  // 9. Inline style={{}} — flag once per file
+  // 9. Inline fontSize with literal px/rem/em (bypasses the fluid type scale)
+  for (const m of source.matchAll(RE_INLINE_FONT_SIZE)) {
+    if (isExempt(source, m.index)) continue;
+    const line = lineOf(source, m.index);
+    flag(file, line, "inline-fontsize-px", lineText(source, line),
+      `Hardcoded inline fontSize (${m[1]}). Use a token: fontSize: "var(--text-caption)" or a className like text-caption/text-body-sm/text-body.`);
+  }
+
+  // 10. Inline style={{}} — flag once per file
   const inlineMatch = source.match(RE_INLINE_STYLE);
   if (inlineMatch) {
     // anchor at the first occurrence for stable baseline key
@@ -228,6 +243,7 @@ const labels = {
   "rigid-container": "Rigid container — use px-container-px (fluid)",
   "raw-px-bracket": "Raw px arbitrary bracket — promote to token or snap",
   "font-heading-misuse": "font-heading on body/caption-sized text",
+  "inline-fontsize-px": "Inline fontSize with literal px/rem (bypasses fluid scale)",
   "inline-style": "Inline style={{}} — audit per-use",
 };
 

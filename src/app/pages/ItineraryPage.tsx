@@ -412,8 +412,7 @@ function ActivityBlock({
           <span className="font-body text-muted-foreground text-caption">{activity.time}</span>
           <Badge
             variant="outline"
-            className="rounded-full px-2 py-0 border-border text-muted-foreground font-body"
-            style={{ fontSize: "11px" }}
+            className="rounded-full px-2 py-0 border-border text-muted-foreground font-body text-caption"
           >
             {activity.tag}
           </Badge>

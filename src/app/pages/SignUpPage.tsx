@@ -322,6 +322,7 @@ function LabeledSlider({
 /* ── Required field mark ── */
 function RequiredMark() {
   return (
+    // token-audit-exception: inline-fontsize-px — `<sup>` size is intentionally parent-relative (em), not token-bound; required-field asterisk must scale with the label it follows.
     <sup
       aria-hidden="true"
       style={{

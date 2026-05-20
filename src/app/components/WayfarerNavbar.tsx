@@ -497,7 +497,7 @@ export function WayfarerNavbar() {
           >
             <Heart className="size-[22px]" strokeWidth={1.8} />
             {count > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 size-4 rounded-full bg-accent text-surface flex items-center justify-center font-bold" style={{ fontSize: "10px" }}>
+              <span className="absolute -top-0.5 -right-0.5 size-4 rounded-full bg-accent text-surface flex items-center justify-center font-bold text-caption">
                 {count}
               </span>
             )}
@@ -739,8 +739,7 @@ export function WayfarerNavbar() {
                     Saved destinations
                     {count > 0 && (
                       <span
-                        className="ml-auto size-5 rounded-full bg-accent text-surface flex items-center justify-center font-bold"
-                        style={{ fontSize: "10px" }}
+                        className="ml-auto size-5 rounded-full bg-accent text-surface flex items-center justify-center font-bold text-caption"
                       >
                         {count}
                       </span>
@@ -812,7 +811,7 @@ export function WayfarerNavbar() {
           <button className="shrink-0 outline-none hover:text-primary active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all relative" aria-label="Saved" onClick={() => navigate("/favorites")}>
             <Heart className="size-[22px]" strokeWidth={1.8} />
             {isAuthenticated && count > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 size-4 rounded-full bg-accent text-surface flex items-center justify-center font-bold" style={{ fontSize: "10px" }}>
+              <span className="absolute -top-0.5 -right-0.5 size-4 rounded-full bg-accent text-surface flex items-center justify-center font-bold text-caption">
                 {count}
               </span>
             )}
