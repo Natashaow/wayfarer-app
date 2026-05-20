@@ -46,7 +46,7 @@ function PassionChip({
     <motion.button
       type="button"
       onClick={onToggle}
-      whileTap={{ scale: 0.93 }}
+      whileTap={{ opacity: 0.85 }}
       className={cn(
         "flex items-center gap-2 px-4 py-2 rounded-full border cursor-pointer outline-none font-body transition-all",
         "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
@@ -109,9 +109,9 @@ export function PersonalizationOnboarding() {
         <motion.div
           className="relative z-10 w-full max-w-[540px] bg-surface rounded-2xl overflow-hidden flex flex-col"
           style={{ boxShadow: "var(--shadow-card-elevated)" }}
-          initial={{ opacity: 0, scale: 0.95, y: 24 }}
+          initial={{ opacity: 0, scale: 0.96, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.97, y: 16 }}
+          exit={{ opacity: 0, y: 8 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           {/* Header bar */}
@@ -303,9 +303,9 @@ export function PersonalizationOnboarding() {
                     <div className="flex justify-center">
                       <motion.span
                         key={immersion}
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                         className="font-heading font-bold"
                         style={{
                           fontSize: "var(--text-title-1)",

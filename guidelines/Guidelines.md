@@ -77,9 +77,43 @@ Case study: https://nowandabout.com/wayfarer-travel
 
 ### 4. Animation (Motion)
 
-**MOTION/REACT:** Use `import { motion } from 'motion/react'`.
+**MOTION/REACT:** Use `import { motion } from 'motion/react'`. Shared variants live in `/src/app/components/animations.ts`. Reduced-motion is enforced via the `useBrandMotion` hook in `/src/app/components/useBrandMotion.ts`.
 
-**STAGGERED REVEALS:** Wrap lists or grids in a `motion.div` with `initial="initial"` and `whileInView="animate"`. Shared variants like `fadeInUp` and `staggerContainer` exist in `/src/app/components/animations.ts`.
+**STAGGERED REVEALS:** Wrap lists or grids in a `motion.div` with `initial="hidden"` and `whileInView="visible"` (or `animate="visible"` above-the-fold). Import variants — never inline a `transition={{...}}` prop. Available variants: `fadeUp`, `fadeIn`, `slideFromLeft`, `slideFromRight`, `slideDown`, `stagger` / `staggerFast` / `staggerSlow`, `sectionItem`, `cardItem`, `badgeItem`.
+
+#### Wayfarer Motion Doctrine
+
+Wayfarer's motion personality is **editorial travel magazine** — slow, confident, restrained. Reveals fade in like a page turn; photography breathes; nothing pops or bounces. The six rules below are non-negotiable. They are enforced in the shared variants and should be honoured in every new component.
+
+- **R1 — Ease only out.** Use `cubic-bezier(0.22, 1, 0.36, 1)` (token: `--motion-ease-out`) exclusively for one-shot transitions. No `ease-in`, no `ease-in-out`, no spring overshoot. Editorial brands don't bounce. _Exception:_ infinite loops (`repeat: Infinity` — loading spinners, ambient pulses, decorative rotations) may use `easeInOut` or `linear` since loops need symmetric curves to look smooth. Any other use of a non-brand curve requires a `// motion-doctrine-exception:` comment.
+- **R2 — Compose on the GPU.** Animate only `transform` and `opacity`. Never animate `width`, `height`, `top`, `left`, `box-shadow`, `filter`, or `background-position` on interactive paths. Use Tailwind's `transition-transform` / `transition-opacity`, not `transition-all`, on hot paths.
+- **R3 — One transform per element tree.** If a parent uses `whileHover` (or a `hover:` Tailwind transform), the child must NOT also transform on `:hover`. A card lifts OR its image zooms, never both. This was the single biggest source of perceived jank in the codebase.
+- **R4 — Reveals are Y + opacity. Scale is for chrome only.** Hero and section reveals use small Y (8–24px) and opacity. Scale animations are reserved for small chrome (badges, dots, indicators) with deltas no smaller than `0.96 → 1`. Hero images fade — they do not zoom.
+- **R5 — Spring damping ≥ 28, or use tween.** If spring physics are used at all, `damping` must be ≥ 28 to prevent overshoot. The default is brand-curve tween (`quickTransition`, `fastTransition`, `defaultTransition`, `slowTransition`).
+- **R6 — Respect `prefers-reduced-motion`.** Wrap variants with `useBrandMotion(variant)`; for scroll-driven `useTransform` values gate the range with `useBrandMotionEnabled()`. The hook returns a no-transform fallback when the user has Reduce Motion enabled in their OS.
+
+**Hover & tap caps** (derived from R3 + R4):
+- `whileHover` scale: max **1.02** for content, max **1.01** for UI chrome (icons, nav). Prefer opacity shifts on chrome.
+- `whileHover` translate: max **4px**.
+- `whileTap`: opacity 0.85 or scale 0.98; never 0.93 or lower.
+
+**Motion tokens** (defined in `src/styles/theme.css`, mirrored as TS in `animations.ts`):
+
+| Token | Value | Use |
+|---|---|---|
+| `--motion-ease-out` | `cubic-bezier(0.22, 1, 0.36, 1)` | the only ease curve in the system |
+| `--motion-duration-quick` | 200ms | taps, toasts, chrome state |
+| `--motion-duration-base` | 400ms | default UI transitions |
+| `--motion-duration-deliberate` | 600ms | section reveals |
+| `--motion-duration-editorial` | 800ms | hero photography reveals |
+| `--motion-y-sm` | 8px | small reveal lift |
+| `--motion-y-md` | 16px | standard reveal lift |
+| `--motion-y-lg` | 24px | feature row slide-in |
+| `--motion-stagger-tight` | 60ms | filter badges, dense lists |
+| `--motion-stagger-base` | 80ms | default cascade |
+| `--motion-stagger-loose` | 120ms | feature rows, hero CTAs |
+
+**Deviating from the doctrine.** Rare cases (custom Lottie-style transitions, deliberate brand moments) may need to deviate. When you do, leave a single-line comment naming the rule and the reason, e.g. `// motion-doctrine-exception: R5 — celebratory bounce on confetti completion`. Anything without that comment is treated as a regression in code review.
 
 ### 5. Clean Code Output
 

@@ -58,10 +58,14 @@ Only when the user explicitly says so in the same turn (e.g., "skip the audit, j
 npm i              # install dependencies
 npm run dev        # start Vite dev server
 npm run build      # production build → dist/
+npm run lint:motion         # Wayfarer Motion Doctrine audit (baseline-aware)
+npm run lint:motion -- --strict   # show all existing motion debt (48 grandfathered items)
 vercel --prod      # deploy to production (already linked)
 ```
 
-> **CRITICAL:** No test runner, no lint script, no CI exists. Do NOT invent commands that don't exist in `package.json`.
+> **CRITICAL:** No test runner, no general-purpose lint script, no CI exists. The only lint is `lint:motion` (custom audit of `src/app/components/animations.ts` doctrine compliance — see `scripts/audit-motion.mjs`). Do NOT invent commands that don't exist in `package.json`.
+>
+> `lint:motion` is **baseline-aware**: the 48 pre-existing violations in `.motion-audit-baseline.json` are grandfathered. The script only fails on *new* violations beyond that snapshot. Run with `--strict` to see all debt; run with `--baseline` to refresh the snapshot after fixing items.
 
 ## Architecture
 
@@ -96,7 +100,7 @@ The `@` alias points to `./src`. SVG and CSV files can be imported raw.
 - **No hardcoded colors, spacing, or font sizes.** Use semantic tokens (`text-primary`, `bg-surface`, `border-muted`, `text-destructive`) and fluid scale variables (`text-display`, `text-h1`, `text-body`, `text-caption`, `text-badge`).
 - **8px grid** for all spacing — snap to tokens in `src/styles/theme.css` (`--space-stack-xs/sm/md/lg`, `--space-section-title`, `--section-py-*`, `--container-px`, `--grid-gap`). Off-grid values like 14/18/20px are forbidden.
 - **Fluid first**, three-tier breakpoints: default (<768px), `md:` (≥768px), `lg:` (≥1024px). Avoid `max-w-7xl`-style rigid containers.
-- **Animations** use `motion/react`. Shared `fadeInUp` / `staggerContainer` variants live in `src/app/components/animations.ts`; reveal patterns use `initial="initial" whileInView="animate"`.
+- **Animations** follow the **Wayfarer Motion Doctrine** (see `guidelines/Guidelines.md#wayfarer-motion-doctrine`). Six rules: ease-out only, GPU-composited transforms (`transform`/`opacity`), one transform per element tree, reveals are Y+opacity (scale for chrome only), spring damping ≥ 28 or tween, and `prefers-reduced-motion` honoured via `useBrandMotion`. Shared variants live in `src/app/components/animations.ts`; reveal patterns use `initial="hidden" whileInView="visible"`. **Never inline `transition={{...}}` props** — import a token-driven transition instead.
 
 CSS entrypoint chain: `src/main.tsx` → `src/styles/index.css` → imports `fonts.css`, `tailwind.css`, `theme.css`. The `default_shadcn_theme.css` at the repo root is reference material, not loaded.
 

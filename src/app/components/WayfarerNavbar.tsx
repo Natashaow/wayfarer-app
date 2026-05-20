@@ -488,8 +488,8 @@ export function WayfarerNavbar() {
           <motion.button
             className="relative text-card-foreground hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1"
             variants={navItem}
-            whileHover={{ scale: 1.12 }}
-            whileTap={{ scale: 0.93 }}
+            whileHover={{ opacity: 0.7 }}
+            whileTap={{ opacity: 0.85 }}
             onClick={() => navigate("/favorites")}
             aria-label="Saved destinations"
           >
@@ -506,7 +506,7 @@ export function WayfarerNavbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
-                  className="shrink-0 outline-none active:scale-95 focus-visible:ring-2 focus-visible:ring-accent rounded-full transition-all cursor-pointer ring-2 ring-transparent hover:ring-accent/20"
+                  className="shrink-0 outline-none active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full transition-all cursor-pointer ring-2 ring-transparent hover:ring-accent/20"
                   aria-label="Account menu"
                 >
                   <UserAvatar firstName={user.firstName} lastName={user.lastName} size={32} />
@@ -610,7 +610,7 @@ export function WayfarerNavbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
-                  className="shrink-0 outline-none hover:text-primary active:scale-95 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all cursor-pointer"
+                  className="shrink-0 outline-none hover:text-primary active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all cursor-pointer"
                   aria-label="Account menu"
                 >
                   <CircleUserRound className="size-[22px]" strokeWidth={1.8} />
@@ -678,7 +678,7 @@ export function WayfarerNavbar() {
         <div className="flex items-center gap-[16px]">
           <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
             <SheetTrigger asChild>
-              <button className="text-card-foreground shrink-0 outline-none hover:text-primary active:scale-95 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all" aria-label="Open menu">
+              <button className="text-card-foreground shrink-0 outline-none hover:text-primary active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all" aria-label="Open menu">
                 <Menu className="size-[24px]" strokeWidth={1.8} />
               </button>
             </SheetTrigger>
@@ -804,10 +804,10 @@ export function WayfarerNavbar() {
 
         {/* Right: Search + Save + User */}
         <div className="flex items-center gap-[8px] md:gap-[16px] text-card-foreground">
-          <button className="shrink-0 outline-none hover:text-primary active:scale-95 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all" aria-label="Search" onClick={() => setMobileSearchOpen(true)}>
+          <button className="shrink-0 outline-none hover:text-primary active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all" aria-label="Search" onClick={() => setMobileSearchOpen(true)}>
             <Search className="size-[22px]" strokeWidth={1.8} />
           </button>
-          <button className="shrink-0 outline-none hover:text-primary active:scale-95 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all relative" aria-label="Saved" onClick={() => navigate("/favorites")}>
+          <button className="shrink-0 outline-none hover:text-primary active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all relative" aria-label="Saved" onClick={() => navigate("/favorites")}>
             <Heart className="size-[22px]" strokeWidth={1.8} />
             {isAuthenticated && count > 0 && (
               <span className="absolute -top-0.5 -right-0.5 size-4 rounded-full bg-accent text-surface flex items-center justify-center font-bold" style={{ fontSize: "10px" }}>
@@ -819,7 +819,7 @@ export function WayfarerNavbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
-                  className="shrink-0 outline-none hover:text-primary active:scale-95 focus-visible:ring-2 focus-visible:ring-accent rounded-full transition-all cursor-pointer"
+                  className="shrink-0 outline-none hover:text-primary active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full transition-all cursor-pointer"
                   aria-label="Account menu"
                 >
                   <UserAvatar firstName={user.firstName} lastName={user.lastName} size={28} />
@@ -891,7 +891,7 @@ export function WayfarerNavbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button
-                  className="shrink-0 outline-none hover:text-primary active:scale-95 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all cursor-pointer"
+                  className="shrink-0 outline-none hover:text-primary active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all cursor-pointer"
                   aria-label="Account menu"
                 >
                   <CircleUserRound className="size-[22px]" strokeWidth={1.8} />

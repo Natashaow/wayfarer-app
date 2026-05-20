@@ -11,7 +11,9 @@ import {
   scaleUp,
   viewport,
   defaultTransition,
+  slowTransition,
 } from "../components/animations";
+import { useBrandMotionEnabled } from "../components/useBrandMotion";
 import { useNavigate } from "react-router";
 import { useRef } from "react";
 import {
@@ -35,12 +37,12 @@ const sectionItem = {
 };
 
 const statItem = {
-  hidden: { scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: defaultTransition },
+  hidden: { opacity: 0, scale: 0.96, y: 8 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: defaultTransition },
 };
 
 const valueItem = {
-  hidden: { y: 32 },
+  hidden: { opacity: 0, y: 16 },
   visible: { opacity: 1, y: 0, transition: defaultTransition },
 };
 
@@ -124,14 +126,17 @@ const cultureValues = [
 /* ── Hero Section ── */
 function AboutHero() {
   const heroRef = useRef<HTMLElement>(null);
+  const motionEnabled = useBrandMotionEnabled();
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.6], [0, -40]);
+  // Doctrine R6: parallax disabled under prefers-reduced-motion.
+  // R4/R3: gentle parallax only — 3% scale, 10% Y, no theatrical zoom.
+  const bgY = useTransform(scrollYProgress, [0, 1], motionEnabled ? ["0%", "10%"] : ["0%", "0%"]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], motionEnabled ? [1, 1.03] : [1, 1]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], motionEnabled ? [1, 0] : [1, 1]);
+  const textY = useTransform(scrollYProgress, [0, 0.6], motionEnabled ? [0, -16] : [0, 0]);
 
   return (
     <section
@@ -140,9 +145,9 @@ function AboutHero() {
     >
       <motion.div
         className="absolute inset-0"
-        initial={{ opacity: 0, scale: 1.04 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={slowTransition}
         style={{ y: bgY, scale: bgScale }}
       >
         <ImageWithFallback
@@ -604,11 +609,11 @@ function CreatorSection() {
           <div className="flex justify-center" style={{ marginTop: "-56px" }}>
             <motion.div
               className="relative"
-              initial={{ scale: 0.8, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
+              initial={{ opacity: 0, scale: 0.96, y: 8 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{
-                duration: 0.7,
+                duration: 0.6,
                 ease: [0.22, 1, 0.36, 1],
                 delay: 0.15,
               }}
@@ -775,8 +780,8 @@ function AboutCTA() {
             >
               <motion.div
                 className="bg-gradient-to-b from-primary-hover to-primary relative rounded-[40px] shrink-0 cursor-pointer shadow-[var(--shadow-primary-cta)]"
-                whileHover={{ opacity: 0.92, scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ opacity: 0.92 }}
+                whileTap={{ opacity: 0.82 }}
                 onClick={() => navigate("/plan-trip")}
               >
                 <div
@@ -802,8 +807,8 @@ function AboutCTA() {
 
               <motion.div
                 className="bg-gradient-to-b from-secondary-btn to-secondary-btn-end relative rounded-[40px] shrink-0 cursor-pointer shadow-[var(--shadow-secondary-cta)]"
-                whileHover={{ opacity: 0.92, scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                whileHover={{ opacity: 0.92 }}
+                whileTap={{ opacity: 0.82 }}
                 onClick={() => navigate("/explore")}
               >
                 <div

@@ -494,7 +494,7 @@ export function WayfarerTestimonials() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:scale-95 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+                  className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:opacity-80 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                   onClick={handlePrev}
                   aria-label="Go to previous reviews"
                 >
@@ -518,7 +518,7 @@ export function WayfarerTestimonials() {
             <Button
               variant="outline"
               size="icon"
-              className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:scale-95 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+              className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:opacity-80 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
               onClick={handleNext}
               aria-label="See more reviews"
             >

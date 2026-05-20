@@ -12,13 +12,9 @@ import {
   slideFromRight,
   viewport,
   defaultTransition,
+  quickTransition,
+  sectionItem,
 } from "./animations";
-
-/** Child variant for desktop text panel elements */
-const textItem = {
-  hidden: { y: 20 },
-  visible: { opacity: 1, y: 0, transition: defaultTransition },
-};
 
 export function WayfarerCTA() {
   const navigate = useNavigate();
@@ -40,8 +36,8 @@ export function WayfarerCTA() {
             {/* Image */}
             <motion.div
               className="relative w-full overflow-hidden pointer-events-none rounded-none h-[clamp(176px,42vw,272px)]"
-              initial={{ opacity: 0, scale: 1.04 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={viewport}
               transition={{ ...defaultTransition, delay: 0.1 }}
             >
@@ -73,8 +69,8 @@ export function WayfarerCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
               transition={{ ...defaultTransition, delay: 0.26 }}
-              whileHover={{ opacity: 0.92, scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
+              whileHover={{ opacity: 0.92 }}
+              whileTap={{ opacity: 0.82 }}
               onClick={() => navigate(isAuthenticated ? "/plan-trip" : "/signup")}
             >
               <div className="flex items-center justify-center overflow-clip px-6 py-3 rounded-[inherit]">
@@ -140,14 +136,14 @@ export function WayfarerCTA() {
                 style={{
                   fontSize: "2.625rem",
                 }}
-                variants={textItem}
+                variants={sectionItem}
               >
                 {isAuthenticated
                   ? "Your next adventure is just a tap away!"
                   : "There's an adventure waiting just for you!"}
               </motion.h2>
 
-              <motion.div variants={textItem} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+              <motion.div variants={sectionItem} whileHover={{ opacity: 0.92 }} whileTap={{ opacity: 0.82 }} transition={quickTransition}>
                 <Button
                   size="lg"
                   className="font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta)] hover:opacity-90 transition-opacity font-bold"

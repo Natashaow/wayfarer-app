@@ -85,14 +85,15 @@ function MobileFooterLogo() {
   );
 }
 
-/** Shared child variant */
+/** Shared child variant — matches doctrine sectionItem (16px Y + fade) */
 const footerItem = {
-  hidden: { y: 20 },
+  hidden: { opacity: 0, y: 16 },
   visible: { opacity: 1, y: 0, transition: defaultTransition },
 };
 
+/** Social icon: subtle scale within R4 chrome cap (0.96 → 1) */
 const socialItem = {
-  hidden: { scale: 0.75 },
+  hidden: { opacity: 0, scale: 0.96 },
   visible: { opacity: 1, scale: 1, transition: fastTransition },
 };
 
@@ -165,8 +166,8 @@ export function WayfarerFooter() {
                 aria-label={s.label}
                 className="shrink-0 hover:text-primary transition-colors outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full p-0.5"
                 variants={socialItem}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ opacity: 0.7 }}
+                whileTap={{ opacity: 0.85 }}
               >
                 {s.icon}
               </motion.a>
@@ -272,7 +273,7 @@ export function WayfarerFooter() {
             {/* Social icons with tooltips */}
             <motion.div className="flex items-center gap-2" variants={staggerFast}>
               {socialIcons.map((s) => (
-                <motion.div key={s.label} variants={socialItem} whileHover={{ scale: 1.18 }} whileTap={{ scale: 0.9 }}>
+                <motion.div key={s.label} variants={socialItem} whileHover={{ opacity: 0.7 }} whileTap={{ opacity: 0.85 }}>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button

@@ -202,6 +202,23 @@
   --shadow-inset-card: inset 4px 4px 8px 0px rgba(6,10,13,0.02), inset 2px 2px 4px 0px rgba(6,10,13,0.02);
   --shadow-inset-card-lg: inset 4px 4px 8px 2px rgba(6,10,13,0.02), inset 2px 2px 4px rgba(6,10,13,0.02);
 
+  /* ── Motion (Wayfarer Motion Doctrine) ───────────────
+   * Editorial travel-magazine pacing — ease-out only, no bounce.
+   * See guidelines/Guidelines.md#motion for the six rules.
+   * Mirrored as TS constants in src/app/components/animations.ts.
+   */
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-duration-quick: 200ms;       /* taps, toasts, chrome state */
+  --motion-duration-base: 400ms;        /* default UI transitions */
+  --motion-duration-deliberate: 600ms;  /* section reveals */
+  --motion-duration-editorial: 800ms;   /* hero photography reveals */
+  --motion-y-sm: 8px;
+  --motion-y-md: 16px;
+  --motion-y-lg: 24px;
+  --motion-stagger-tight: 60ms;
+  --motion-stagger-base: 80ms;
+  --motion-stagger-loose: 120ms;
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);

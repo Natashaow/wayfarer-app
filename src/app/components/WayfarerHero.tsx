@@ -1,25 +1,20 @@
 import imgHeroImage from "figma:asset/b9eec30ee7db572fec86e8db69b530b9fd818720.jpg";
 import imgHeroMobile from "figma:asset/e2e3f204a6869d3991cb9ff963548e71e9e76281.png";
 import { motion } from "motion/react";
-import { stagger, fadeIn } from "./animations";
+import { stagger, fadeIn, fadeUp, quickTransition } from "./animations";
+import { useBrandMotion } from "./useBrandMotion";
 import { useNavigate } from "react-router";
 import { useAuth } from "./AuthContext";
-
-/** Child variant for each staggered hero element */
-const heroItem = {
-  hidden: { y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const } },
-};
-
-/** Background image reveal — subtle scale only, no opacity fade */
-const bgReveal = {
-  hidden: { scale: 1.04 },
-  visible: { scale: 1, transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] as const } },
-};
 
 export function WayfarerHero() {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
+
+  // Doctrine: hero photography fades in (R4 — no scale on reveals).
+  // Hero content uses the standard fadeUp (16px lift + fade).
+  const bgReveal = useBrandMotion(fadeIn);
+  const heroItem = useBrandMotion(fadeUp);
+  const container = useBrandMotion(stagger);
 
   return (
     <section
@@ -62,7 +57,7 @@ export function WayfarerHero() {
       >
         <motion.div
           className="w-full flex flex-col items-center lg:items-start lg:justify-center gap-(--space-stack-md)"
-          variants={stagger}
+          variants={container}
         >
           {/* Header: H1 + body */}
           <div className="flex flex-col items-center lg:items-start max-w-[clamp(280px,82vw,420px)] md:max-w-[55vw] lg:max-w-[603px] gap-(--space-stack-md)">
@@ -97,15 +92,15 @@ export function WayfarerHero() {
           <motion.div
             className="flex flex-wrap items-center justify-center lg:justify-start"
             style={{ gap: "var(--hero-btn-gap)" }}
-            variants={stagger}
+            variants={container}
           >
             {/* Primary — orange gradient */}
             <motion.div
               className="bg-gradient-to-b from-primary-hover to-primary relative rounded-[40px] shrink-0 cursor-pointer shadow-[var(--shadow-primary-cta)]"
               variants={heroItem}
-              whileHover={{ opacity: 0.92, scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.18 }}
+              whileHover={{ opacity: 0.92 }}
+              whileTap={{ opacity: 0.82 }}
+              transition={quickTransition}
               onClick={() => navigate("/plan-trip")}
             >
               <div
@@ -135,9 +130,9 @@ export function WayfarerHero() {
             <motion.div
               className="bg-gradient-to-b from-secondary-btn to-secondary-btn-end relative rounded-[40px] shrink-0 cursor-pointer shadow-[var(--shadow-secondary-cta)]"
               variants={heroItem}
-              whileHover={{ opacity: 0.92, scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.18 }}
+              whileHover={{ opacity: 0.92 }}
+              whileTap={{ opacity: 0.82 }}
+              transition={quickTransition}
               onClick={() => navigate("/signup")}
             >
               <div

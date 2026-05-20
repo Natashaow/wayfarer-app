@@ -12,6 +12,8 @@ import {
   staggerFast,
   viewport,
   defaultTransition,
+  fastTransition,
+  quickTransition,
   sectionItem,
   badgeItem,
   cardItem,
@@ -100,9 +102,9 @@ function MatchBadge({ score }: { score: number }) {
   const isHighMatch = score >= 80;
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+      transition={fastTransition}
       className="flex items-center gap-1 px-2 py-1 rounded-full backdrop-blur-sm"
       style={{
         backgroundColor: isHighMatch ? "var(--accent)" : "var(--surface)",
@@ -148,8 +150,8 @@ const DestinationCard = forwardRef<HTMLDivElement, { dest: Destination, compact?
       layout
       ref={ref}
       variants={cardItem}
-      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-      whileHover={{ y: -6, transition: { duration: 0.3, ease: "easeOut" } }}
+      exit={{ opacity: 0, transition: quickTransition }}
+      whileHover={{ y: -4, transition: quickTransition }}
     >
       <Card
         className="relative rounded-[20px] overflow-hidden shrink-0 border-0 shadow-[var(--shadow-card-elevated)] p-0 gap-0 cursor-pointer group/card"
@@ -166,7 +168,7 @@ const DestinationCard = forwardRef<HTMLDivElement, { dest: Destination, compact?
         <img
           src={dest.image}
           alt={dest.title}
-          className="absolute inset-0 object-cover size-full transition-transform duration-500 group-hover/card:scale-105"
+          className="absolute inset-0 object-cover size-full"
         />
 
         {/* Gradient overlay */}
@@ -188,7 +190,7 @@ const DestinationCard = forwardRef<HTMLDivElement, { dest: Destination, compact?
             <Button
               variant="ghost"
               size="icon"
-              className="size-8 md:size-10 rounded-full bg-surface/20 hover:bg-surface/30 active:scale-95 backdrop-blur-sm shadow-[var(--shadow-button-glow)] outline-none focus-visible:ring-2 focus-visible:ring-accent transition-all"
+              className="size-8 md:size-10 rounded-full bg-surface/20 hover:bg-surface/30 active:opacity-80 backdrop-blur-sm shadow-[var(--shadow-button-glow)] outline-none focus-visible:ring-2 focus-visible:ring-accent transition-all"
               onClick={(e) => { e.stopPropagation(); toggleFavorite(dest.id); }}
               aria-label={saved ? "Remove from saved" : "Save destination"}
             >
@@ -392,7 +394,7 @@ export function WayfarerExperiences() {
                   <motion.div
                     key={filter}
                     variants={badgeItem}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ opacity: 0.85 }}
                   >
                     <Badge
                       onClick={() => handleFilterChange(filter)}
@@ -451,7 +453,7 @@ export function WayfarerExperiences() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:scale-95 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+                  className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:opacity-80 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                   onClick={handlePrev}
                   aria-label="Go to previous destinations"
                 >
@@ -475,7 +477,7 @@ export function WayfarerExperiences() {
             <Button
               variant="outline"
               size="icon"
-              className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:scale-95 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+              className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:opacity-80 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
               onClick={handleNext}
               aria-label="See more destinations"
             >

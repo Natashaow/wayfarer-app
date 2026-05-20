@@ -10,6 +10,7 @@ import {
   staggerSlow,
   viewport,
   defaultTransition,
+  slowTransition,
 } from "./animations";
 
 const features = [
@@ -100,8 +101,8 @@ function DesktopFeatureRow({ feature, index }: { feature: (typeof features)[0]; 
       {/* Center column — dot + vertical line connector */}
       <motion.div
         className="order-2 flex flex-col items-center w-[10%] self-stretch justify-center relative"
-        initial={{ opacity: 0, scale: 0.5 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, scale: 0.96, y: 8 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={viewport}
         transition={{ ...defaultTransition, delay: 0.15 }}
       >
@@ -131,9 +132,9 @@ function DesktopFeatureRow({ feature, index }: { feature: (typeof features)[0]; 
   );
 }
 
-/* Mobile child variant */
+/* Mobile child variant — matches shared sectionItem (16px Y + fade) */
 const mobileFeatureItem = {
-  hidden: { y: 28 },
+  hidden: { opacity: 0, y: 16 },
   visible: { opacity: 1, y: 0, transition: defaultTransition },
 };
 
@@ -215,7 +216,7 @@ export function WayfarerWhySection() {
             initial={{ scaleY: 0, originY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true, margin: "-120px" }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ ...slowTransition }}
           />
 
           <div className="flex flex-col gap-(--space-stack-lg)">

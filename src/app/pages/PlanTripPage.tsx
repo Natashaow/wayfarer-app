@@ -525,9 +525,9 @@ function BudgetCard({
           <motion.div
             className="size-2.5 rounded-full"
             style={{ backgroundColor: "var(--accent)" }}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           />
         )}
       </div>
@@ -1262,8 +1262,8 @@ export default function PlanTripPage() {
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.25 }}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
+                      whileHover={{ opacity: 0.92 }}
+                      whileTap={{ opacity: 0.82 }}
                     >
                       <Button
                         onClick={goBack}
