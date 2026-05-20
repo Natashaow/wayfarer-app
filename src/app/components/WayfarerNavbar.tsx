@@ -14,7 +14,7 @@ import {
 import { Separator } from "./ui/separator";
 import { motion } from "motion/react";
 import { slideDown, stagger, fadeIn, fastTransition } from "./animations";
-import { useState, useCallback, useRef, useEffect, useMemo } from "react";
+import { useState, useCallback, useRef, useEffect, useMemo, type KeyboardEvent } from "react";
 import { useNavigate } from "react-router";
 import { useFavorites } from "./FavoritesContext";
 import { useAuth } from "./AuthContext";
@@ -86,7 +86,7 @@ function DesktopSearchInput({ navigate }: { navigate: (to: string) => void }) {
   }, [query, highlightIndex, results, navigate]);
 
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
+    (e: KeyboardEvent) => {
       if (e.key === "ArrowDown") {
         e.preventDefault();
         setHighlightIndex((prev) => Math.min(prev + 1, results.length - 1));
@@ -132,7 +132,7 @@ function DesktopSearchInput({ navigate }: { navigate: (to: string) => void }) {
           onFocus={() => query.trim() && setOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder="Search destinations, experiences, or adventures"
-          className="font-body pl-12 h-[48px] rounded-full border-2 border-border bg-surface text-foreground placeholder:text-muted-foreground text-sm shadow-[var(--shadow-input)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:border-transparent transition-all"
+          className="font-body pl-12 h-12 rounded-full border-2 border-border bg-surface text-foreground placeholder:text-muted-foreground text-body-sm shadow-[var(--shadow-input)] focus-visible:ring-2 focus-visible:ring-accent focus-visible:border-transparent transition-all"
         />
         {query && (
           <button
@@ -148,14 +148,14 @@ function DesktopSearchInput({ navigate }: { navigate: (to: string) => void }) {
       {/* Dropdown results */}
       {showDropdown && (
         <div
-          className="absolute top-full left-0 right-0 mt-2 bg-surface border border-border rounded-[16px] shadow-[var(--shadow-card-elevated)] overflow-hidden z-50"
+          className="absolute top-full left-0 right-0 mt-2 bg-surface border border-border rounded-2xl shadow-[var(--shadow-card-elevated)] overflow-hidden z-50"
         >
           {results.length > 0 ? (
-            <div className="py-1.5">
+            <div className="py-2">
               {results.map((dest, i) => (
                 <button
                   key={dest.id}
-                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors cursor-pointer outline-none ${
+                  className={`w-full flex items-center gap-2 px-4 py-3 text-left transition-colors cursor-pointer outline-none ${
                     i === highlightIndex ? "bg-muted" : "hover:bg-muted/50"
                   }`}
                   onClick={() => handleResultClick(dest)}
@@ -164,7 +164,7 @@ function DesktopSearchInput({ navigate }: { navigate: (to: string) => void }) {
                   <img
                     src={dest.image}
                     alt={dest.title}
-                    className="size-10 rounded-[8px] object-cover shrink-0"
+                    className="size-10 rounded-lg object-cover shrink-0"
                   />
                   <div className="flex flex-col min-w-0 flex-1">
                     <span
@@ -185,7 +185,7 @@ function DesktopSearchInput({ navigate }: { navigate: (to: string) => void }) {
               {/* View all link */}
               <div className="border-t border-border mt-1 pt-1">
                 <button
-                  className="w-full px-4 py-2.5 text-left font-body text-accent hover:bg-muted/50 transition-colors cursor-pointer flex items-center gap-2 text-body-sm font-medium"
+                  className="w-full px-4 py-2 text-left font-body text-accent hover:bg-muted/50 transition-colors cursor-pointer flex items-center gap-2 text-body-sm font-medium"
                   onClick={handleSubmit}
                 >
                   <Search className="size-3.5" strokeWidth={1.8} />
@@ -267,10 +267,7 @@ function MobileSearchOverlay({
     <div className="fixed inset-0 z-[60] bg-surface flex flex-col">
       {/* Header */}
       <div
-        className="flex items-center gap-3 border-b border-border shrink-0 px-(--container-px)"
-        style={{
-          height: "56px",
-        }}
+        className="flex items-center gap-2 border-b border-border shrink-0 px-(--container-px) h-14"
       >
         <div className="relative flex-1">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
@@ -282,7 +279,7 @@ function MobileSearchOverlay({
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => { if (e.key === "Enter") handleSubmit(); }}
             placeholder="Search destinations..."
-            className="font-body pl-10 pr-9 h-[40px] rounded-full border-2 border-border bg-surface text-foreground placeholder:text-muted-foreground text-sm focus-visible:ring-2 focus-visible:ring-accent focus-visible:border-transparent transition-all"
+            className="font-body pl-10 pr-8 h-10 rounded-full border-2 border-border bg-surface text-foreground placeholder:text-muted-foreground text-body-sm focus-visible:ring-2 focus-visible:ring-accent focus-visible:border-transparent transition-all"
           />
           {query && (
             <button
@@ -303,10 +300,10 @@ function MobileSearchOverlay({
       </div>
 
       {/* Results */}
-      <div className="flex-1 overflow-y-auto" style={{ paddingTop: "8px" }}>
+      <div className="flex-1 overflow-y-auto pt-2">
         {query.trim() === "" ? (
           <div className="px-4 py-8 text-center">
-            <Search className="size-8 text-muted-foreground/30 mx-auto mb-3" strokeWidth={1.5} />
+            <Search className="size-8 text-muted-foreground/30 mx-auto mb-2" strokeWidth={1.5} />
             <p
               className="font-body text-muted-foreground text-body-sm"
             >
@@ -318,7 +315,7 @@ function MobileSearchOverlay({
             {results.map((dest) => (
               <button
                 key={dest.id}
-                className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 active:bg-muted transition-colors cursor-pointer outline-none pl-(--container-px) pr-(--container-px)"
+                className="w-full flex items-center gap-2 px-4 py-3 text-left hover:bg-muted/50 active:bg-muted transition-colors cursor-pointer outline-none pl-(--container-px) pr-(--container-px)"
                 onClick={() => handleSelect(dest)}
               >
                 <img
@@ -517,11 +514,11 @@ export function WayfarerNavbar() {
               <DropdownMenuContent
                 align="end"
                 sideOffset={8}
-                className="w-[272px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-[16px] p-0 overflow-hidden"
+                className="w-[272px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-2xl p-0 overflow-hidden"
               >
                 {/* Profile header */}
                 <div
-                  className="flex items-center gap-3 px-4 py-4"
+                  className="flex items-center gap-2 px-4 py-4"
                   style={{ backgroundColor: "var(--bg-subtle)" }}
                 >
                   <UserAvatar firstName={user.firstName} lastName={user.lastName} size={40} />
@@ -544,10 +541,10 @@ export function WayfarerNavbar() {
                 {/* Navigation group */}
                 <div className="p-1.5">
                   <DropdownMenuItem
-                    className="flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[40px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm"
+                    className="flex items-center gap-2 cursor-pointer rounded-lg px-3 h-10 font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm"
                     onClick={() => navigate("/profile")}
                   >
-                    <div className="size-8 rounded-[8px] bg-accent/8 flex items-center justify-center shrink-0">
+                    <div className="size-8 rounded-lg bg-accent/8 flex items-center justify-center shrink-0">
                       <User className="size-4 text-accent" strokeWidth={1.8} />
                     </div>
                     <div className="flex flex-col min-w-0 flex-1">
@@ -559,9 +556,9 @@ export function WayfarerNavbar() {
                     <ChevronRight className="size-3.5 text-muted-foreground/50 shrink-0" strokeWidth={1.8} />
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[40px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm"
+                    className="flex items-center gap-2 cursor-pointer rounded-lg px-3 h-10 font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm"
                   >
-                    <div className="size-8 rounded-[8px] bg-accent/8 flex items-center justify-center shrink-0">
+                    <div className="size-8 rounded-lg bg-accent/8 flex items-center justify-center shrink-0">
                       <Settings className="size-4 text-accent" strokeWidth={1.8} />
                     </div>
                     <div className="flex flex-col min-w-0 flex-1">
@@ -579,10 +576,10 @@ export function WayfarerNavbar() {
                 {/* AI CTA */}
                 <div className="p-1.5">
                   <DropdownMenuItem
-                    className="flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[40px] font-body text-foreground hover:bg-accent-light transition-colors text-body-sm"
+                    className="flex items-center gap-2 cursor-pointer rounded-lg px-3 h-10 font-body text-foreground hover:bg-accent-light transition-colors text-body-sm"
                     onClick={() => showComingSoon()}
                   >
-                    <div className="size-8 rounded-[8px] bg-gradient-to-br from-primary/12 to-accent/12 flex items-center justify-center shrink-0">
+                    <div className="size-8 rounded-lg bg-gradient-to-br from-primary/12 to-accent/12 flex items-center justify-center shrink-0">
                       <Sparkles className="size-4 text-primary" strokeWidth={1.8} />
                     </div>
                     <div className="flex flex-col min-w-0">
@@ -599,7 +596,7 @@ export function WayfarerNavbar() {
                 {/* Sign out */}
                 <div className="p-1.5">
                   <DropdownMenuItem
-                    className="flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[40px] font-body text-muted-foreground hover:bg-destructive/6 hover:text-destructive transition-colors text-body-sm"
+                    className="flex items-center gap-2 cursor-pointer rounded-lg px-3 h-10 font-body text-muted-foreground hover:bg-destructive/6 hover:text-destructive transition-colors text-body-sm"
                     onClick={handleSignOut}
                   >
                     <LogOut className="size-4" strokeWidth={1.8} />
@@ -621,7 +618,7 @@ export function WayfarerNavbar() {
               <DropdownMenuContent
                 align="end"
                 sideOffset={8}
-                className="w-[256px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-[16px] p-0 overflow-hidden"
+                className="w-[256px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-2xl p-0 overflow-hidden"
               >
                 {/* Welcome header */}
                 <div
@@ -699,7 +696,7 @@ export function WayfarerNavbar() {
               {/* Authenticated: show user profile card in drawer */}
               {isAuthenticated && user && (
                 <>
-                  <div className="px-6 py-4 flex items-center gap-3">
+                  <div className="px-6 py-4 flex items-center gap-2">
                     <UserAvatar firstName={user.firstName} lastName={user.lastName} size={40} />
                     <div className="flex flex-col min-w-0">
                       <p
@@ -724,7 +721,7 @@ export function WayfarerNavbar() {
                     key={link.label}
                     href="#"
                     onClick={(e) => { e.preventDefault(); drawerNavigate(link.href); }}
-                    className="font-body text-card-foreground py-3 px-2 rounded-lg hover:bg-muted hover:text-primary active:bg-accent-light active:text-accent transition-colors text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1"
+                    className="font-body text-card-foreground py-3 px-2 rounded-lg hover:bg-muted hover:text-primary active:bg-accent-light active:text-accent transition-colors text-body-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1"
                   >
                     {link.label}
                   </a>
@@ -733,7 +730,7 @@ export function WayfarerNavbar() {
                   <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); drawerNavigate("/favorites"); }}
-                    className="font-body text-card-foreground py-3 px-2 rounded-lg hover:bg-muted hover:text-primary active:bg-accent-light active:text-accent transition-colors text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 flex items-center gap-2"
+                    className="font-body text-card-foreground py-3 px-2 rounded-lg hover:bg-muted hover:text-primary active:bg-accent-light active:text-accent transition-colors text-body-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 flex items-center gap-2"
                   >
                     <Heart className="size-4" strokeWidth={1.8} />
                     Saved destinations
@@ -750,7 +747,7 @@ export function WayfarerNavbar() {
                   <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); drawerNavigate("/profile"); }}
-                    className="font-body text-card-foreground py-3 px-2 rounded-lg hover:bg-muted hover:text-primary active:bg-accent-light active:text-accent transition-colors text-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 flex items-center gap-2"
+                    className="font-body text-card-foreground py-3 px-2 rounded-lg hover:bg-muted hover:text-primary active:bg-accent-light active:text-accent transition-colors text-body-sm font-medium outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 flex items-center gap-2"
                   >
                     <Settings className="size-4" strokeWidth={1.8} />
                     Profile & Settings
@@ -760,18 +757,18 @@ export function WayfarerNavbar() {
 
               <Separator className="bg-border mx-6" style={{ width: "calc(100% - 48px)" }} />
 
-              <div className="flex flex-col px-6 py-4 gap-3">
+              <div className="flex flex-col px-6 py-4 gap-2">
                 {isAuthenticated ? (
                   <>
                     <Button
-                      className="w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
+                      className="w-full h-11 rounded-full text-body-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
                       onClick={() => { setSheetOpen(false); showComingSoon(); }}
                     >
                       Start a trip with AI
                     </Button>
                     <Button
                       variant="outline"
-                      className="w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted gap-2 font-bold"
+                      className="w-full h-11 rounded-full text-body-sm border-border text-card-foreground hover:bg-muted gap-2 font-bold"
                       onClick={handleSignOut}
                     >
                       <LogOut className="size-4" strokeWidth={1.8} />
@@ -781,14 +778,14 @@ export function WayfarerNavbar() {
                 ) : (
                   <>
                     <Button
-                      className="w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
+                      className="w-full h-11 rounded-full text-body-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
                       onClick={() => navigate("/signup")}
                     >
                       Sign up
                     </Button>
                     <Button
                       variant="outline"
-                      className="w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted font-bold"
+                      className="w-full h-11 rounded-full text-body-sm border-border text-card-foreground hover:bg-muted font-bold"
                       onClick={() => navigate("/login")}
                     >
                       Log in
@@ -804,7 +801,7 @@ export function WayfarerNavbar() {
         </div>
 
         {/* Right: Search + Save + User */}
-        <div className="flex items-center gap-[8px] md:gap-[16px] text-card-foreground">
+        <div className="flex items-center gap-2 md:gap-4 text-card-foreground">
           <button className="shrink-0 outline-none hover:text-primary active:opacity-80 focus-visible:ring-2 focus-visible:ring-accent rounded-full p-1 transition-all" aria-label="Search" onClick={() => setMobileSearchOpen(true)}>
             <Search className="size-[22px]" strokeWidth={1.8} />
           </button>
@@ -829,11 +826,11 @@ export function WayfarerNavbar() {
               <DropdownMenuContent
                 align="end"
                 sideOffset={8}
-                className="w-[256px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-[16px] p-0 overflow-hidden"
+                className="w-[256px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-2xl p-0 overflow-hidden"
               >
                 {/* Profile header */}
                 <div
-                  className="flex items-center gap-3 px-4 py-3"
+                  className="flex items-center gap-2 px-4 py-3"
                   style={{ backgroundColor: "var(--bg-subtle)" }}
                 >
                   <UserAvatar firstName={user.firstName} lastName={user.lastName} size={36} />
@@ -855,19 +852,19 @@ export function WayfarerNavbar() {
 
                 <div className="p-1.5">
                   <DropdownMenuItem
-                    className="flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm"
+                    className="flex items-center gap-2 cursor-pointer rounded-lg px-3 h-11 font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm"
                     onClick={() => navigate("/profile")}
                   >
-                    <div className="size-8 rounded-[8px] bg-accent/8 flex items-center justify-center shrink-0">
+                    <div className="size-8 rounded-lg bg-accent/8 flex items-center justify-center shrink-0">
                       <User className="size-4 text-accent" strokeWidth={1.8} />
                     </div>
                     <span className="font-medium">Profile</span>
                     <ChevronRight className="size-3.5 text-muted-foreground/50 shrink-0 ml-auto" strokeWidth={1.8} />
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm"
+                    className="flex items-center gap-2 cursor-pointer rounded-lg px-3 h-11 font-body text-card-foreground hover:bg-muted hover:text-primary transition-colors text-body-sm"
                   >
-                    <div className="size-8 rounded-[8px] bg-accent/8 flex items-center justify-center shrink-0">
+                    <div className="size-8 rounded-lg bg-accent/8 flex items-center justify-center shrink-0">
                       <Settings className="size-4 text-accent" strokeWidth={1.8} />
                     </div>
                     <span className="font-medium">Settings</span>
@@ -879,7 +876,7 @@ export function WayfarerNavbar() {
 
                 <div className="p-1.5">
                   <DropdownMenuItem
-                    className="flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[44px] font-body text-muted-foreground hover:bg-destructive/6 hover:text-destructive transition-colors text-body-sm"
+                    className="flex items-center gap-2 cursor-pointer rounded-lg px-3 h-11 font-body text-muted-foreground hover:bg-destructive/6 hover:text-destructive transition-colors text-body-sm"
                     onClick={handleSignOut}
                   >
                     <LogOut className="size-4" strokeWidth={1.8} />
@@ -901,7 +898,7 @@ export function WayfarerNavbar() {
               <DropdownMenuContent
                 align="end"
                 sideOffset={8}
-                className="w-[240px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-[16px] p-0 overflow-hidden"
+                className="w-[240px] bg-surface border-border shadow-[var(--shadow-card-elevated)] rounded-2xl p-0 overflow-hidden"
               >
                 {/* Welcome header */}
                 <div
@@ -929,7 +926,7 @@ export function WayfarerNavbar() {
 
                 <div className="flex flex-col gap-2 p-3">
                   <Button
-                    className="w-full h-[40px] rounded-full bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 transition-opacity font-bold text-body-sm"
+                    className="w-full h-10 rounded-full bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 transition-opacity font-bold text-body-sm"
                     onClick={() => navigate("/signup")}
                   >
                     <UserPlus className="size-4 mr-1.5" strokeWidth={1.8} />
@@ -937,7 +934,7 @@ export function WayfarerNavbar() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="w-full h-[40px] rounded-full border-border text-card-foreground hover:bg-muted hover:border-muted-foreground/30 transition-all font-bold text-body-sm"
+                    className="w-full h-10 rounded-full border-border text-card-foreground hover:bg-muted hover:border-muted-foreground/30 transition-all font-bold text-body-sm"
                     onClick={() => navigate("/login")}
                   >
                     <LogIn className="size-4 mr-1.5" strokeWidth={1.8} />
