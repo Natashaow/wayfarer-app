@@ -16,6 +16,7 @@ import {
 import { useBrandMotionEnabled } from "../components/useBrandMotion";
 import { useNavigate } from "react-router";
 import { useRef } from "react";
+import { showComingSoon } from "../components/utils/comingSoon";
 import {
   Compass,
   Sparkles,
@@ -778,7 +779,7 @@ function AboutCTA() {
                 className="bg-gradient-to-b from-primary-hover to-primary relative rounded-[40px] shrink-0 cursor-pointer shadow-[var(--shadow-primary-cta)]"
                 whileHover={{ opacity: 0.92 }}
                 whileTap={{ opacity: 0.82 }}
-                onClick={() => navigate("/plan-trip")}
+                onClick={() => showComingSoon()}
               >
                 <div
                   className="flex items-center justify-center overflow-clip px-6 py-3 rounded-[inherit]"

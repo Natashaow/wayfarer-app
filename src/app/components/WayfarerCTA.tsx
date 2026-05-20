@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
 import { useAuth } from "./AuthContext";
+import { showComingSoon } from "./utils/comingSoon";
 import {
   scaleUp,
   stagger,
@@ -71,7 +72,7 @@ export function WayfarerCTA() {
               transition={{ ...defaultTransition, delay: 0.26 }}
               whileHover={{ opacity: 0.92 }}
               whileTap={{ opacity: 0.82 }}
-              onClick={() => navigate(isAuthenticated ? "/plan-trip" : "/signup")}
+              onClick={() => isAuthenticated ? showComingSoon() : navigate("/signup")}
             >
               <div className="flex items-center justify-center overflow-clip px-6 py-3 rounded-[inherit]">
                 <span
@@ -150,7 +151,7 @@ export function WayfarerCTA() {
                   style={{
                     fontSize: "var(--text-button)",
                   }}
-                  onClick={() => navigate(isAuthenticated ? "/plan-trip" : "/signup")}
+                  onClick={() => isAuthenticated ? showComingSoon() : navigate("/signup")}
                 >
                   {isAuthenticated ? "Plan a trip with AI" : "Sign up"}
                   <ArrowRight className="size-4" />

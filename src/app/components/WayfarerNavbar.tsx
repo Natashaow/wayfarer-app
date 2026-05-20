@@ -19,6 +19,7 @@ import { useNavigate } from "react-router";
 import { useFavorites } from "./FavoritesContext";
 import { useAuth } from "./AuthContext";
 import { toast } from "sonner";
+import { showComingSoon } from "./utils/comingSoon";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -578,7 +579,7 @@ export function WayfarerNavbar() {
                 <div className="p-1.5">
                   <DropdownMenuItem
                     className="flex items-center gap-3 cursor-pointer rounded-[10px] px-3 min-h-[40px] font-body text-foreground hover:bg-accent-light transition-colors text-body-sm"
-                    onClick={() => navigate("/plan-trip")}
+                    onClick={() => showComingSoon()}
                   >
                     <div className="size-8 rounded-[8px] bg-gradient-to-br from-primary/12 to-accent/12 flex items-center justify-center shrink-0">
                       <Sparkles className="size-4 text-primary" strokeWidth={1.8} />
@@ -586,7 +587,7 @@ export function WayfarerNavbar() {
                     <div className="flex flex-col min-w-0">
                       <span className="font-medium">Plan with AI</span>
                       <span className="text-muted-foreground text-caption">
-                        Get personalized trips
+                        Coming soon
                       </span>
                     </div>
                   </DropdownMenuItem>
@@ -764,7 +765,7 @@ export function WayfarerNavbar() {
                   <>
                     <Button
                       className="font-heading w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
-                      onClick={() => drawerNavigate("/plan-trip")}
+                      onClick={() => { setSheetOpen(false); showComingSoon(); }}
                     >
                       Start a trip with AI
                     </Button>

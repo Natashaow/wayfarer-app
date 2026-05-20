@@ -5,6 +5,7 @@ import { stagger, fadeIn, fadeUp, quickTransition } from "./animations";
 import { useBrandMotion } from "./useBrandMotion";
 import { useNavigate } from "react-router";
 import { useAuth } from "./AuthContext";
+import { showComingSoon } from "./utils/comingSoon";
 
 export function WayfarerHero() {
   const navigate = useNavigate();
@@ -101,7 +102,7 @@ export function WayfarerHero() {
               whileHover={{ opacity: 0.92 }}
               whileTap={{ opacity: 0.82 }}
               transition={quickTransition}
-              onClick={() => navigate("/plan-trip")}
+              onClick={() => showComingSoon()}
             >
               <div
                 className="flex items-center justify-center overflow-clip rounded-[inherit]"

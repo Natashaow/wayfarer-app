@@ -9,6 +9,7 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { useAuth } from "../components/AuthContext";
 import { destinations, type Destination } from "../components/destinations-data";
 import { toast } from "sonner";
+import { showComingSoon } from "../components/utils/comingSoon";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {
@@ -550,7 +551,6 @@ export default function ItineraryPage() {
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "Plan with AI", href: "/plan-trip" },
     { label: `${state.destination} Itinerary` },
   ];
 
@@ -676,7 +676,7 @@ export default function ItineraryPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...defaultTransition, delay: 0.3 }}
           >
-            <Button variant="outline" size="lg" className="font-heading h-[48px] px-8 rounded-full gap-2 border-border text-card-foreground hover:bg-muted font-bold" onClick={() => navigate("/plan-trip")}>
+            <Button variant="outline" size="lg" className="font-heading h-[48px] px-8 rounded-full gap-2 border-border text-card-foreground hover:bg-muted font-bold" onClick={() => showComingSoon()}>
               <ArrowLeft className="size-4" />
               Plan another trip
             </Button>
