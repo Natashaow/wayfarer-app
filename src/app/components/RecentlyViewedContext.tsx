@@ -4,18 +4,31 @@ import {
   useState,
   useCallback,
   useEffect,
+  useMemo,
   type ReactNode,
 } from "react";
 
 const STORAGE_KEY = "wayfarer_recently_viewed";
 const MAX_ITEMS = 20;
 
+/**
+ * Stored entry shape — mirrors the future Supabase table
+ * `recently_viewed (user_id, destination_id, viewed_at)`.
+ * Keeping the shape aligned now means swapping localStorage for
+ * Supabase later is purely a transport change.
+ */
+export interface RecentlyViewedEntry {
+  destinationId: number;
+  viewedAt: string; // ISO-8601
+}
+
 interface RecentlyViewedContextValue {
-  /** Ordered list of destination IDs, most recent first */
+  /** Entries ordered most-recent first. */
+  recentItems: RecentlyViewedEntry[];
+  /** Derived: ID list for back-compat with existing callers. */
   recentIds: number[];
-  /** Call when a user opens an experience detail page */
+  /** Call when a user opens an experience detail page. */
   trackView: (id: number) => void;
-  /** Number of recently viewed items */
   count: number;
 }
 
@@ -23,49 +36,94 @@ const RecentlyViewedContext = createContext<RecentlyViewedContextValue | null>(
   null
 );
 
-function loadFromStorage(): number[] {
+/**
+ * Read + migrate localStorage. Accepts three legacy shapes:
+ *   1. `number[]`                                  — original (IDs only)
+ *   2. `{ destinationId, viewedAt }[]`             — current
+ *   3. anything else                               — treated as empty
+ *
+ * For shape #1 we backfill timestamps: most-recent ID gets `now`, oldest
+ * gets ~14 days back, evenly spread. This keeps the memory rail meaningful
+ * for users with existing data instead of resetting them.
+ */
+function loadFromStorage(): RecentlyViewedEntry[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) return parsed.filter((n) => typeof n === "number");
+    if (!Array.isArray(parsed)) return [];
+
+    // Shape 2 — current
+    if (parsed.length === 0) return [];
+    if (
+      typeof parsed[0] === "object" &&
+      parsed[0] !== null &&
+      "destinationId" in parsed[0]
+    ) {
+      return parsed.filter(
+        (e): e is RecentlyViewedEntry =>
+          e &&
+          typeof e.destinationId === "number" &&
+          typeof e.viewedAt === "string"
+      );
+    }
+
+    // Shape 1 — legacy number[]; backfill timestamps
+    if (typeof parsed[0] === "number") {
+      const ids = parsed.filter((n): n is number => typeof n === "number");
+      const now = Date.now();
+      const dayMs = 86_400_000;
+      // Spread oldest→newest across the last 14 days so the rail looks like
+      // genuine history rather than a single moment.
+      const spreadMs = Math.min(14 * dayMs, ids.length * 2 * dayMs);
+      return ids.map((id, idx) => ({
+        destinationId: id,
+        viewedAt: new Date(
+          now - (idx / Math.max(1, ids.length - 1)) * spreadMs
+        ).toISOString(),
+      }));
+    }
+
+    return [];
   } catch {
-    // noop
+    return [];
   }
-  return [];
 }
 
-function saveToStorage(ids: number[]) {
+function saveToStorage(items: RecentlyViewedEntry[]) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   } catch {
     // noop
   }
 }
 
 export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
-  const [recentIds, setRecentIds] = useState<number[]>(loadFromStorage);
+  const [recentItems, setRecentItems] =
+    useState<RecentlyViewedEntry[]>(loadFromStorage);
 
-  // Persist to localStorage whenever recentIds changes (outside the updater,
-  // so React Strict Mode double-invocation doesn't cause duplicate writes).
   useEffect(() => {
-    saveToStorage(recentIds);
-  }, [recentIds]);
+    saveToStorage(recentItems);
+  }, [recentItems]);
 
   const trackView = useCallback((id: number) => {
-    setRecentIds((prev) => {
-      // Merge against the latest persisted state to survive remounts
+    setRecentItems((prev) => {
+      // Merge against latest persisted state to survive remounts
       // and cross-tab updates within the preview iframe.
       const base = loadFromStorage();
       const merged = base.length >= prev.length ? base : prev;
-      const filtered = merged.filter((existingId) => existingId !== id);
-      return [id, ...filtered].slice(0, MAX_ITEMS);
+      const filtered = merged.filter((entry) => entry.destinationId !== id);
+      const next: RecentlyViewedEntry = {
+        destinationId: id,
+        viewedAt: new Date().toISOString(),
+      };
+      return [next, ...filtered].slice(0, MAX_ITEMS);
     });
   }, []);
 
-  // Re-sync state from localStorage when the tab regains focus or storage changes.
+  // Re-sync from localStorage on focus / cross-tab storage events.
   useEffect(() => {
-    const sync = () => setRecentIds(loadFromStorage());
+    const sync = () => setRecentItems(loadFromStorage());
     window.addEventListener("storage", sync);
     window.addEventListener("focus", sync);
     return () => {
@@ -74,9 +132,19 @@ export function RecentlyViewedProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const recentIds = useMemo(
+    () => recentItems.map((e) => e.destinationId),
+    [recentItems]
+  );
+
   return (
     <RecentlyViewedContext.Provider
-      value={{ recentIds, trackView, count: recentIds.length }}
+      value={{
+        recentItems,
+        recentIds,
+        trackView,
+        count: recentItems.length,
+      }}
     >
       {children}
     </RecentlyViewedContext.Provider>

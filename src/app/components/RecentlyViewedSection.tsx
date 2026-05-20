@@ -5,23 +5,31 @@ import { Clock, ArrowRight } from "lucide-react";
 import { ScrollArea, ScrollBar } from "./ui/scroll-area";
 import { destinations } from "./destinations-data";
 import { useRecentlyViewed } from "./RecentlyViewedContext";
-import { DestinationCard } from "./WayfarerExperiences";
+import { MemoryCard } from "./MemoryCard";
 import { stagger, sectionItem, viewport } from "./animations";
 
 const DESKTOP_LIMIT = 6;
 const MIN_ITEMS = 3;
 
+interface ResolvedItem {
+  dest: NonNullable<ReturnType<Map<number, (typeof destinations)[number]>["get"]>>;
+  viewedAt: string;
+}
+
 export function RecentlyViewedSection() {
-  const { recentIds } = useRecentlyViewed();
+  const { recentItems } = useRecentlyViewed();
   const navigate = useNavigate();
 
-  const items = useMemo(() => {
+  const items = useMemo<ResolvedItem[]>(() => {
     const byId = new Map(destinations.map((d) => [d.id, d]));
-    return recentIds
-      .map((id) => byId.get(id))
-      .filter((d): d is NonNullable<typeof d> => Boolean(d))
+    return recentItems
+      .map((entry) => {
+        const dest = byId.get(entry.destinationId);
+        return dest ? { dest, viewedAt: entry.viewedAt } : null;
+      })
+      .filter((x): x is ResolvedItem => x !== null)
       .slice(0, DESKTOP_LIMIT);
-  }, [recentIds]);
+  }, [recentItems]);
 
   if (items.length < MIN_ITEMS) return null;
 
@@ -64,36 +72,22 @@ export function RecentlyViewedSection() {
           </motion.button>
         </motion.div>
 
-        {/* Desktop: 3-column grid */}
+        {/* Desktop: 2 columns × up to 3 rows */}
         <div className="hidden lg:block">
           <motion.div
-            className="grid grid-cols-3 gap-(--grid-gap)"
+            className="grid grid-cols-2 gap-(--grid-gap)"
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
             variants={stagger}
           >
-            {items.slice(0, 3).map((dest) => (
-              <DestinationCard key={dest.id} dest={dest} />
+            {items.map(({ dest, viewedAt }) => (
+              <MemoryCard key={dest.id} dest={dest} viewedAt={viewedAt} />
             ))}
           </motion.div>
-
-          {items.length >= 6 && (
-            <motion.div
-              className="grid grid-cols-3 gap-(--grid-gap) mt-(--grid-gap)"
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-              variants={stagger}
-            >
-              {items.slice(3, 6).map((dest) => (
-                <DestinationCard key={dest.id} dest={dest} />
-              ))}
-            </motion.div>
-          )}
         </div>
 
-        {/* Mobile: horizontal scroll */}
+        {/* Mobile: horizontal scroll of compact memory tiles */}
         <div className="lg:hidden">
           <ScrollArea className="w-[calc(100%+var(--container-px))] -mr-[var(--container-px)]">
             <motion.div
@@ -103,9 +97,12 @@ export function RecentlyViewedSection() {
               viewport={viewport}
               variants={stagger}
             >
-              {items.map((dest) => (
-                <div key={dest.id} className="shrink-0 w-[clamp(220px,67vw,280px)]">
-                  <DestinationCard dest={dest} compact />
+              {items.map(({ dest, viewedAt }) => (
+                <div
+                  key={dest.id}
+                  className="shrink-0 w-[clamp(260px,82vw,320px)]"
+                >
+                  <MemoryCard dest={dest} viewedAt={viewedAt} compact />
                 </div>
               ))}
             </motion.div>
