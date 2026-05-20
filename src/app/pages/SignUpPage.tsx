@@ -890,7 +890,7 @@ function FieldWrapper({
   const [scope, animate] = useAnimate();
   useEffect(() => {
     if (hasError && shakeKey > 0) {
-      animate(scope.current, { x: [0, -7, 7, -5, 5, -3, 3, 0] }, { duration: 0.42, ease: "easeInOut" });
+      animate(scope.current, { x: [0, -7, 7, -5, 5, -3, 3, 0] }, fastTransition);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shakeKey]);

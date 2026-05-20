@@ -1,6 +1,6 @@
 {
-  "generated": "2026-05-20T14:43:20.629Z",
-  "count": 544,
+  "generated": "2026-05-20T15:06:23.633Z",
+  "count": 494,
   "violations": [
     {
       "file": "src/app/components/Breadcrumbs.tsx",
@@ -64,24 +64,6 @@
     },
     {
       "file": "src/app/components/RecentlyViewedSection.tsx",
-      "line": 38,
-      "category": "rigid-container",
-      "snippet": "<div className=\"px-(--container-px)\">"
-    },
-    {
-      "file": "src/app/components/RecentlyViewedSection.tsx",
-      "line": 92,
-      "category": "rigid-container",
-      "snippet": "<ScrollArea className=\"w-[calc(100%+var(--container-px))] -mr-[var(--container-px)]\">"
-    },
-    {
-      "file": "src/app/components/RecentlyViewedSection.tsx",
-      "line": 94,
-      "category": "rigid-container",
-      "snippet": "className=\"flex pb-4 pr-[var(--container-px)] gap-(--grid-gap)\""
-    },
-    {
-      "file": "src/app/components/RecentlyViewedSection.tsx",
       "line": 50,
       "category": "inline-style",
       "snippet": "2 inline style={{}} occurrence(s) in file"
@@ -106,24 +88,6 @@
     },
     {
       "file": "src/app/components/SavedSection.tsx",
-      "line": 28,
-      "category": "rigid-container",
-      "snippet": "<div className=\"px-(--container-px)\">"
-    },
-    {
-      "file": "src/app/components/SavedSection.tsx",
-      "line": 96,
-      "category": "rigid-container",
-      "snippet": "<ScrollArea className=\"w-[calc(100%+var(--container-px))] -mr-[var(--container-px)]\">"
-    },
-    {
-      "file": "src/app/components/SavedSection.tsx",
-      "line": 98,
-      "category": "rigid-container",
-      "snippet": "className=\"flex pb-4 pr-[var(--container-px)] gap-(--grid-gap)\""
-    },
-    {
-      "file": "src/app/components/SavedSection.tsx",
       "line": 40,
       "category": "inline-style",
       "snippet": "2 inline style={{}} occurrence(s) in file"
@@ -133,18 +97,6 @@
       "line": 77,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"flex items-center justify-center overflow-clip px-6 py-3 rounded-[inherit]\">"
-    },
-    {
-      "file": "src/app/components/WayfarerCTA.tsx",
-      "line": 35,
-      "category": "rigid-container",
-      "snippet": "className=\"flex flex-col items-center w-full gap-(--space-stack-md) pb-(--section-py-lg) pt-(--space-stack-md) px-(--container-px)\""
-    },
-    {
-      "file": "src/app/components/WayfarerCTA.tsx",
-      "line": 96,
-      "category": "rigid-container",
-      "snippet": "<div className=\"px-(--container-px)\">"
     },
     {
       "file": "src/app/components/WayfarerCTA.tsx",
@@ -244,24 +196,6 @@
     },
     {
       "file": "src/app/components/WayfarerExperiences.tsx",
-      "line": 248,
-      "category": "rigid-container",
-      "snippet": "<div className=\"px-(--container-px)\">"
-    },
-    {
-      "file": "src/app/components/WayfarerExperiences.tsx",
-      "line": 486,
-      "category": "rigid-container",
-      "snippet": "<ScrollArea className=\"w-[calc(100%+var(--container-px))] -mr-[var(--container-px)]\">"
-    },
-    {
-      "file": "src/app/components/WayfarerExperiences.tsx",
-      "line": 488,
-      "category": "rigid-container",
-      "snippet": "className=\"flex pb-4 pr-[var(--container-px)] gap-(--grid-gap)\""
-    },
-    {
-      "file": "src/app/components/WayfarerExperiences.tsx",
       "line": 60,
       "category": "raw-px-bracket",
       "snippet": "<CommandList className=\"max-h-[50vh] md:max-h-[300px]\">"
@@ -325,30 +259,6 @@
       "line": 123,
       "category": "inline-style",
       "snippet": "4 inline style={{}} occurrence(s) in file"
-    },
-    {
-      "file": "src/app/components/WayfarerFooter.tsx",
-      "line": 110,
-      "category": "rigid-container",
-      "snippet": "className=\"flex flex-col items-start gap-(--space-stack-lg) pb-(--section-py-lg) pt-(--section-py-md) px-(--container-px)\""
-    },
-    {
-      "file": "src/app/components/WayfarerFooter.tsx",
-      "line": 153,
-      "category": "rigid-container",
-      "snippet": "className=\"flex flex-col items-start gap-(--space-stack-md) pt-(--space-stack-md) pb-(--section-py-md) px-(--container-px)\""
-    },
-    {
-      "file": "src/app/components/WayfarerFooter.tsx",
-      "line": 189,
-      "category": "rigid-container",
-      "snippet": "className=\"flex flex-row items-start justify-between w-full gap-(--grid-gap) px-(--container-px) pt-[clamp(48px,5vw,64px)] pb-[clamp(56px,6.5vw,88px)]\""
-    },
-    {
-      "file": "src/app/components/WayfarerFooter.tsx",
-      "line": 252,
-      "category": "rigid-container",
-      "snippet": "className=\"flex flex-col w-full pt-(--space-stack-sm) px-(--container-px) pb-[clamp(32px,3.5vw,48px)] gap-(--space-stack-sm)\""
     },
     {
       "file": "src/app/components/WayfarerFooter.tsx",
@@ -487,12 +397,6 @@
       "line": 8,
       "category": "rigid-container",
       "snippet": "import { showComingSoon } from \"./utils/comingSoon\";"
-    },
-    {
-      "file": "src/app/components/WayfarerHero.tsx",
-      "line": 54,
-      "category": "rigid-container",
-      "snippet": "className=\"relative z-10 h-full flex flex-col items-center lg:items-start justify-start lg:justify-start pt-(--hero-pt) pb-(--hero-pb) px-(--container-px) gap-(--space-stack-md)\""
     },
     {
       "file": "src/app/components/WayfarerHero.tsx",
@@ -907,36 +811,6 @@
       "line": 943,
       "category": "off-grid-spacing",
       "snippet": "<LogIn className=\"size-4 mr-1.5\" strokeWidth={1.8} />"
-    },
-    {
-      "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 270,
-      "category": "rigid-container",
-      "snippet": "className=\"flex items-center gap-3 border-b border-border shrink-0 px-(--container-px)\""
-    },
-    {
-      "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 321,
-      "category": "rigid-container",
-      "snippet": "className=\"w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/50 active:bg-muted transition-colors cursor-pointer outline-none pl-(--container-px) pr-(--container-px)\""
-    },
-    {
-      "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 347,
-      "category": "rigid-container",
-      "snippet": "className=\"w-full px-4 py-3 text-left font-body text-accent hover:bg-muted/50 transition-colors cursor-pointer flex items-center gap-2 border-t border-border mt-1 pl-(--container-px) pr-(--container-p"
-    },
-    {
-      "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 464,
-      "category": "rigid-container",
-      "snippet": "className=\"hidden lg:flex items-center justify-between w-full h-[clamp(64px,7vw,80px)] px-(--container-px) gap-[clamp(16px,2vw,24px)]\""
-    },
-    {
-      "file": "src/app/components/WayfarerNavbar.tsx",
-      "line": 676,
-      "category": "rigid-container",
-      "snippet": "className=\"lg:hidden flex items-center justify-between h-[56px] w-full px-(--container-px) pt-[12px] pb-[12px]\""
     },
     {
       "file": "src/app/components/WayfarerNavbar.tsx",
@@ -1360,99 +1234,45 @@
     },
     {
       "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 283,
+      "line": 279,
       "category": "raw-type-class",
       "snippet": "className=\"text-card-foreground text-xs font-semibold bg-accent-light\""
     },
     {
       "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 277,
+      "line": 273,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 text-left group cursor-pointer rounded-lg -mx-1 px-1 py-1 transition-colors hover:bg-muted/50 outline-none focus-visible:ring-2 focus-visible:ring-accent\""
     },
     {
       "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 329,
-      "category": "off-grid-spacing",
-      "snippet": "<Avatar className=\"size-[72px] ring-2 ring-primary/20 mb-3\">"
-    },
-    {
-      "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 407,
+      "line": 393,
       "category": "off-grid-spacing",
       "snippet": "className=\"border-t border-muted flex items-center gap-3 p-(--space-stack-md)\""
     },
     {
       "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 472,
-      "category": "rigid-container",
-      "snippet": "<div className=\"px-(--container-px)\">"
-    },
-    {
-      "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 574,
-      "category": "rigid-container",
-      "snippet": "<ScrollArea className=\"w-[calc(100%+var(--container-px))] -mr-[var(--container-px)]\">"
-    },
-    {
-      "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 576,
-      "category": "rigid-container",
-      "snippet": "className=\"flex pb-4 pr-[var(--container-px)] gap-(--grid-gap)\""
-    },
-    {
-      "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 225,
+      "line": 255,
       "category": "raw-px-bracket",
-      "snippet": "<div className=\"flex items-center gap-[2.5px]\" aria-label={`${count} out of 5 stars`}>"
+      "snippet": "className=\"border border-border rounded-[20px] flex flex-col gap-0 p-0 bg-card h-full shadow-[var(--shadow-card)] transition-colors transition-shadow hover:border-primary/20 hover:shadow-[var(--shadow"
     },
     {
       "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 260,
+      "line": 315,
       "category": "raw-px-bracket",
-      "snippet": "className=\"border border-muted rounded-[20px] flex flex-col gap-0 p-0 bg-transparent shadow-sm h-full transition-all hover:border-primary/30 hover:shadow-md\""
+      "snippet": "<DialogContent className=\"max-w-md rounded-[20px] bg-surface border-border p-0 overflow-hidden gap-0 shadow-[var(--shadow-card-elevated)]\">"
     },
     {
       "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 280,
-      "category": "raw-px-bracket",
-      "snippet": "<Avatar className=\"size-[36px] md:size-9 shrink-0 ring-2 ring-transparent group-hover:ring-primary/20 transition-all\">"
-    },
-    {
-      "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 324,
-      "category": "raw-px-bracket",
-      "snippet": "<DialogContent className=\"max-w-[440px] rounded-[20px] bg-surface border-border p-0 overflow-hidden gap-0\">"
-    },
-    {
-      "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 324,
-      "category": "raw-px-bracket",
-      "snippet": "<DialogContent className=\"max-w-[440px] rounded-[20px] bg-surface border-border p-0 overflow-hidden gap-0\">"
-    },
-    {
-      "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 329,
-      "category": "raw-px-bracket",
-      "snippet": "<Avatar className=\"size-[72px] ring-2 ring-primary/20 mb-3\">"
-    },
-    {
-      "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 409,
+      "line": 395,
       "category": "raw-px-bracket",
       "snippet": "<div className=\"size-8 rounded-[8px] bg-primary/10 flex items-center justify-center shrink-0\">"
     },
     {
       "file": "src/app/components/WayfarerTestimonials.tsx",
-      "line": 296,
+      "line": 470,
       "category": "inline-style",
-      "snippet": "3 inline style={{}} occurrence(s) in file"
-    },
-    {
-      "file": "src/app/components/WayfarerWhySection.tsx",
-      "line": 190,
-      "category": "rigid-container",
-      "snippet": "<div className=\"px-(--container-px)\">"
+      "snippet": "1 inline style={{}} occurrence(s) in file"
     },
     {
       "file": "src/app/components/WayfarerWhySection.tsx",
@@ -1516,205 +1336,157 @@
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 785,
+      "line": 786,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center justify-center overflow-clip px-6 py-3 rounded-[inherit]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 812,
+      "line": 813,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center justify-center overflow-clip px-6 py-3 rounded-[inherit]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 164,
-      "category": "rigid-container",
-      "snippet": "className=\"relative z-10 h-full flex flex-col items-center justify-center text-center px-(--container-px) gap-(--space-stack-sm)\""
-    },
-    {
-      "file": "src/app/pages/AboutPage.tsx",
-      "line": 208,
-      "category": "rigid-container",
-      "snippet": "className=\"grid grid-cols-2 lg:grid-cols-4 px-(--container-px) pt-(--space-stack-lg) pb-(--space-stack-lg) gap-(--space-stack-md)\""
-    },
-    {
-      "file": "src/app/pages/AboutPage.tsx",
-      "line": 245,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/AboutPage.tsx",
-      "line": 311,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/AboutPage.tsx",
-      "line": 376,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/AboutPage.tsx",
-      "line": 461,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/AboutPage.tsx",
-      "line": 568,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/AboutPage.tsx",
-      "line": 745,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/AboutPage.tsx",
-      "line": 183,
+      "line": 184,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-heading text-surface max-w-[700px] font-bold text-display leading-display\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 191,
+      "line": 192,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-body text-surface/90 max-w-[600px] text-subtitle leading-subtitle font-normal\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 252,
+      "line": 253,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full lg:w-1/2 relative rounded-[24px] overflow-hidden shadow-[var(--shadow-feature)] min-h-[clamp(240px,30vw,400px)]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 318,
+      "line": 319,
       "category": "raw-px-bracket",
       "snippet": "className=\"w-full lg:w-1/2 relative rounded-[24px] overflow-hidden shadow-[var(--shadow-feature)] min-h-[clamp(240px,30vw,400px)]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 420,
+      "line": 421,
       "category": "raw-px-bracket",
       "snippet": "className=\"bg-card rounded-[20px] flex flex-col border border-border shadow-[var(--shadow-card)] transition-all hover:shadow-[var(--shadow-card-elevated)] hover:border-primary/20 p-(--space-stack-md) "
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 428,
+      "line": 429,
       "category": "raw-px-bracket",
       "snippet": "className={`size-10 rounded-[12px] flex items-center justify-center shrink-0 ${colors.bg}`}"
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 488,
+      "line": 489,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-body text-muted-foreground text-center max-w-[680px] mx-auto text-body leading-body font-normal mb-(--space-stack-lg)\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 500,
+      "line": 501,
       "category": "raw-px-bracket",
       "snippet": "className=\"grid grid-cols-1 md:grid-cols-3 max-w-[960px] mx-auto gap-(--grid-gap)\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 517,
+      "line": 518,
       "category": "raw-px-bracket",
       "snippet": "className=\"bg-surface rounded-[20px] flex flex-col items-center text-center border border-border shadow-[var(--shadow-card)] transition-all hover:shadow-[var(--shadow-card-elevated)] hover:border-prim"
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 544,
+      "line": 545,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-body text-muted-foreground text-center max-w-[640px] mx-auto text-body leading-body font-normal mt-(--space-stack-lg)\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 595,
+      "line": 596,
       "category": "raw-px-bracket",
       "snippet": "className=\"relative rounded-[24px] overflow-hidden bg-card border border-border shadow-[var(--shadow-section-card-lg)] max-w-[640px] mx-auto\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 595,
+      "line": 596,
       "category": "raw-px-bracket",
       "snippet": "className=\"relative rounded-[24px] overflow-hidden bg-card border border-border shadow-[var(--shadow-section-card-lg)] max-w-[640px] mx-auto\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 618,
+      "line": 619,
       "category": "raw-px-bracket",
       "snippet": "<div className=\"size-[112px] rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[var(--shadow-primary-cta)] ring-4 ring-card\">"
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 672,
+      "line": 673,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-body text-muted-foreground max-w-[480px] text-body leading-body font-normal\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 748,
+      "line": 749,
       "category": "raw-px-bracket",
       "snippet": "className=\"relative rounded-[24px] overflow-hidden shadow-[var(--shadow-section-card-lg)] min-h-[clamp(256px,28vw,384px)]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 766,
+      "line": 767,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-heading text-surface max-w-[520px] font-bold text-title-1 leading-title-1\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 771,
+      "line": 772,
       "category": "raw-px-bracket",
       "snippet": "className=\"font-body text-surface/85 max-w-[440px] text-subtitle leading-subtitle font-normal\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 779,
+      "line": 780,
       "category": "raw-px-bracket",
       "snippet": "className=\"bg-gradient-to-b from-primary-hover to-primary relative rounded-[40px] shrink-0 cursor-pointer shadow-[var(--shadow-primary-cta)]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 801,
+      "line": 802,
       "category": "raw-px-bracket",
       "snippet": "className=\"absolute border-primary-dark border-[0.5px] border-solid inset-0 pointer-events-none rounded-[40px]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 801,
+      "line": 802,
       "category": "raw-px-bracket",
       "snippet": "className=\"absolute border-primary-dark border-[0.5px] border-solid inset-0 pointer-events-none rounded-[40px]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 806,
+      "line": 807,
       "category": "raw-px-bracket",
       "snippet": "className=\"bg-gradient-to-b from-secondary-btn to-secondary-btn-end relative rounded-[40px] shrink-0 cursor-pointer shadow-[var(--shadow-secondary-cta)]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 827,
+      "line": 828,
       "category": "raw-px-bracket",
       "snippet": "className=\"absolute border-primary border-[0.5px] border-solid inset-0 pointer-events-none rounded-[40px]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 827,
+      "line": 828,
       "category": "raw-px-bracket",
       "snippet": "className=\"absolute border-primary border-[0.5px] border-solid inset-0 pointer-events-none rounded-[40px]\""
     },
     {
       "file": "src/app/pages/AboutPage.tsx",
-      "line": 152,
+      "line": 153,
       "category": "inline-style",
       "snippet": "24 inline style={{}} occurrence(s) in file"
     },
@@ -1735,12 +1507,6 @@
       "line": 81,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 mb-(--space-stack-lg)\""
-    },
-    {
-      "file": "src/app/pages/CountryPage.tsx",
-      "line": 66,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
     },
     {
       "file": "src/app/pages/CountryPage.tsx",
@@ -1807,42 +1573,6 @@
       "line": 309,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex flex-col sm:flex-row gap-3\""
-    },
-    {
-      "file": "src/app/pages/ExperienceDetailPage.tsx",
-      "line": 113,
-      "category": "rigid-container",
-      "snippet": "className=\"absolute top-0 left-0 right-0 flex items-center justify-between px-(--container-px) pt-[clamp(16px,3vw,24px)]\""
-    },
-    {
-      "file": "src/app/pages/ExperienceDetailPage.tsx",
-      "line": 149,
-      "category": "rigid-container",
-      "snippet": "className=\"absolute bottom-0 left-0 right-0 px-(--container-px) pb-[clamp(24px,4vw,40px)]\""
-    },
-    {
-      "file": "src/app/pages/ExperienceDetailPage.tsx",
-      "line": 185,
-      "category": "rigid-container",
-      "snippet": "className=\"pt-(--section-py-sm) pb-(--section-py-md) px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/ExperienceDetailPage.tsx",
-      "line": 337,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/ExperienceDetailPage.tsx",
-      "line": 361,
-      "category": "rigid-container",
-      "snippet": "<ScrollArea className=\"w-[calc(100%+var(--container-px))] -mr-[var(--container-px)]\">"
-    },
-    {
-      "file": "src/app/pages/ExperienceDetailPage.tsx",
-      "line": 363,
-      "category": "rigid-container",
-      "snippet": "className=\"flex pb-4 pr-[var(--container-px)] gap-(--grid-gap)\""
     },
     {
       "file": "src/app/pages/ExperienceDetailPage.tsx",
@@ -1924,12 +1654,6 @@
     },
     {
       "file": "src/app/pages/ExploreAllPage.tsx",
-      "line": 89,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/ExploreAllPage.tsx",
       "line": 132,
       "category": "raw-px-bracket",
       "snippet": "className=\"relative mb-4 max-w-[480px]\""
@@ -2005,12 +1729,6 @@
       "line": 127,
       "category": "off-grid-spacing",
       "snippet": "\"font-body cursor-pointer rounded-full px-[12px] md:px-3 py-1.5 whitespace-nowrap transition-all select-none outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-1 tex"
-    },
-    {
-      "file": "src/app/pages/FavoritesPage.tsx",
-      "line": 70,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
     },
     {
       "file": "src/app/pages/FavoritesPage.tsx",
@@ -2113,12 +1831,6 @@
       "line": 673,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex flex-col sm:flex-row items-center justify-center gap-3 print:hidden mt-(--space-stack-lg)\""
-    },
-    {
-      "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 561,
-      "category": "rigid-container",
-      "snippet": "<div className=\"px-(--container-px)\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
@@ -2902,12 +2614,6 @@
     },
     {
       "file": "src/app/pages/ProfilePage.tsx",
-      "line": 402,
-      "category": "rigid-container",
-      "snippet": "className=\"flex-1 flex flex-col w-full pt-(--section-py-sm) pb-(--section-py-lg) px-(--container-px)\""
-    },
-    {
-      "file": "src/app/pages/ProfilePage.tsx",
       "line": 448,
       "category": "raw-px-bracket",
       "snippet": "<div className=\"flex flex-col gap-6 max-w-[720px] w-full mx-auto sm:mx-0\">"
@@ -3037,12 +2743,6 @@
       "line": 73,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex items-center gap-3 mb-(--space-stack-lg)\""
-    },
-    {
-      "file": "src/app/pages/RecentlyViewedPage.tsx",
-      "line": 64,
-      "category": "rigid-container",
-      "snippet": "className=\"px-(--container-px)\""
     },
     {
       "file": "src/app/pages/RecentlyViewedPage.tsx",

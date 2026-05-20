@@ -111,7 +111,8 @@ const RE_OFF_GRID =
   /\b(?:p|pt|pb|pl|pr|px|py|m|mt|mb|ml|mr|mx|my|gap|gap-x|gap-y|space-x|space-y)-(?:1\.5|3\.5|3|5|7|9|11|13|15)\b/g;
 
 // `container` Tailwind class — only when it appears inside a string literal (className context).
-const RE_CONTAINER_STR = /["'`][^"'`]*\bcontainer\b[^"'`]*["'`]/g;
+// Must NOT be followed by `-` or `_` (excludes `--container-px`, `container-fluid`, etc.).
+const RE_CONTAINER_STR = /["'`][^"'`]*\bcontainer\b(?![-_])[^"'`]*["'`]/g;
 const RE_MAX_W_RIGID = /\bmax-w-(?:3|4|5|6|7)xl\b/g;
 
 // Arbitrary px-value brackets — [12px], [40px], [0.5px]. Exclude [var(...)] (no `px` literal inside).

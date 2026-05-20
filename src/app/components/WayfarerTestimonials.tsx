@@ -30,6 +30,7 @@ import {
   defaultTransition,
   quickTransition,
   fastTransition,
+  cardItem,
 } from "./animations";
 import { useState, useCallback } from "react";
 import { cn } from "./ui/utils";
@@ -222,7 +223,7 @@ const testimonials: Testimonial[] = [
 
 function StarRating({ count }: { count: number }) {
   return (
-    <div className="flex items-center gap-[2.5px]" aria-label={`${count} out of 5 stars`}>
+    <div className="flex items-center gap-1" aria-label={`${count} out of 5 stars`}>
       {Array.from({ length: count }).map((_, i) => (
         <svg key={i} width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <circle
@@ -237,12 +238,6 @@ function StarRating({ count }: { count: number }) {
   );
 }
 
-/** Card child variant */
-const cardItem = {
-  hidden: { y: 32, scale: 0.97 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: defaultTransition },
-};
-
 function TestimonialCard({
   t,
   onClickUser,
@@ -254,10 +249,10 @@ function TestimonialCard({
     <motion.div
       variants={cardItem}
       className="h-full"
-      whileHover={{ y: -5, transition: { duration: 0.28, ease: "easeOut" } }}
+      whileHover={{ y: -4, transition: quickTransition }}
     >
       <Card
-        className="border border-muted rounded-[20px] flex flex-col gap-0 p-0 bg-transparent shadow-sm h-full transition-all hover:border-primary/30 hover:shadow-md"
+        className="border border-border rounded-[20px] flex flex-col gap-0 p-0 bg-card h-full shadow-[var(--shadow-card)] transition-colors transition-shadow hover:border-primary/20 hover:shadow-[var(--shadow-card-elevated)]"
       >
         <CardContent
           className="flex flex-col h-full gap-(--space-stack-md) pt-(--space-stack-md) pb-(--space-stack-lg) px-(--space-stack-md)"
@@ -274,10 +269,11 @@ function TestimonialCard({
 
           {/* Reviewer — clickable */}
           <button
+            type="button"
             className="flex items-center gap-3 text-left group cursor-pointer rounded-lg -mx-1 px-1 py-1 transition-colors hover:bg-muted/50 outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={() => onClickUser(t)}
           >
-            <Avatar className="size-[36px] md:size-9 shrink-0 ring-2 ring-transparent group-hover:ring-primary/20 transition-all">
+            <Avatar className="size-9 shrink-0 ring-2 ring-transparent transition-[box-shadow] group-hover:ring-primary/20">
               <AvatarImage src={t.avatar} alt={t.name} />
               <AvatarFallback
                 className="text-card-foreground text-xs font-semibold bg-accent-light"
@@ -291,12 +287,7 @@ function TestimonialCard({
               >
                 {t.name}
               </p>
-              <p
-                className="text-muted-foreground font-normal text-body-sm"
-                style={{
-                  fontStyle: "italic",
-                }}
-              >
+              <p className="text-muted-foreground font-normal italic text-body-sm">
                 {t.role}
               </p>
             </div>
@@ -321,12 +312,12 @@ function TravelerProfileDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-[440px] rounded-[20px] bg-surface border-border p-0 overflow-hidden gap-0">
+      <DialogContent className="max-w-md rounded-[20px] bg-surface border-border p-0 overflow-hidden gap-0 shadow-[var(--shadow-card-elevated)]">
         {/* Header with avatar */}
         <div
           className="flex flex-col items-center text-center pt-(--space-stack-lg) pb-(--space-stack-md) px-(--space-stack-md)"
         >
-          <Avatar className="size-[72px] ring-2 ring-primary/20 mb-3">
+          <Avatar className="size-20 ring-2 ring-primary/20 mb-(--space-stack-xs)">
             <AvatarImage src={traveler.avatar} alt={traveler.name} />
             <AvatarFallback className="text-card-foreground bg-accent-light text-title-3">
               {traveler.initials}
@@ -338,12 +329,7 @@ function TravelerProfileDialog({
             >
               {traveler.name}
             </DialogTitle>
-            <DialogDescription
-              className="text-muted-foreground font-normal text-body-sm"
-              style={{
-                fontStyle: "italic",
-              }}
-            >
+            <DialogDescription className="text-muted-foreground font-normal italic text-body-sm">
               {traveler.role}
             </DialogDescription>
           </DialogHeader>
@@ -428,7 +414,7 @@ function TravelerProfileDialog({
           className="border-t border-muted bg-muted/30 p-(--space-stack-md)"
         >
           <div className="flex gap-2">
-            <span className="text-primary shrink-0 text-title-1" style={{ lineHeight: "1" }}>"</span>
+            <span className="text-primary shrink-0 text-title-1 leading-none">"</span>
             <p
               className="font-body text-card-foreground italic text-body-sm leading-body"
             >
@@ -479,9 +465,13 @@ export function WayfarerTestimonials() {
           viewport={viewport}
           variants={fadeUp}
         >
-          <h2
-            className="font-heading text-foreground font-semibold text-title-1 leading-title-1"
+          <p
+            className="font-body text-accent tracking-widest uppercase text-badge font-medium mb-(--space-stack-xs)"
+            style={{ letterSpacing: "0.12em" }}
           >
+            Voices from the trail
+          </p>
+          <h2 className="font-heading text-foreground font-bold text-title-1 leading-title-1">
             What travelers are raving about
           </h2>
         </motion.div>
@@ -501,7 +491,7 @@ export function WayfarerTestimonials() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:opacity-80 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+                  className="shrink-0 size-10 rounded-full border border-border bg-surface text-card-foreground shadow-[var(--shadow-card)] outline-none transition-colors transition-shadow hover:bg-primary/8 hover:border-primary/20 hover:text-primary hover:shadow-[var(--shadow-card-elevated)] active:opacity-80 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
                   onClick={handlePrev}
                   aria-label="Go to previous reviews"
                 >
@@ -525,7 +515,7 @@ export function WayfarerTestimonials() {
             <Button
               variant="outline"
               size="icon"
-              className="shrink-0 size-10 rounded-full border-border bg-surface text-card-foreground shadow-sm outline-none transition-all hover:bg-primary/8 hover:border-primary hover:text-primary hover:shadow-md active:opacity-80 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
+              className="shrink-0 size-10 rounded-full border border-border bg-surface text-card-foreground shadow-[var(--shadow-card)] outline-none transition-colors transition-shadow hover:bg-primary/8 hover:border-primary/20 hover:text-primary hover:shadow-[var(--shadow-card-elevated)] active:opacity-80 active:bg-primary/12 active:border-primary active:shadow-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1"
               onClick={handleNext}
               aria-label="See more reviews"
             >
@@ -559,10 +549,10 @@ export function WayfarerTestimonials() {
                 onClick={() => setPage(i)}
                 aria-label={`Go to page ${i + 1}`}
                 className={cn(
-                  "rounded-full transition-all",
+                  "size-2 rounded-full transition-colors",
                   i === page
-                    ? "bg-accent w-2 h-2 scale-125"
-                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50 w-2 h-2"
+                    ? "bg-accent scale-125"
+                    : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
                 )}
               />
             ))}
@@ -573,14 +563,14 @@ export function WayfarerTestimonials() {
         <div className="lg:hidden">
           <ScrollArea className="w-[calc(100%+var(--container-px))] -mr-[var(--container-px)]">
             <motion.div
-              className="flex pb-4 pr-[var(--container-px)] gap-(--grid-gap)"
+              className="flex pb-(--space-stack-sm) pr-(--container-px) gap-(--grid-gap)"
               initial="hidden"
               whileInView="visible"
               viewport={viewport}
               variants={stagger}
             >
               {testimonials.map((t) => (
-                <div key={t.id} className="shrink-0 w-[clamp(262px,72vw,340px)]">
+                <div key={t.id} className="shrink-0 w-72 md:w-80">
                   <TestimonialCard t={t} onClickUser={handleClickUser} />
                 </div>
               ))}

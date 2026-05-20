@@ -11,6 +11,7 @@ import {
   scaleUp,
   viewport,
   defaultTransition,
+  fastTransition,
   slowTransition,
 } from "../components/animations";
 import { useBrandMotionEnabled } from "../components/useBrandMotion";
@@ -421,7 +422,7 @@ function WhatWeDoSection() {
                 variants={valueItem}
                 whileHover={{
                   y: -4,
-                  transition: { duration: 0.28, ease: "easeOut" },
+                  transition: fastTransition,
                 }}
               >
                 <div
@@ -518,7 +519,7 @@ function CultureSection() {
                 variants={valueItem}
                 whileHover={{
                   y: -4,
-                  transition: { duration: 0.28, ease: "easeOut" },
+                  transition: fastTransition,
                 }}
               >
                 <div className={`size-12 rounded-full flex items-center justify-center shrink-0 ${colors.bg}`}>
