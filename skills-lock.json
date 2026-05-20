@@ -7,11 +7,11 @@
       "skillPath": "skills/browser-use/SKILL.md",
       "computedHash": "9f3a097275554dc44356f37d17d445d9c2b5b3579332fa93a1e9422f465f01bb"
     },
-    "frontend-design": {
-      "source": "anthropics/claude-code",
+    "impeccable": {
+      "source": "pbakaus/impeccable",
       "sourceType": "github",
-      "skillPath": "plugins/frontend-design/skills/frontend-design/SKILL.md",
-      "computedHash": "e8118284a6365753790d44bb2758a6032b3af27fa84696428d9233f2be0f4e78"
+      "skillPath": "skill/SKILL.md",
+      "computedHash": "34e59a34b9705187e87039faa5d9585aebe0056ef657f761b905afef276a3362"
     }
   }
 }

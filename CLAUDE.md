@@ -24,7 +24,7 @@ Each skill occupies a distinct slot in the workflow. Reach for the most specific
 
 | Skill | Location | When to use |
 | --- | --- | --- |
-| `frontend-design` | `.agents/skills/frontend-design/` | New components, layouts, or aesthetic decisions. Pairs with `guidelines/Guidelines.md`. |
+| `impeccable` | `.agents/skills/impeccable/` | New components, layouts, aesthetic decisions, **and structured design audits/refactors** of existing UI. Sub-commands map directly to our cleanup work: `audit`, `polish`, `harden`, `typeset`, `colorize`, `bolder`, `quieter`, `craft`, `shape`, `live`. Replaced `frontend-design` on 2026-05-20 as a documented successor (per its SKILL.md). Pairs with `guidelines/Guidelines.md`. ⚠️ Rated Med Risk (Gen) / Med Risk (Snyk) — third-party publisher (`pbakaus`). Optionally expects `PRODUCT.md` and `DESIGN.md` in the project root or `.agents/context/` — works without but with reduced effectiveness; consider synthesising from `guidelines/Guidelines.md` as a follow-up. |
 | `copywriting` | `.claude/skills/copywriting/` | UX copy, microcopy, brand-voice work, empty/error states, onboarding language. Wayfarer is content-led — use liberally. |
 | `accessibility` | `.claude/skills/accessibility/` | Semantic HTML, ARIA, focus order, contrast against design tokens. Run before shipping any new flow. Includes WCAG reference. |
 | `web-performance-optimization` | `.claude/skills/web-performance-optimization/` | Asset/bundle/loading perf. **Highest-priority debt: the 8–15 MB PNGs in `src/assets/`.** |
@@ -58,25 +58,36 @@ Only when the user explicitly says so in the same turn (e.g., "skip the audit, j
 npm i              # install dependencies (also wires the pre-push hook via `prepare`)
 npm run dev        # start Vite dev server
 npm run build      # production build → dist/
-npm run lint:motion         # Wayfarer Motion Doctrine audit (baseline-aware)
-npm run lint:motion -- --strict   # show all doctrine debt, ignoring baseline
-node scripts/fix-motion.js  # auto-refactor inline transitions to token spreads
+npm run lint:motion          # Wayfarer Motion Doctrine audit (baseline-aware)
+npm run lint:motion -- --strict     # show all doctrine debt, ignoring baseline
+npm run lint:tokens          # Wayfarer Token / Design-System Adoption audit (baseline-aware)
+npm run lint:tokens -- --strict     # show all token debt, ignoring baseline
+npm run lint:design          # composite: lint:motion && lint:tokens
+node scripts/fix-motion.js   # auto-refactor inline transitions to token spreads
 vercel --prod      # deploy to production (already linked)
 ```
 
-> **CRITICAL:** No test runner, no general-purpose lint script, no CI exists. The only lint is `lint:motion` (custom audit of `src/app/components/animations.ts` doctrine compliance — see `scripts/audit-motion.mjs`). Do NOT invent commands that don't exist in `package.json`.
+> **CRITICAL:** No test runner, no general-purpose lint script, no CI exists. The two lints are `lint:motion` (custom audit of doctrine compliance in `src/app/components/animations.ts` — see `scripts/audit-motion.mjs`) and `lint:tokens` (semantic-token + 8px-grid adoption audit across `src/app/components/` and `src/app/pages/`, excluding shadcn `ui/` primitives — see `scripts/audit-tokens.mjs`). Do NOT invent commands that don't exist in `package.json`.
 >
-> `lint:motion` is **baseline-aware**: violations in `.motion-audit-baseline.json` are grandfathered. The script only fails on *new* violations beyond that snapshot. Current baseline is 0. Run with `--strict` to see all debt; run with `--baseline` to refresh the snapshot after intentionally introducing exempted debt.
+> **Both lints are baseline-aware**:
+> - `lint:motion` grandfathers entries in `.motion-audit-baseline.json` (currently 0).
+> - `lint:tokens` grandfathers entries in `.token-audit-baseline.json` (currently 582 — established 2026-05-20 as the starting point of the Figma-Make-export cleanup; will shrink as P0–P4 cleanup PRs land).
+>
+> Each script only fails on *new* violations beyond its snapshot. Run with `--strict` to see all debt; run with `--baseline` to refresh after intentionally introducing exempted debt or after a cleanup PR lands.
+>
+> Per-line exemption comments:
+> - Motion: `// motion-doctrine-exception: <rule> <reason>`
+> - Tokens: `// token-audit-exception: <category> <reason>`
 
 ### Pre-push hook
 
-A pre-push hook at `.githooks/pre-push` runs `npm run lint:motion` and **blocks** the push if any new doctrine violations are detected. The hook is wired via `core.hooksPath` (set by the `prepare` npm script on `npm install`).
+A pre-push hook at `.githooks/pre-push` runs **both** `npm run lint:motion` and `npm run lint:tokens` in sequence and **blocks** the push if either reports new violations beyond its baseline. The hook is wired via `core.hooksPath` (set by the `prepare` npm script on `npm install`).
 
 - **Bypass for emergencies:** `git push --no-verify`
 - **Disable entirely:** `git config --unset core.hooksPath`
 - **Re-activate after fresh clone:** `npm install` runs `prepare` which calls `git config core.hooksPath .githooks`. Or run that command directly.
 
-If the hook starts failing on a legitimate change (e.g. intentionally adding a `motion-doctrine-exception` line), the audit either accepts the comment-marked exception or you refresh the baseline: `npm run lint:motion -- --baseline`.
+If the hook starts failing on a legitimate change (e.g. intentionally adding an exception line), the audit either accepts the comment-marked exception or you refresh the relevant baseline. For tokens, refresh after a cleanup PR merges so subsequent PRs measure against the cleaner state.
 
 ## Architecture
 

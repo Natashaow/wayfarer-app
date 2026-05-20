@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 #
-# Wayfarer Motion Doctrine — pre-push gate.
+# Wayfarer Design-System pre-push gate.
 #
-# Blocks pushes when `npm run lint:motion` reports new doctrine violations
-# beyond the baseline in .motion-audit-baseline.json. The audit is
-# baseline-aware, so legitimately grandfathered debt does not block; only
-# net-new regressions do.
+# Blocks pushes when either of the design-system audits reports new violations
+# beyond their baselines (.motion-audit-baseline.json, .token-audit-baseline.json).
+# Both audits are baseline-aware, so legitimately grandfathered debt does not
+# block; only net-new regressions do.
 #
 # Bypass (emergencies only):       git push --no-verify
-# See doctrine + escape valves:    guidelines/Guidelines.md#wayfarer-motion-doctrine
+# See motion doctrine:             guidelines/Guidelines.md#wayfarer-motion-doctrine
+# See token reference:             src/styles/theme.css
 # Disable hook entirely:           git config --unset core.hooksPath
 
 set -e
@@ -30,5 +31,15 @@ if ! npm run --silent lint:motion; then
   printf '\n%spre-push blocked: motion doctrine violations.%s\n' "$CYAN" "$RESET"
   printf '%s  Fix with:  node scripts/fix-motion.js%s\n' "$DIM" "$RESET"
   printf '%s  Override:  git push --no-verify  (use sparingly)%s\n' "$DIM" "$RESET"
+  exit 1
+fi
+
+printf '%spre-push: running token-adoption audit…%s\n' "$CYAN" "$RESET"
+
+if ! npm run --silent lint:tokens; then
+  printf '\n%spre-push blocked: new token violations.%s\n' "$CYAN" "$RESET"
+  printf '%s  See:        src/styles/theme.css (semantic tokens)%s\n' "$DIM" "$RESET"
+  printf '%s  Refresh:    npm run lint:tokens -- --baseline (only after deliberate debt)%s\n' "$DIM" "$RESET"
+  printf '%s  Override:   git push --no-verify  (use sparingly)%s\n' "$DIM" "$RESET"
   exit 1
 fi

@@ -7,6 +7,8 @@
     "build": "vite build",
     "dev": "vite",
     "lint:motion": "node scripts/audit-motion.mjs",
+    "lint:tokens": "node scripts/audit-tokens.mjs",
+    "lint:design": "npm run lint:motion && npm run lint:tokens",
     "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
