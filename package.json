@@ -6,9 +6,11 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
+    "typecheck": "tsc --noEmit",
     "lint:motion": "node scripts/audit-motion.mjs",
     "lint:tokens": "node scripts/audit-tokens.mjs",
     "lint:design": "npm run lint:motion && npm run lint:tokens",
+    "fix:tokens": "node scripts/fix-tokens.mjs",
     "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {

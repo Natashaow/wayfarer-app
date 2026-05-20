@@ -58,12 +58,15 @@ Only when the user explicitly says so in the same turn (e.g., "skip the audit, j
 npm i              # install dependencies (also wires the pre-push hook via `prepare`)
 npm run dev        # start Vite dev server
 npm run build      # production build → dist/
-npm run lint:motion          # Wayfarer Motion Doctrine audit (baseline-aware)
+npm run typecheck              # TypeScript type-check (no emit)
+npm run lint:motion            # Wayfarer Motion Doctrine audit (baseline-aware)
 npm run lint:motion -- --strict     # show all doctrine debt, ignoring baseline
-npm run lint:tokens          # Wayfarer Token / Design-System Adoption audit (baseline-aware)
+npm run lint:tokens            # Wayfarer Token / Design-System Adoption audit (baseline-aware)
 npm run lint:tokens -- --strict     # show all token debt, ignoring baseline
-npm run lint:design          # composite: lint:motion && lint:tokens
-node scripts/fix-motion.js   # auto-refactor inline transitions to token spreads
+npm run lint:design            # composite: lint:motion && lint:tokens
+npm run fix:tokens             # auto-fix type-scale and spacing violations
+npm run fix:tokens -- --dry-run     # preview changes without writing
+npm run fix:tokens -- --file <path> # fix a single file
 vercel --prod      # deploy to production (already linked)
 ```
 
