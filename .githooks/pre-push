@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#
+# Wayfarer Motion Doctrine — pre-push gate.
+#
+# Blocks pushes when `npm run lint:motion` reports new doctrine violations
+# beyond the baseline in .motion-audit-baseline.json. The audit is
+# baseline-aware, so legitimately grandfathered debt does not block; only
+# net-new regressions do.
+#
+# Bypass (emergencies only):       git push --no-verify
+# See doctrine + escape valves:    guidelines/Guidelines.md#wayfarer-motion-doctrine
+# Disable hook entirely:           git config --unset core.hooksPath
+
+set -e
+
+# Colors (degrade gracefully if no TTY)
+if [ -t 1 ]; then
+  CYAN=$'\033[36m'
+  DIM=$'\033[2m'
+  RESET=$'\033[0m'
+else
+  CYAN=''
+  DIM=''
+  RESET=''
+fi
+
+printf '%spre-push: running motion doctrine audit…%s\n' "$CYAN" "$RESET"
+
+if ! npm run --silent lint:motion; then
+  printf '\n%spre-push blocked: motion doctrine violations.%s\n' "$CYAN" "$RESET"
+  printf '%s  Fix with:  node scripts/fix-motion.js%s\n' "$DIM" "$RESET"
+  printf '%s  Override:  git push --no-verify  (use sparingly)%s\n' "$DIM" "$RESET"
+  exit 1
+fi

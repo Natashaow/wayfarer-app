@@ -55,17 +55,28 @@ Only when the user explicitly says so in the same turn (e.g., "skip the audit, j
 ## Commands
 
 ```bash
-npm i              # install dependencies
+npm i              # install dependencies (also wires the pre-push hook via `prepare`)
 npm run dev        # start Vite dev server
 npm run build      # production build → dist/
 npm run lint:motion         # Wayfarer Motion Doctrine audit (baseline-aware)
-npm run lint:motion -- --strict   # show all existing motion debt (48 grandfathered items)
+npm run lint:motion -- --strict   # show all doctrine debt, ignoring baseline
+node scripts/fix-motion.js  # auto-refactor inline transitions to token spreads
 vercel --prod      # deploy to production (already linked)
 ```
 
 > **CRITICAL:** No test runner, no general-purpose lint script, no CI exists. The only lint is `lint:motion` (custom audit of `src/app/components/animations.ts` doctrine compliance — see `scripts/audit-motion.mjs`). Do NOT invent commands that don't exist in `package.json`.
 >
-> `lint:motion` is **baseline-aware**: the 48 pre-existing violations in `.motion-audit-baseline.json` are grandfathered. The script only fails on *new* violations beyond that snapshot. Run with `--strict` to see all debt; run with `--baseline` to refresh the snapshot after fixing items.
+> `lint:motion` is **baseline-aware**: violations in `.motion-audit-baseline.json` are grandfathered. The script only fails on *new* violations beyond that snapshot. Current baseline is 0. Run with `--strict` to see all debt; run with `--baseline` to refresh the snapshot after intentionally introducing exempted debt.
+
+### Pre-push hook
+
+A pre-push hook at `.githooks/pre-push` runs `npm run lint:motion` and **blocks** the push if any new doctrine violations are detected. The hook is wired via `core.hooksPath` (set by the `prepare` npm script on `npm install`).
+
+- **Bypass for emergencies:** `git push --no-verify`
+- **Disable entirely:** `git config --unset core.hooksPath`
+- **Re-activate after fresh clone:** `npm install` runs `prepare` which calls `git config core.hooksPath .githooks`. Or run that command directly.
+
+If the hook starts failing on a legitimate change (e.g. intentionally adding a `motion-doctrine-exception` line), the audit either accepts the comment-marked exception or you refresh the baseline: `npm run lint:motion -- --baseline`.
 
 ## Architecture
 
