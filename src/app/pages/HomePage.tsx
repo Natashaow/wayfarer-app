@@ -1,7 +1,8 @@
 import { WayfarerNavbar } from "../components/WayfarerNavbar";
 import { WayfarerHero } from "../components/WayfarerHero";
 import { WayfarerExperiences } from "../components/WayfarerExperiences";
-import { PersonalizedSection } from "../components/PersonalizedSection";
+import { SavedSection } from "../components/SavedSection";
+import { RecentlyViewedSection } from "../components/RecentlyViewedSection";
 import { WayfarerWhySection } from "../components/WayfarerWhySection";
 import { WayfarerCTA } from "../components/WayfarerCTA";
 import { WayfarerTestimonials } from "../components/WayfarerTestimonials";
@@ -16,7 +17,8 @@ export default function HomePage() {
       <main className="flex flex-col w-full flex-1">
         <WayfarerHero />
         <WayfarerExperiences />
-        <PersonalizedSection />
+        <SavedSection />
+        <RecentlyViewedSection />
         <WayfarerWhySection />
         <WayfarerCTA />
         <WayfarerTestimonials />
