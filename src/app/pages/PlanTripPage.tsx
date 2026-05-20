@@ -1460,7 +1460,7 @@ export default function PlanTripPage() {
                             <span className="font-body text-caption block mb-0.5" style={{ color: "var(--accent)", fontWeight: "var(--font-weight-medium)" }}>
                               {item.label}
                             </span>
-                            <p className="font-heading text-card-foreground truncate font-semibold text-body-sm">{item.dest.title}</p>
+                            <p className="text-card-foreground truncate font-semibold text-body-sm">{item.dest.title}</p>
                             <div className="flex items-center gap-1 text-muted-foreground">
                               <MapPin className="size-3" strokeWidth={1.8} />
                               <span className="font-body text-caption">{item.dest.location}</span>

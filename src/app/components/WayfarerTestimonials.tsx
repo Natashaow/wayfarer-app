@@ -287,12 +287,12 @@ function TestimonialCard({
             </Avatar>
             <div>
               <p
-                className="font-heading text-card-foreground group-hover:text-primary transition-colors font-normal text-body"
+                className="text-card-foreground group-hover:text-primary transition-colors font-normal text-body"
               >
                 {t.name}
               </p>
               <p
-                className="font-heading text-muted-foreground font-normal text-body-sm"
+                className="text-muted-foreground font-normal text-body-sm"
                 style={{
                   fontStyle: "italic",
                 }}
@@ -339,7 +339,7 @@ function TravelerProfileDialog({
               {traveler.name}
             </DialogTitle>
             <DialogDescription
-              className="font-heading text-muted-foreground font-normal text-body-sm"
+              className="text-muted-foreground font-normal text-body-sm"
               style={{
                 fontStyle: "italic",
               }}

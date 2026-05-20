@@ -76,7 +76,7 @@ export function WayfarerCTA() {
             >
               <div className="flex items-center justify-center overflow-clip px-6 py-3 rounded-[inherit]">
                 <span
-                  className="font-heading text-primary-foreground text-center whitespace-nowrap shrink-0 font-bold text-nav"
+                  className="text-primary-foreground text-center whitespace-nowrap shrink-0 font-bold text-nav"
                   style={{ lineHeight: "normal" }}
                 >
                   {isAuthenticated ? "Plan a trip with AI" : "Sign up"}

@@ -168,7 +168,7 @@ function DesktopSearchInput({ navigate }: { navigate: (to: string) => void }) {
                   />
                   <div className="flex flex-col min-w-0 flex-1">
                     <span
-                      className="font-heading text-foreground truncate font-medium text-body-sm"
+                      className="text-foreground truncate font-medium text-body-sm"
                     >
                       {dest.title}
                     </span>
@@ -328,7 +328,7 @@ function MobileSearchOverlay({
                 />
                 <div className="flex flex-col min-w-0 flex-1">
                   <span
-                    className="font-heading text-foreground truncate font-medium text-body"
+                    className="text-foreground truncate font-medium text-body"
                   >
                     {dest.title}
                   </span>
@@ -403,6 +403,7 @@ function MobileLogo() {
 function UserAvatar({ firstName, lastName, size = 32 }: { firstName: string; lastName: string; size?: number }) {
   const initials = `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
   return (
+    // token-audit-exception: font-heading-misuse — initials are a brand-mark, treated as title-like typography even without a text-title-* token.
     <div
       className="rounded-full flex items-center justify-center shrink-0 font-heading font-bold"
       style={{
@@ -526,7 +527,7 @@ export function WayfarerNavbar() {
                   <UserAvatar firstName={user.firstName} lastName={user.lastName} size={40} />
                   <div className="flex flex-col min-w-0 flex-1">
                     <span
-                      className="font-heading text-foreground truncate font-bold text-body"
+                      className="text-foreground truncate font-bold text-body"
                     >
                       {user.firstName} {user.lastName}
                     </span>
@@ -632,7 +633,7 @@ export function WayfarerNavbar() {
                   </div>
                   <div className="flex flex-col items-center gap-0.5 text-center">
                     <span
-                      className="font-heading text-foreground font-bold text-body"
+                      className="text-foreground font-bold text-body"
                     >
                       Welcome to Wayfarer
                     </span>
@@ -649,7 +650,7 @@ export function WayfarerNavbar() {
                 {/* Auth actions */}
                 <div className="flex flex-col gap-2 p-4">
                   <Button
-                    className="font-heading w-full h-[40px] rounded-full bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 transition-opacity font-bold text-body-sm"
+                    className="w-full h-[40px] rounded-full bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 transition-opacity font-bold text-body-sm"
                     onClick={() => navigate("/signup")}
                   >
                     <UserPlus className="size-4 mr-1.5" strokeWidth={1.8} />
@@ -657,7 +658,7 @@ export function WayfarerNavbar() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="font-heading w-full h-[40px] rounded-full border-border text-card-foreground hover:bg-muted hover:border-muted-foreground/30 transition-all font-bold text-body-sm"
+                    className="w-full h-[40px] rounded-full border-border text-card-foreground hover:bg-muted hover:border-muted-foreground/30 transition-all font-bold text-body-sm"
                     onClick={() => navigate("/login")}
                   >
                     <LogIn className="size-4 mr-1.5" strokeWidth={1.8} />
@@ -702,7 +703,7 @@ export function WayfarerNavbar() {
                     <UserAvatar firstName={user.firstName} lastName={user.lastName} size={40} />
                     <div className="flex flex-col min-w-0">
                       <p
-                        className="font-heading text-foreground truncate font-bold text-body"
+                        className="text-foreground truncate font-bold text-body"
                       >
                         {user.firstName} {user.lastName}
                       </p>
@@ -764,14 +765,14 @@ export function WayfarerNavbar() {
                 {isAuthenticated ? (
                   <>
                     <Button
-                      className="font-heading w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
+                      className="w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
                       onClick={() => { setSheetOpen(false); showComingSoon(); }}
                     >
                       Start a trip with AI
                     </Button>
                     <Button
                       variant="outline"
-                      className="font-heading w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted gap-2 font-bold"
+                      className="w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted gap-2 font-bold"
                       onClick={handleSignOut}
                     >
                       <LogOut className="size-4" strokeWidth={1.8} />
@@ -781,14 +782,14 @@ export function WayfarerNavbar() {
                 ) : (
                   <>
                     <Button
-                      className="font-heading w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
+                      className="w-full h-[44px] rounded-full text-sm bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 font-bold"
                       onClick={() => navigate("/signup")}
                     >
                       Sign up
                     </Button>
                     <Button
                       variant="outline"
-                      className="font-heading w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted font-bold"
+                      className="w-full h-[44px] rounded-full text-sm border-border text-card-foreground hover:bg-muted font-bold"
                       onClick={() => navigate("/login")}
                     >
                       Log in
@@ -839,7 +840,7 @@ export function WayfarerNavbar() {
                   <UserAvatar firstName={user.firstName} lastName={user.lastName} size={36} />
                   <div className="flex flex-col min-w-0 flex-1">
                     <span
-                      className="font-heading text-foreground truncate font-bold text-body-sm"
+                      className="text-foreground truncate font-bold text-body-sm"
                     >
                       {user.firstName} {user.lastName}
                     </span>
@@ -913,7 +914,7 @@ export function WayfarerNavbar() {
                   </div>
                   <div className="flex flex-col items-center gap-0.5 text-center">
                     <span
-                      className="font-heading text-foreground font-bold text-body-sm"
+                      className="text-foreground font-bold text-body-sm"
                     >
                       Welcome to Wayfarer
                     </span>
@@ -929,7 +930,7 @@ export function WayfarerNavbar() {
 
                 <div className="flex flex-col gap-2 p-3">
                   <Button
-                    className="font-heading w-full h-[40px] rounded-full bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 transition-opacity font-bold text-body-sm"
+                    className="w-full h-[40px] rounded-full bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shadow-primary-cta-sm)] hover:opacity-90 transition-opacity font-bold text-body-sm"
                     onClick={() => navigate("/signup")}
                   >
                     <UserPlus className="size-4 mr-1.5" strokeWidth={1.8} />
@@ -937,7 +938,7 @@ export function WayfarerNavbar() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="font-heading w-full h-[40px] rounded-full border-border text-card-foreground hover:bg-muted hover:border-muted-foreground/30 transition-all font-bold text-body-sm"
+                    className="w-full h-[40px] rounded-full border-border text-card-foreground hover:bg-muted hover:border-muted-foreground/30 transition-all font-bold text-body-sm"
                     onClick={() => navigate("/login")}
                   >
                     <LogIn className="size-4 mr-1.5" strokeWidth={1.8} />

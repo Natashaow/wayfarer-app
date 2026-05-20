@@ -170,7 +170,7 @@ export default function ExperienceDetailPage() {
               >
                 <MapPin className="size-4 shrink-0" />
                 <span
-                  className="font-heading italic text-body"
+                  className="italic text-body"
                 >
                   {dest.location}
                 </span>
@@ -210,7 +210,7 @@ export default function ExperienceDetailPage() {
                 <div className="flex items-center gap-1.5">
                   <Star className="size-4 text-primary fill-primary" />
                   <span
-                    className="font-heading text-foreground font-bold text-body"
+                    className="text-foreground font-bold text-body"
                   >
                     {dest.rating}
                   </span>
@@ -288,7 +288,7 @@ export default function ExperienceDetailPage() {
                   </span>
                   <div className="flex flex-col min-w-0 flex-1">
                     <span
-                      className="font-heading text-foreground font-semibold text-body"
+                      className="text-foreground font-semibold text-body"
                     >
                       Explore more in {dest.country}
                     </span>

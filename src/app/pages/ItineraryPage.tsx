@@ -405,7 +405,7 @@ function ActivityBlock({
       <div className="flex-1 min-w-0 pb-(--space-stack-xs)">
         <div className="flex items-center gap-2 flex-wrap">
           <span
-            className={`font-heading ${periodColor} text-caption font-bold`}
+            className={`${periodColor} text-caption font-bold`}
           >
             {period}
           </span>

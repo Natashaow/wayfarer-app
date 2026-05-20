@@ -116,7 +116,7 @@ export function MemoryCard({ dest, viewedAt, compact }: MemoryCardProps) {
                 strokeWidth={1.8}
               />
               <span
-                className="font-heading italic text-muted-foreground text-caption truncate"
+                className="italic text-muted-foreground text-caption truncate"
               >
                 {dest.location}
               </span>

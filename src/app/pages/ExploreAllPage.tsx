@@ -269,7 +269,7 @@ export default function ExploreAllPage() {
                 >
                   <Globe className="size-10 text-muted-foreground/40" />
                   <p
-                    className="font-heading text-muted-foreground text-center text-body font-medium"
+                    className="text-muted-foreground text-center text-body font-medium"
                   >
                     No experiences match your current filters
                   </p>

@@ -174,7 +174,7 @@ const DestinationCard = forwardRef<HTMLDivElement, { dest: Destination, compact?
             >
               <MapPin className="size-3.5 md:size-4 text-surface shrink-0" />
               <span
-                className="font-heading text-surface underline decoration-surface/40 underline-offset-2 text-body"
+                className="text-surface underline decoration-surface/40 underline-offset-2 text-body"
                 style={{
                   fontStyle: "italic",
                 }}
@@ -385,7 +385,7 @@ export function WayfarerExperiences() {
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <Globe className="size-10 text-muted-foreground/40 mb-3" />
             <p
-              className="font-heading text-muted-foreground text-body font-medium"
+              className="text-muted-foreground text-body font-medium"
             >
               No experiences found for {selectedCountry} in "{activeFilter}"
             </p>

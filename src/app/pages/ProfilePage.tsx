@@ -720,14 +720,14 @@ export default function ProfilePage() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   variant="outline"
-                  className="font-heading h-[42px] px-6 rounded-full gap-2 border-border text-card-foreground hover:bg-muted transition-colors font-bold text-caption"
+                  className="h-[42px] px-6 rounded-full gap-2 border-border text-card-foreground hover:bg-muted transition-colors font-bold text-caption"
                   onClick={handleSignOut}
                 >
                   Sign out
                 </Button>
                 <Button
                   variant="outline"
-                  className="font-heading h-[42px] px-6 rounded-full gap-2 border-border hover:bg-muted transition-colors font-bold text-caption"
+                  className="h-[42px] px-6 rounded-full gap-2 border-border hover:bg-muted transition-colors font-bold text-caption"
                   style={{ color: "var(--destructive)", borderColor: "var(--destructive)" }}
                   onClick={() => setShowDeleteConfirm(true)}
                 >
@@ -750,7 +750,7 @@ export default function ProfilePage() {
                     <div className="flex items-start gap-2.5">
                       <AlertTriangle className="size-5 mt-0.5 shrink-0" style={{ color: "var(--destructive)" }} strokeWidth={1.8} />
                       <div className="flex flex-col gap-1">
-                        <span className="font-heading font-bold text-body-sm" style={{ color: "var(--destructive)" }}>
+                        <span className="font-bold text-body-sm" style={{ color: "var(--destructive)" }}>
                           Are you sure?
                         </span>
                         <span className="font-body text-caption" style={{ color: "var(--muted-foreground)" }}>
@@ -761,7 +761,7 @@ export default function ProfilePage() {
                     <div className="flex gap-2 ml-7">
                       <Button
                         size="sm"
-                        className="font-heading h-[34px] px-4 rounded-full text-surface font-bold text-caption"
+                        className="h-[34px] px-4 rounded-full text-surface font-bold text-caption"
                         style={{ backgroundColor: "var(--destructive)" }}
                         onClick={handleDeleteAccount}
                       >
@@ -770,7 +770,7 @@ export default function ProfilePage() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="font-heading h-[34px] px-4 rounded-full border-border text-card-foreground font-bold text-caption"
+                        className="h-[34px] px-4 rounded-full border-border text-card-foreground font-bold text-caption"
                         onClick={() => setShowDeleteConfirm(false)}
                       >
                         Cancel
@@ -788,7 +788,7 @@ export default function ProfilePage() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   variant="outline"
-                  className="font-heading h-[42px] px-6 rounded-full gap-2 border-border text-card-foreground hover:bg-muted transition-colors font-bold text-caption"
+                  className="h-[42px] px-6 rounded-full gap-2 border-border text-card-foreground hover:bg-muted transition-colors font-bold text-caption"
                   onClick={() => setShowPasswordForm(true)}
                 >
                   Change password
@@ -855,7 +855,7 @@ export default function ProfilePage() {
                     <div className="flex gap-2">
                       <Button
                         size="sm"
-                        className="font-heading h-[36px] px-5 rounded-full text-surface font-bold text-caption"
+                        className="h-[36px] px-5 rounded-full text-surface font-bold text-caption"
                         style={{ backgroundColor: "var(--accent)" }}
                         onClick={handlePasswordChange}
                       >
@@ -865,7 +865,7 @@ export default function ProfilePage() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="font-heading h-[36px] px-5 rounded-full border-border text-card-foreground hover:bg-muted font-bold text-caption"
+                        className="h-[36px] px-5 rounded-full border-border text-card-foreground hover:bg-muted font-bold text-caption"
                         onClick={() => { setShowPasswordForm(false); setCurrentPw(""); setNewPw(""); setConfirmPw(""); setPwError(""); }}
                       >
                         Cancel
