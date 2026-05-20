@@ -88,15 +88,12 @@ If real URL routing is ever required, this file is the single point of change.
 
 ### 2. Provider chain (`src/app/components/RootLayout.tsx`)
 
-Order matters because `PersonalizationProvider` reads from `useAuth()`:
-
 ```
 ErrorBoundary → AuthProvider → FavoritesProvider → RecentlyViewedProvider
-  → PersonalizationWrapper (consumes auth, mounts PersonalizationProvider + onboarding)
   → ScrollToTop → Outlet → Toaster
 ```
 
-New global contexts must be placed relative to their dependencies in this chain.
+New global contexts must be placed relative to their dependencies in this chain. The previous `PersonalizationProvider` / `PersonalizationOnboarding` layer was removed in favour of `RecentlyViewedContext` + `FavoritesContext` as the only behavioural signals — see `RecentlyViewedSection` / `SavedSection` on the homepage.
 
 ### 3. Custom Vite plugin — `figma:asset/` imports
 
