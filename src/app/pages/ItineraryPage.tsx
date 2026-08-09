@@ -39,14 +39,19 @@ import {
   Waves,
   Printer,
   GripVertical,
+  DollarSign,
+  AlertTriangle,
+  Pencil,
 } from "lucide-react";
 import {
   defaultTransition,
   fastTransition,
+  quickTransition,
   fadeUp,
   stagger,
   viewport,
 } from "../components/animations";
+import { Input } from "../components/ui/input";
 
 /* ── Types ── */
 
@@ -56,6 +61,7 @@ interface Activity {
   icon: typeof Sun;
   tag: string;
   time: string;
+  cost: number;
 }
 
 interface DayTemplate {
@@ -82,14 +88,57 @@ interface TripState {
   resultDestinations: Destination[];
 }
 
+/* ── Budget ── */
+
+/** Daily spend ceiling per budget tier, matching the ranges shown in PlanTripPage's BudgetCard. */
+const TIER_DAILY_CAP: Record<string, number> = {
+  budget: 80,
+  moderate: 200,
+  comfort: 500,
+  luxury: 800, // "$500+ / day" in PlanTripPage has no hard ceiling — 800 is a reasonable working cap (TBC with Natasha)
+};
+
+/** Evening (dining) activities run pricier than morning/afternoon ones. */
+const PERIOD_SHARE: Record<"morning" | "afternoon" | "evening", number> = {
+  morning: 0.22,
+  afternoon: 0.33,
+  evening: 0.45,
+};
+
+/** Deterministic 0–1 pseudo-random from a string, so costs are stable across re-renders without relying on Math.random(). */
+function seededUnit(seed: string): number {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash * 31 + seed.charCodeAt(i)) | 0;
+  }
+  return (Math.abs(hash) % 1000) / 1000;
+}
+
+/** Assigns a realistic per-activity cost: period share of the daily cap, ±20% variance. */
+function estimateCost(tierId: string, dayIndex: number, period: keyof typeof PERIOD_SHARE): number {
+  const dailyCap = TIER_DAILY_CAP[tierId] ?? TIER_DAILY_CAP.moderate;
+  const base = dailyCap * PERIOD_SHARE[period];
+  const variance = 0.8 + seededUnit(`${dayIndex}-${period}`) * 0.4; // 0.8x–1.2x
+  return Math.round((base * variance) / 5) * 5; // round to nearest $5
+}
+
 /* ── Realistic itinerary builder ── */
 
-function buildRealisticDays(dest: Destination, numDays: number): DayTemplate[] {
+/** Pre-cost-assignment shape — genericPool activities don't have a cost yet. */
+type ActivityDraft = Omit<Activity, "cost">;
+interface DayTemplateDraft {
+  theme: string;
+  morning: ActivityDraft;
+  afternoon: ActivityDraft;
+  evening: ActivityDraft;
+}
+
+function buildRealisticDays(dest: Destination, numDays: number, tierId: string): DayTemplate[] {
   const loc = dest.location;
   const country = dest.country;
   const h = dest.highlights || [];
 
-  const genericPool: DayTemplate[] = [
+  const genericPool: DayTemplateDraft[] = [
     {
       theme: `Arrival & ${loc} First Impressions`,
       morning: {
@@ -236,7 +285,7 @@ function buildRealisticDays(dest: Destination, numDays: number): DayTemplate[] {
     },
   ];
 
-  const days: DayTemplate[] = [];
+  const days: DayTemplateDraft[] = [];
   for (let i = 0; i < numDays; i++) {
     if (i === 0) {
       days.push(genericPool[0]);
@@ -253,7 +302,15 @@ function buildRealisticDays(dest: Destination, numDays: number): DayTemplate[] {
       days.push(genericPool[i % genericPool.length] || genericPool[1]);
     }
   }
-  return days;
+
+  // Assign per-activity costs from the selected budget tier — done as a pass here
+  // rather than inline above, so every activity (including the reused Farewell day) gets one.
+  return days.map((tmpl, i) => ({
+    ...tmpl,
+    morning: { ...tmpl.morning, cost: estimateCost(tierId, i, "morning") },
+    afternoon: { ...tmpl.afternoon, cost: estimateCost(tierId, i, "afternoon") },
+    evening: { ...tmpl.evening, cost: estimateCost(tierId, i, "evening") },
+  }));
 }
 
 /* ── Drag-and-drop Day Card ── */
@@ -266,12 +323,14 @@ function DraggableDayCard({
   isExpanded,
   onToggle,
   moveDay,
+  onCostChange,
 }: {
   day: ItineraryDay;
   index: number;
   isExpanded: boolean;
   onToggle: () => void;
   moveDay: (from: number, to: number) => void;
+  onCostChange: (day: number, period: "morning" | "afternoon" | "evening", cost: number) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -367,11 +426,11 @@ function DraggableDayCard({
                   <CardContent
                     className="flex flex-col gap-(--space-stack-sm) p-(--space-stack-md)"
                   >
-                    <ActivityBlock period="Morning" periodIcon={Sun} periodColor="text-warning" activity={day.morning} />
+                    <ActivityBlock period="Morning" periodIcon={Sun} periodColor="text-warning" activity={day.morning} onCostChange={(cost) => onCostChange(day.day, "morning", cost)} />
                     <Separator className="bg-border" />
-                    <ActivityBlock period="Afternoon" periodIcon={Sunset} periodColor="text-primary" activity={day.afternoon} />
+                    <ActivityBlock period="Afternoon" periodIcon={Sunset} periodColor="text-primary" activity={day.afternoon} onCostChange={(cost) => onCostChange(day.day, "afternoon", cost)} />
                     <Separator className="bg-border" />
-                    <ActivityBlock period="Evening" periodIcon={Moon} periodColor="text-accent" activity={day.evening} />
+                    <ActivityBlock period="Evening" periodIcon={Moon} periodColor="text-accent" activity={day.evening} onCostChange={(cost) => onCostChange(day.day, "evening", cost)} />
                   </CardContent>
                 </motion.div>
               )}
@@ -388,12 +447,23 @@ function ActivityBlock({
   periodIcon: PeriodIcon,
   periodColor,
   activity,
+  onCostChange,
 }: {
   period: string;
   periodIcon: typeof Sun;
   periodColor: string;
   activity: Activity;
+  onCostChange: (cost: number) => void;
 }) {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(String(activity.cost));
+
+  const commit = () => {
+    const next = Number(draft);
+    onCostChange(Number.isFinite(next) && next >= 0 ? next : activity.cost);
+    setEditing(false);
+  };
+
   return (
     <div className="flex gap-3">
       <div className="flex flex-col items-center shrink-0" style={{ width: "40px" }}>
@@ -429,8 +499,94 @@ function ActivityBlock({
         >
           {activity.description}
         </p>
+        <div className="flex items-center gap-2 print:hidden" style={{ marginTop: "6px" }}>
+          {editing ? (
+            <Input
+              autoFocus
+              type="number"
+              min={0}
+              step={5}
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onBlur={commit}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") commit();
+                if (e.key === "Escape") { setDraft(String(activity.cost)); setEditing(false); }
+              }}
+              className="h-7 w-20 rounded-md text-caption tabular-nums px-2 py-1"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => { setDraft(String(activity.cost)); setEditing(true); }}
+              className="flex items-center gap-1 rounded-md px-2 py-1 outline-none font-body text-caption tabular-nums text-muted-foreground hover:text-foreground hover:bg-muted focus-visible:ring-2 focus-visible:ring-accent transition-colors"
+              aria-label={`Edit cost for ${activity.title}`}
+            >
+              <DollarSign className="size-3" />
+              {activity.cost} SGD
+              <Pencil className="size-3 opacity-50" />
+            </button>
+          )}
+        </div>
       </div>
     </div>
+  );
+}
+
+/* ── Budget summary ── */
+
+function BudgetSummaryBar({
+  spent,
+  cap,
+  overBudget,
+}: {
+  spent: number;
+  cap: number;
+  overBudget: boolean;
+}) {
+  const pct = cap > 0 ? Math.min(100, Math.round((spent / cap) * 100)) : 0;
+
+  return (
+    <motion.div
+      className="print:hidden mb-(--space-stack-md)"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={fastTransition}
+    >
+      <Card
+        className="rounded-2xl p-(--space-stack-md) flex flex-col gap-(--space-stack-xs) border"
+        style={{ borderColor: overBudget ? "var(--destructive)" : "var(--border)" }}
+      >
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-2">
+            <DollarSign
+              className="size-5"
+              style={{ color: overBudget ? "var(--destructive)" : "var(--success)" }}
+              strokeWidth={1.8}
+            />
+            <span className="font-body text-muted-foreground text-caption">Trip budget</span>
+          </div>
+          <p className="font-body font-semibold text-body tabular-nums" style={{ color: overBudget ? "var(--destructive)" : "var(--foreground)" }}>
+            ${spent} <span className="font-body font-normal text-muted-foreground">/ ${cap} SGD</span>
+          </p>
+        </div>
+        <div className="w-full h-1.5 rounded-full overflow-hidden bg-muted">
+          <motion.div
+            className="h-full rounded-full"
+            style={{ backgroundColor: overBudget ? "var(--destructive)" : "var(--success)" }}
+            initial={{ width: 0 }}
+            animate={{ width: `${pct}%` }}
+            transition={fastTransition}
+          />
+        </div>
+        {overBudget && (
+          <div className="flex items-center gap-2 font-body text-caption" style={{ color: "var(--destructive)" }}>
+            <AlertTriangle className="size-3.5" />
+            ${spent - cap} SGD over cap — edit activity costs below to bring it back in line.
+          </div>
+        )}
+      </Card>
+    </motion.div>
   );
 }
 
@@ -465,8 +621,8 @@ export default function ItineraryPage() {
   const numDays = durationMap[state.duration] || 5;
 
   const dayTemplates = useMemo(
-    () => buildRealisticDays(bestMatch, numDays),
-    [bestMatch.id, numDays]
+    () => buildRealisticDays(bestMatch, numDays, state.budget),
+    [bestMatch.id, numDays, state.budget]
   );
 
   const regionDests = destinations.filter((d) => d.countrySlug === bestMatch.countrySlug);
@@ -507,6 +663,28 @@ export default function ItineraryPage() {
       return updated.map((d, i) => ({ ...d, day: i + 1 }));
     });
   }, []);
+
+  /* Live budget: per-activity cost editing */
+  const updateActivityCost = useCallback(
+    (day: number, period: "morning" | "afternoon" | "evening", cost: number) => {
+      setItinerary((prev) =>
+        prev.map((d) => (d.day === day ? { ...d, [period]: { ...d[period], cost } } : d))
+      );
+    },
+    []
+  );
+
+  const dailyCap = TIER_DAILY_CAP[state.budget] ?? TIER_DAILY_CAP.moderate;
+  const totalCap = dailyCap * itinerary.length;
+  const totalSpent = useMemo(
+    () =>
+      itinerary.reduce(
+        (sum, d) => sum + d.morning.cost + d.afternoon.cost + d.evening.cost,
+        0
+      ),
+    [itinerary]
+  );
+  const overBudget = totalSpent > totalCap;
 
   /* Print handler */
   const handlePrint = useCallback(() => {
@@ -626,6 +804,8 @@ export default function ItineraryPage() {
             </div>
           </motion.div>
 
+          <BudgetSummaryBar spent={totalSpent} cap={totalCap} overBudget={overBudget} />
+
           {/* Controls */}
           <motion.div
             className="flex items-center justify-between flex-wrap print:hidden mb-(--space-stack-md) gap-(--space-stack-xs)"
@@ -664,6 +844,7 @@ export default function ItineraryPage() {
                 isExpanded={expandedDays.has(day.day)}
                 onToggle={() => toggleDay(day.day)}
                 moveDay={moveDay}
+                onCostChange={updateActivityCost}
               />
             ))}
           </motion.div>
