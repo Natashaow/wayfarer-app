@@ -42,6 +42,9 @@ import {
   DollarSign,
   AlertTriangle,
   Pencil,
+  Trash2,
+  Plus,
+  X,
 } from "lucide-react";
 import {
   defaultTransition,
@@ -55,7 +58,10 @@ import { Input } from "../components/ui/input";
 
 /* ── Types ── */
 
+type Period = "morning" | "afternoon" | "evening";
+
 interface Activity {
+  id: string;
   title: string;
   description: string;
   icon: typeof Sun;
@@ -66,18 +72,18 @@ interface Activity {
 
 interface DayTemplate {
   theme: string;
-  morning: Activity;
-  afternoon: Activity;
-  evening: Activity;
+  morning: Activity[];
+  afternoon: Activity[];
+  evening: Activity[];
 }
 
 interface ItineraryDay {
   day: number;
   theme: string;
   image: string;
-  morning: Activity;
-  afternoon: Activity;
-  evening: Activity;
+  morning: Activity[];
+  afternoon: Activity[];
+  evening: Activity[];
 }
 
 interface TripState {
@@ -99,10 +105,17 @@ const TIER_DAILY_CAP: Record<string, number> = {
 };
 
 /** Evening (dining) activities run pricier than morning/afternoon ones. */
-const PERIOD_SHARE: Record<"morning" | "afternoon" | "evening", number> = {
+const PERIOD_SHARE: Record<Period, number> = {
   morning: 0.22,
   afternoon: 0.33,
   evening: 0.45,
+};
+
+/** Header icon/color/label per period — shared by day-card rendering and the "Add a stop" control, both of which now render a variable-length activity list rather than one fixed slot. */
+const PERIOD_META: Record<Period, { label: string; icon: typeof Sun; color: string }> = {
+  morning: { label: "Morning", icon: Sun, color: "text-warning" },
+  afternoon: { label: "Afternoon", icon: Sunset, color: "text-primary" },
+  evening: { label: "Evening", icon: Moon, color: "text-accent" },
 };
 
 /** Deterministic 0–1 pseudo-random from a string, so costs are stable across re-renders without relying on Math.random(). */
@@ -112,6 +125,13 @@ function seededUnit(seed: string): number {
     hash = (hash * 31 + seed.charCodeAt(i)) | 0;
   }
   return (Math.abs(hash) % 1000) / 1000;
+}
+
+/** Stable id for a stop — used as the React key and the identity target for cost edits/removal, since activity lists are now mutable (add/remove), not fixed-index slots. */
+function makeActivityId(): string {
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `activity-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
 /** Assigns a realistic per-activity cost: period share of the daily cap, ±20% variance. */
@@ -125,7 +145,7 @@ function estimateCost(tierId: string, dayIndex: number, period: keyof typeof PER
 /* ── Realistic itinerary builder ── */
 
 /** Pre-cost-assignment shape — genericPool activities don't have a cost yet. */
-type ActivityDraft = Omit<Activity, "cost">;
+type ActivityDraft = Omit<Activity, "cost" | "id">;
 interface DayTemplateDraft {
   theme: string;
   morning: ActivityDraft;
@@ -305,11 +325,13 @@ function buildRealisticDays(dest: Destination, numDays: number, tierId: string):
 
   // Assign per-activity costs from the selected budget tier — done as a pass here
   // rather than inline above, so every activity (including the reused Farewell day) gets one.
+  // Each generated slot becomes a one-element array: the day's real state shape supports
+  // any number of stops per period, but the AI-curated starting point is still one each.
   return days.map((tmpl, i) => ({
-    ...tmpl,
-    morning: { ...tmpl.morning, cost: estimateCost(tierId, i, "morning") },
-    afternoon: { ...tmpl.afternoon, cost: estimateCost(tierId, i, "afternoon") },
-    evening: { ...tmpl.evening, cost: estimateCost(tierId, i, "evening") },
+    theme: tmpl.theme,
+    morning: [{ ...tmpl.morning, id: makeActivityId(), cost: estimateCost(tierId, i, "morning") }],
+    afternoon: [{ ...tmpl.afternoon, id: makeActivityId(), cost: estimateCost(tierId, i, "afternoon") }],
+    evening: [{ ...tmpl.evening, id: makeActivityId(), cost: estimateCost(tierId, i, "evening") }],
   }));
 }
 
@@ -324,13 +346,17 @@ function DraggableDayCard({
   onToggle,
   moveDay,
   onCostChange,
+  onAddStop,
+  onRemoveStop,
 }: {
   day: ItineraryDay;
   index: number;
   isExpanded: boolean;
   onToggle: () => void;
   moveDay: (from: number, to: number) => void;
-  onCostChange: (day: number, period: "morning" | "afternoon" | "evening", cost: number) => void;
+  onCostChange: (day: number, period: Period, activityId: string, cost: number) => void;
+  onAddStop: (day: number, period: Period, stop: { title: string; time: string; cost: number }) => void;
+  onRemoveStop: (day: number, period: Period, activityId: string) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -426,11 +452,18 @@ function DraggableDayCard({
                   <CardContent
                     className="flex flex-col gap-(--space-stack-sm) p-(--space-stack-md)"
                   >
-                    <ActivityBlock period="Morning" periodIcon={Sun} periodColor="text-warning" activity={day.morning} onCostChange={(cost) => onCostChange(day.day, "morning", cost)} />
-                    <Separator className="bg-border" />
-                    <ActivityBlock period="Afternoon" periodIcon={Sunset} periodColor="text-primary" activity={day.afternoon} onCostChange={(cost) => onCostChange(day.day, "afternoon", cost)} />
-                    <Separator className="bg-border" />
-                    <ActivityBlock period="Evening" periodIcon={Moon} periodColor="text-accent" activity={day.evening} onCostChange={(cost) => onCostChange(day.day, "evening", cost)} />
+                    {(["morning", "afternoon", "evening"] as const).map((period, i) => (
+                      <div key={period} className="flex flex-col gap-(--space-stack-sm)">
+                        {i > 0 && <Separator className="bg-border" />}
+                        <PeriodSection
+                          period={period}
+                          activities={day[period]}
+                          onCostChange={(activityId, cost) => onCostChange(day.day, period, activityId, cost)}
+                          onRemoveStop={(activityId) => onRemoveStop(day.day, period, activityId)}
+                          onAddStop={(stop) => onAddStop(day.day, period, stop)}
+                        />
+                      </div>
+                    ))}
                   </CardContent>
                 </motion.div>
               )}
@@ -442,18 +475,149 @@ function DraggableDayCard({
   );
 }
 
+/** One period's stop list — any number of activities (0+), plus the affordance to add another. Replaces the old fixed single-ActivityBlock-per-period rendering now that stops are add/removable. */
+function PeriodSection({
+  period,
+  activities,
+  onCostChange,
+  onRemoveStop,
+  onAddStop,
+}: {
+  period: Period;
+  activities: Activity[];
+  onCostChange: (activityId: string, cost: number) => void;
+  onRemoveStop: (activityId: string) => void;
+  onAddStop: (stop: { title: string; time: string; cost: number }) => void;
+}) {
+  const meta = PERIOD_META[period];
+  return (
+    <div className="flex flex-col gap-(--space-stack-sm)">
+      {activities.map((activity) => (
+        <ActivityBlock
+          key={activity.id}
+          period={meta.label}
+          periodIcon={meta.icon}
+          periodColor={meta.color}
+          activity={activity}
+          onCostChange={(cost) => onCostChange(activity.id, cost)}
+          onRemove={() => onRemoveStop(activity.id)}
+        />
+      ))}
+      <AddStopRow periodColor={meta.color} onAdd={onAddStop} />
+    </div>
+  );
+}
+
+/** Inline "+ Add a stop" control — collapsed to a ghost button by default, expands to a compact title/time/cost form on click. Mirrors ActivityBlock's existing inline-edit-on-click pattern for the cost field. */
+function AddStopRow({
+  periodColor,
+  onAdd,
+}: {
+  periodColor: string;
+  onAdd: (stop: { title: string; time: string; cost: number }) => void;
+}) {
+  const [adding, setAdding] = useState(false);
+  const [title, setTitle] = useState("");
+  const [time, setTime] = useState("");
+  const [cost, setCost] = useState("0");
+
+  const reset = () => {
+    setTitle("");
+    setTime("");
+    setCost("0");
+    setAdding(false);
+  };
+
+  const commit = () => {
+    const trimmedTitle = title.trim();
+    if (!trimmedTitle) return;
+    const parsedCost = Number(cost);
+    onAdd({
+      title: trimmedTitle,
+      time: time.trim() || "Time TBC",
+      cost: Number.isFinite(parsedCost) && parsedCost >= 0 ? parsedCost : 0,
+    });
+    reset();
+  };
+
+  if (!adding) {
+    return (
+      <button
+        type="button"
+        onClick={() => setAdding(true)}
+        className={`flex items-center gap-2 self-start rounded-md px-2 py-1 outline-none font-body text-caption ${periodColor} hover:bg-muted focus-visible:ring-2 focus-visible:ring-accent transition-colors print:hidden`}
+      >
+        <Plus className="size-3.5" />
+        Add a stop
+      </button>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-2 rounded-md border border-border p-(--space-stack-xs) print:hidden">
+      <Input
+        autoFocus
+        placeholder="Stop title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        onKeyDown={(e) => { if (e.key === "Escape") reset(); }}
+        className="h-8 rounded-md text-caption"
+      />
+      <div className="flex items-center gap-2">
+        <Input
+          placeholder="e.g. 2:00 PM – 4:00 PM"
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Escape") reset(); }}
+          className="h-8 rounded-md text-caption flex-1"
+        />
+        <Input
+          type="number"
+          min={0}
+          step={5}
+          value={cost}
+          onChange={(e) => setCost(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Escape") reset(); }}
+          className="h-8 w-20 rounded-md text-caption tabular-nums"
+        />
+      </div>
+      <div className="flex items-center gap-2 self-end">
+        <button
+          type="button"
+          onClick={reset}
+          aria-label="Cancel adding stop"
+          className="flex items-center justify-center size-7 rounded-md outline-none text-muted-foreground hover:text-foreground hover:bg-muted focus-visible:ring-2 focus-visible:ring-accent transition-colors"
+        >
+          <X className="size-3.5" />
+        </button>
+        <button
+          type="button"
+          onClick={commit}
+          disabled={!title.trim()}
+          aria-label="Confirm new stop"
+          className="flex items-center justify-center size-7 rounded-md outline-none text-success hover:bg-success/8 focus-visible:ring-2 focus-visible:ring-accent transition-colors disabled:opacity-40 disabled:pointer-events-none"
+        >
+          <Check className="size-3.5" />
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function ActivityBlock({
   period,
   periodIcon: PeriodIcon,
   periodColor,
   activity,
   onCostChange,
+  onRemove,
 }: {
   period: string;
   periodIcon: typeof Sun;
   periodColor: string;
   activity: Activity;
   onCostChange: (cost: number) => void;
+  onRemove: () => void;
 }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(String(activity.cost));
@@ -493,12 +657,14 @@ function ActivityBlock({
         >
           {activity.title}
         </h4>
-        <p
-          className="font-body text-muted-foreground text-body-sm leading-body"
-          style={{ marginTop: "4px" }}
-        >
-          {activity.description}
-        </p>
+        {activity.description && (
+          <p
+            className="font-body text-muted-foreground text-body-sm leading-body"
+            style={{ marginTop: "4px" }}
+          >
+            {activity.description}
+          </p>
+        )}
         <div className="flex items-center gap-2 print:hidden" style={{ marginTop: "6px" }}>
           {editing ? (
             <Input
@@ -527,6 +693,14 @@ function ActivityBlock({
               <Pencil className="size-3 opacity-50" />
             </button>
           )}
+          <button
+            type="button"
+            onClick={onRemove}
+            className="flex items-center justify-center size-7 rounded-md outline-none text-muted-foreground hover:text-destructive hover:bg-destructive/8 focus-visible:ring-2 focus-visible:ring-accent transition-colors"
+            aria-label={`Remove ${activity.title}`}
+          >
+            <Trash2 className="size-3.5" />
+          </button>
         </div>
       </div>
     </div>
@@ -666,22 +840,72 @@ export default function ItineraryPage() {
 
   /* Live budget: per-activity cost editing */
   const updateActivityCost = useCallback(
-    (day: number, period: "morning" | "afternoon" | "evening", cost: number) => {
+    (day: number, period: Period, activityId: string, cost: number) => {
       setItinerary((prev) =>
-        prev.map((d) => (d.day === day ? { ...d, [period]: { ...d[period], cost } } : d))
+        prev.map((d) =>
+          d.day === day
+            ? { ...d, [period]: d[period].map((a) => (a.id === activityId ? { ...a, cost } : a)) }
+            : d
+        )
       );
     },
     []
   );
+
+  /* Add/remove arbitrary stops — the itinerary is a variable-length list per period now, not a fixed morning/afternoon/evening slot each. */
+  const addStop = useCallback(
+    (day: number, period: Period, stop: { title: string; time: string; cost: number }) => {
+      setItinerary((prev) =>
+        prev.map((d) =>
+          d.day === day
+            ? {
+                ...d,
+                [period]: [
+                  ...d[period],
+                  {
+                    id: makeActivityId(),
+                    title: stop.title,
+                    description: "",
+                    icon: PERIOD_META[period].icon,
+                    tag: "Custom",
+                    time: stop.time,
+                    cost: stop.cost,
+                  },
+                ],
+              }
+            : d
+        )
+      );
+      toast.success("Stop added");
+    },
+    []
+  );
+
+  const removeStop = useCallback((day: number, period: Period, activityId: string) => {
+    setItinerary((prev) =>
+      prev.map((d) =>
+        d.day === day ? { ...d, [period]: d[period].filter((a) => a.id !== activityId) } : d
+      )
+    );
+    toast.success("Stop removed");
+  }, []);
 
   const dailyCap = TIER_DAILY_CAP[state.budget] ?? TIER_DAILY_CAP.moderate;
   const totalCap = dailyCap * itinerary.length;
   const totalSpent = useMemo(
     () =>
       itinerary.reduce(
-        (sum, d) => sum + d.morning.cost + d.afternoon.cost + d.evening.cost,
+        (sum, d) =>
+          sum +
+          d.morning.reduce((s, a) => s + a.cost, 0) +
+          d.afternoon.reduce((s, a) => s + a.cost, 0) +
+          d.evening.reduce((s, a) => s + a.cost, 0),
         0
       ),
+    [itinerary]
+  );
+  const totalActivities = useMemo(
+    () => itinerary.reduce((sum, d) => sum + d.morning.length + d.afternoon.length + d.evening.length, 0),
     [itinerary]
   );
   const overBudget = totalSpent > totalCap;
@@ -814,7 +1038,7 @@ export default function ItineraryPage() {
             transition={fastTransition}
           >
             <p className="font-body text-muted-foreground text-body-sm">
-              {itinerary.length} days · {itinerary.length * 3} activities · All in {bestMatch.country}
+              {itinerary.length} days · {totalActivities} {totalActivities === 1 ? "activity" : "activities"} · All in {bestMatch.country}
             </p>
             <div className="flex items-center gap-2">
               <span className="font-body text-muted-foreground text-caption">
@@ -845,6 +1069,8 @@ export default function ItineraryPage() {
                 onToggle={() => toggleDay(day.day)}
                 moveDay={moveDay}
                 onCostChange={updateActivityCost}
+                onAddStop={addStop}
+                onRemoveStop={removeStop}
               />
             ))}
           </motion.div>

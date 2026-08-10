@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-08T00:04:56.859Z",
+  "generated": "2026-08-10T17:48:57.022Z",
   "count": 434,
   "violations": [
     {
@@ -1402,115 +1402,115 @@
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 400,
+      "line": 426,
       "category": "tailwind-palette",
       "snippet": "className=\"font-heading text-white font-semibold text-title-3 leading-title-3\""
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 406,
+      "line": 432,
       "category": "tailwind-palette",
       "snippet": "<div className=\"size-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0 print:hidden\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 408,
+      "line": 434,
       "category": "tailwind-palette",
       "snippet": "<ChevronUp className=\"size-4 text-white\" />"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 410,
+      "line": 436,
       "category": "tailwind-palette",
       "snippet": "<ChevronDown className=\"size-4 text-white\" />"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 468,
+      "line": 632,
       "category": "off-grid-spacing",
       "snippet": "<div className=\"flex gap-3\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 769,
+      "line": 993,
       "category": "off-grid-spacing",
       "snippet": "<Badge variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 769,
+      "line": 993,
       "category": "off-grid-spacing",
       "snippet": "<Badge variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 772,
+      "line": 996,
       "category": "off-grid-spacing",
       "snippet": "<Badge variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 772,
+      "line": 996,
       "category": "off-grid-spacing",
       "snippet": "<Badge variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 776,
+      "line": 1000,
       "category": "off-grid-spacing",
       "snippet": "<Badge key={s} variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body capitalize text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 776,
+      "line": 1000,
       "category": "off-grid-spacing",
       "snippet": "<Badge key={s} variant=\"outline\" className=\"rounded-full px-3 py-1.5 border-border text-card-foreground font-body capitalize text-caption\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 854,
+      "line": 1080,
       "category": "off-grid-spacing",
       "snippet": "className=\"flex flex-col sm:flex-row items-center justify-center gap-3 print:hidden mt-(--space-stack-lg)\""
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 363,
+      "line": 389,
       "category": "raw-px-bracket",
       "snippet": "className={isOver ? \"ring-2 ring-accent/40 rounded-[16px]\" : \"\"}"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 365,
+      "line": 391,
       "category": "raw-px-bracket",
       "snippet": "<Card className=\"border border-muted rounded-[16px] bg-transparent shadow-sm overflow-hidden p-0 transition-all hover:shadow-md\">"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 834,
+      "line": 1058,
       "category": "raw-px-bracket",
       "snippet": "className=\"flex flex-col max-w-[800px] gap-(--space-stack-sm)\""
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 859,
+      "line": 1085,
       "category": "raw-px-bracket",
       "snippet": "<Button variant=\"outline\" size=\"lg\" className=\"font-heading h-[48px] px-8 rounded-full gap-2 border-border text-card-foreground hover:bg-muted font-bold\" onClick={() => showComingSoon()}>"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 863,
+      "line": 1089,
       "category": "raw-px-bracket",
       "snippet": "<Button size=\"lg\" className=\"font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shado"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 863,
+      "line": 1089,
       "category": "raw-px-bracket",
       "snippet": "<Button size=\"lg\" className=\"font-heading h-[48px] px-8 rounded-full gap-2 bg-gradient-to-b from-primary-hover to-primary text-primary-foreground border-[0.5px] border-primary-dark shadow-[var(--shado"
     },
     {
       "file": "src/app/pages/ItineraryPage.tsx",
-      "line": 362,
+      "line": 388,
       "category": "inline-style",
       "snippet": "12 inline style={{}} occurrence(s) in file"
     },
